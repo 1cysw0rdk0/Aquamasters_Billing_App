@@ -46,6 +46,12 @@ namespace AquaMasters_Billing_App
        
     }
 
+    /**
+     * Part: the basic framework for a part or chem
+     *      has a name, type and cost.
+     *      fields are public to allow JsonConvert
+     *      to serialize the object.
+     */
     public class Part {
 
         public string name;
