@@ -7,8 +7,14 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="271,153,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="271,200,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_1"/>
+        <TextBox x:Name="TotalCostTB" HorizontalAlignment="Left" Height="23" Margin="647,371,0,0" TextWrapping="Wrap" Text="0.00" VerticalAlignment="Top" Width="120" IsEnabled="False" ToolTip="Total cost to bill" MaxLines="1"/>
+        <TextBox x:Name="SubtotalCostTB" HorizontalAlignment="Left" Height="23" Margin="647,343,0,0" TextWrapping="Wrap" Text="0.00" VerticalAlignment="Top" Width="120" IsEnabled="False" ToolTip="Total cost before tax" MaxLines="1"/>
+        <TextBox x:Name="LaborCostTB" HorizontalAlignment="Left" Height="23" Margin="647,315,0,0" TextWrapping="Wrap" Text="0.00" VerticalAlignment="Top" Width="120" IsEnabled="False" ToolTip="Total cost of labor" MaxLines="1"/>
+        <TextBox x:Name="PartCostTB" HorizontalAlignment="Left" Height="23" Margin="647,287,0,0" TextWrapping="Wrap" Text="5.00" VerticalAlignment="Top" Width="120" IsEnabled="False" ToolTip="Total cost of parts" MaxLines="1"/>
+        <Label Content="Parts:" HorizontalAlignment="Left" Margin="604,283,0,0" VerticalAlignment="Top"/>
+        <Label Content="Labor:" HorizontalAlignment="Left" Margin="599,311,0,0" VerticalAlignment="Top"/>
+        <Label Content="Subtotal:" HorizontalAlignment="Left" Margin="585,339,0,0" VerticalAlignment="Top"/>
+        <Label Content="Total:" HorizontalAlignment="Left" Margin="604,367,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

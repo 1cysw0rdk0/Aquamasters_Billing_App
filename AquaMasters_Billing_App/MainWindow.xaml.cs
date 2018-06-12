@@ -22,11 +22,57 @@ namespace AquaMasters_Billing_App
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        public Dictionary<string, Part> PriceSheet;
+        public string savePath;
+
         public MainWindow()
         {
             InitializeComponent();
+            InitializeBackendData();
 
         }
+
+        private void InitializeBackendData() {
+
+            //Generate save path for this computer
+            this.savePath = Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
+            this.savePath += "\\Aquamasters\\test.ini";
+
+            //Initialize file to read text
+            StreamReader file = File.OpenText(this.savePath);
+
+            //Initialize price sheet with new empty dictionary
+            this.PriceSheet = new Dictionary<string, Part>();
+
+            //Read every line from the file, desearializing into parts and adding to dictonary
+            while (!file.EndOfStream)
+            {
+                Part part = (Part)JsonConvert.DeserializeObject(file.ReadLine(), typeof(Part));
+                this.PriceSheet.Add(part.name, part);
+            }
+
+
+            
+
+        }
+
+
+        private void UpdateTotals() {
+
+            this.SubtotalCostTB.Text = (Decimal.Parse(this.PartCostTB.Text) + Decimal.Parse(this.LaborCostTB.Text)).ToString();
+            string cost = (Decimal.Parse(this.SubtotalCostTB.Text) * 1.0635m).ToString();
+            this.TotalCostTB.Text = cost.Substring(0, cost.IndexOf(".") + 3);
+
+        }
+
+
+
+
+
+
+
+
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -46,19 +92,7 @@ namespace AquaMasters_Billing_App
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            string strPath = Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
-            strPath = strPath + "\\Aquamasters\\test.ini";
-
-            StreamReader file = File.OpenText(strPath);
-            Dictionary<string, Part> PriceSheet = new Dictionary<string, Part>();
-
-
-            while (!file.EndOfStream) {
-                Part part = (Part)JsonConvert.DeserializeObject(file.ReadLine(), typeof(Part));
-                PriceSheet.Add(part.name, part);
-            }
-
-            Console.Out.Write("");
+            UpdateTotals();
 
         }
     }
