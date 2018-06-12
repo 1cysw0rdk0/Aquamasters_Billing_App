@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Newtonsoft.Json;
+using System.IO;
 
 namespace AquaMasters_Billing_App
 {
@@ -39,11 +40,27 @@ namespace AquaMasters_Billing_App
             string strPath = Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
             strPath = strPath + "\\Aquamasters\\test.ini";
 
-            string jsonData = JsonConvert.SerializeObject(json, Formatting.Indented);
+            string jsonData = JsonConvert.SerializeObject(json, Formatting.None);
             System.IO.File.WriteAllText(strPath, jsonData);
         }
 
-       
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            string strPath = Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
+            strPath = strPath + "\\Aquamasters\\test.ini";
+
+            StreamReader file = File.OpenText(strPath);
+            Dictionary<string, Part> PriceSheet = new Dictionary<string, Part>();
+
+
+            while (!file.EndOfStream) {
+                Part part = (Part)JsonConvert.DeserializeObject(file.ReadLine(), typeof(Part));
+                PriceSheet.Add(part.name, part);
+            }
+
+            Console.Out.Write("");
+
+        }
     }
 
     /**
