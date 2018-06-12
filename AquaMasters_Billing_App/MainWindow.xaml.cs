@@ -30,6 +30,7 @@ namespace AquaMasters_Billing_App
         {
             InitializeComponent();
             InitializeBackendData();
+            InitializeFrontendData();
 
         }
 
@@ -54,6 +55,13 @@ namespace AquaMasters_Billing_App
 
 
             
+
+        }
+
+
+        private void InitializeFrontendData() {
+
+            dg.Columns.
 
         }
 
@@ -93,6 +101,11 @@ namespace AquaMasters_Billing_App
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             UpdateTotals();
+
+        }
+
+        private void dg_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
 
         }
     }
