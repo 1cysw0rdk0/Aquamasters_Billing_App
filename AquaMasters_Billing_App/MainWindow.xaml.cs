@@ -61,7 +61,7 @@ namespace AquaMasters_Billing_App
 
         private void InitializeFrontendData() {
 
-            dg.Columns.
+            
 
         }
 
@@ -104,10 +104,7 @@ namespace AquaMasters_Billing_App
 
         }
 
-        private void dg_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
 
-        }
     }
 
     /**
