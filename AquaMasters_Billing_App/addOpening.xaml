@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AquaMasters_Billing_App"
         mc:Ignorable="d"
-        Title="Opening A Pool" Height="450" Width="800">
+        Title="Opening A Pool" Height="330.723" Width="565.964">
     <Grid>
         <RadioButton x:Name="SmallRB" Content="15x30 - 16x32" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" GroupName="sizeGroup" IsChecked="True"/>
         <RadioButton x:Name="LargeRB" Content="18x36 - 20x40" HorizontalAlignment="Left" Margin="141,10,0,0" VerticalAlignment="Top" IsChecked="True" GroupName="sizeGroup"/>
@@ -35,6 +35,8 @@
         <CheckBox x:Name="CaseCB" Content="1 Case of Shock" HorizontalAlignment="Left" Margin="330,95,0,0" VerticalAlignment="Top"/>
         <CheckBox x:Name="Poly60" Content="1 qt. Poly 60" HorizontalAlignment="Left" Margin="462,95,0,0" VerticalAlignment="Top" IsChecked="True" />
         <CheckBox x:Name="AddChemsCB" Content="Add Chemicals" HorizontalAlignment="Left" Margin="10,95,0,0" VerticalAlignment="Top" IsChecked="True" Click="AddChemsCB_Click"/>
+        <Button x:Name="Accept" Content="Add" HorizontalAlignment="Left" Margin="382,266,0,0" VerticalAlignment="Top" Width="75" Click="Accept_Click"/>
+        <Button x:Name="CancelButton" Content="Cancel" HorizontalAlignment="Left" Margin="462,266,0,0" VerticalAlignment="Top" Width="75" Click="CancelButton_Click"/>
 
 
     </Grid>

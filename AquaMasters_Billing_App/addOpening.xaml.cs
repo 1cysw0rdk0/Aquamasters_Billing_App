@@ -24,6 +24,7 @@ namespace AquaMasters_Billing_App
             InitializeComponent();
         }
 
+        public List<Part> parts;
         
 
         private void AssembleOnlyCB_Click(object sender, RoutedEventArgs e) {
@@ -94,6 +95,18 @@ namespace AquaMasters_Billing_App
             }
         }
 
+        private void CancelButton_Click(object sender, RoutedEventArgs e) { this.DialogResult = false; this.Close(); }
 
+        private void Accept_Click(object sender, RoutedEventArgs e) {
+
+            parts = new List<Part>();
+
+            
+
+
+
+            this.DialogResult = true;
+            this.Close();
+        }
     }
 }

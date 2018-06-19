@@ -174,8 +174,18 @@ namespace AquaMasters_Billing_App
         }
 
         private void OpeningButton_Click(object sender, RoutedEventArgs e) {
+
+            List<Part> newParts;
             addOpening opening = new addOpening();
-            opening.Show();
+
+            if (opening.ShowDialog().Value == true) {
+                newParts = opening.parts;
+                foreach (Part part in newParts) {
+                    AddPart(part, 1);
+                }
+            }
+
+            
         }
 
     }
