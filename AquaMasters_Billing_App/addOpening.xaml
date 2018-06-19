@@ -5,14 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AquaMasters_Billing_App"
         mc:Ignorable="d"
-        Title="addOpening" Height="450" Width="800">
+        Title="Opening A Pool" Height="450" Width="800">
     <Grid>
         <RadioButton x:Name="SmallRB" Content="15x30 - 16x32" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" GroupName="sizeGroup" IsChecked="True"/>
         <RadioButton x:Name="LargeRB" Content="18x36 - 20x40" HorizontalAlignment="Left" Margin="141,10,0,0" VerticalAlignment="Top" IsChecked="True" GroupName="sizeGroup"/>
-        <RadioButton x:Name="SolidRB" Content="Solid w/ Tubes" HorizontalAlignment="Left" Margin="10,30,0,0" VerticalAlignment="Top" IsChecked="True" GroupName="coverType"/>
-        <RadioButton x:Name="MeycoRB" Content="Meyco / Mesh" HorizontalAlignment="Left" Margin="141,30,0,0" VerticalAlignment="Top" GroupName="coverType"/>
+        <RadioButton x:Name="SolidRB" Content="Solid w/ Tubes" HorizontalAlignment="Left" Margin="10,30,0,0" VerticalAlignment="Top" IsChecked="True" GroupName="coverType" Click="Solid_Click"/>
+        <RadioButton x:Name="MeycoRB" Content="Meyco / Mesh" HorizontalAlignment="Left" Margin="141,30,0,0" VerticalAlignment="Top" GroupName="coverType" Click="Solid_Checked"/>
         <CheckBox x:Name="AssembleOnlyCB" Content="Assemble System ONLY" HorizontalAlignment="Left" Margin="249,10,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="CleanCoverCB" Content="Remove and Clean Cover" HorizontalAlignment="Left" Margin="10,75,0,0" VerticalAlignment="Top" IsChecked="True"/>
+        <CheckBox x:Name="CleanCoverCB" Content="Remove and Clean Cover" HorizontalAlignment="Left" Margin="10,75,0,0" VerticalAlignment="Top" IsChecked="True" Click="Solid_Checked"/>
         <CheckBox x:Name="PumpCoverCB" Content="Pump Off Cover (+$150)" HorizontalAlignment="Left" Margin="200,75,0,0" VerticalAlignment="Top"/>
         <CheckBox x:Name="NoPower" Content="No Power Return (+$75)" HorizontalAlignment="Left" Margin="10,150,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5"/>
         <CheckBox x:Name="BigL" Content="Big L's (+$20)" HorizontalAlignment="Left" Margin="10,170,0,0" VerticalAlignment="Top"/>
@@ -34,7 +34,7 @@
         <CheckBox x:Name="_5GalCB" Content="5 Gal. of Shock" HorizontalAlignment="Left" Margin="200,95,0,0" VerticalAlignment="Top" IsChecked="True"/>
         <CheckBox x:Name="CaseCB" Content="1 Case of Shock" HorizontalAlignment="Left" Margin="330,95,0,0" VerticalAlignment="Top"/>
         <CheckBox x:Name="Poly60" Content="1 qt. Poly 60" HorizontalAlignment="Left" Margin="462,95,0,0" VerticalAlignment="Top" IsChecked="True" />
-        <CheckBox x:Name="AddChemsCB" Content="Add Chemicals" HorizontalAlignment="Left" Margin="10,95,0,0" VerticalAlignment="Top" IsChecked="True"/>
+        <CheckBox x:Name="AddChemsCB" Content="Add Chemicals" HorizontalAlignment="Left" Margin="10,95,0,0" VerticalAlignment="Top" IsChecked="True" Click="AddChemsCB_Click"/>
 
 
     </Grid>

@@ -24,21 +24,29 @@ namespace AquaMasters_Billing_App
             InitializeComponent();
         }
 
-        private void AssembleOnlyCB_Checked(object sender, RoutedEventArgs e)
-        {
-            if (this.AssembleOnlyCB.IsChecked.Value) {
+        
 
+        private void AssembleOnlyCB_Click(object sender, RoutedEventArgs e) {
+            if (!this.AssembleOnlyCB.IsChecked.Value) {
+                CleanCoverCB.IsChecked = true;
+                AddChemsCB.IsChecked = true;
             }
+            UpdateVisibility();
         }
 
-        private void AssembleOnlyCB_Click(object sender, RoutedEventArgs e)
-        {
+        private void Solid_Click(object sender, RoutedEventArgs e) => UpdateVisibility();
 
+        private void AddChemsCB_Click(object sender, RoutedEventArgs e) {
+            if (this.AddChemsCB.IsChecked.Value) {
+                _5GalCB.IsChecked = true;
+                Poly60.IsChecked = true;
+            }
+            UpdateVisibility();
         }
-
 
         private void UpdateVisibility() {
 
+            // Logic for Filter Assembly Only
             if (this.AssembleOnlyCB.IsChecked.Value) {
                 CleanCoverCB.IsChecked = false;
                 AddChemsCB.IsChecked = false;
@@ -51,6 +59,40 @@ namespace AquaMasters_Billing_App
                 this.AddChemsCB.Opacity = 100;
             }
 
+            // Logic for Solid Covers
+            if (!this.SolidRB.IsChecked.Value) {
+                PumpCoverCB.IsChecked = false;
+                PumpCoverCB.Opacity = 0;
+            } else {
+                PumpCoverCB.Opacity = 100;
+            }
+
+            // Logic for Cleaning Cover
+            if (!this.CleanCoverCB.IsChecked.Value) {
+                PumpCoverCB.IsChecked = false;
+                PumpCoverCB.Opacity = 0;
+            }
+            else {
+                PumpCoverCB.Opacity = 100;
+            }
+
+            // Logic for Chems
+            if (!this.AddChemsCB.IsChecked.Value) {
+                _5GalCB.IsChecked = false;
+                CaseCB.IsChecked = false;
+                Poly60.IsChecked = false;
+
+                _5GalCB.Opacity = 0;
+                CaseCB.Opacity = 0;
+                Poly60.Opacity = 0;
+            } else {
+                _5GalCB.Opacity = 100;
+                CaseCB.Opacity = 100;
+                Poly60.Opacity = 100;
+            }
         }
+
+        
+
     }
 }

@@ -77,7 +77,7 @@ namespace AquaMasters_Billing_App
             this.LaborDG.Columns.Add(new DataGridTextColumn { Header = "Hours", Binding = new Binding("quantity"), Width = 42 });
             this.LaborDG.Columns.Add(new DataGridTextColumn { Header = "Men", Binding = new Binding("part.name"), Width = 50 });
             this.LaborDG.Columns.Add(new DataGridTextColumn { Header = "Rate", Binding = new Binding("part.cost"), Width = 52 });
-            this.LaborDG.Columns.Add(new DataGridCheckBoxColumn { Header = " X", Width = 30, CanUserSort=false, IsReadOnly=false })
+            this.LaborDG.Columns.Add(new DataGridCheckBoxColumn { Header = " X", Width = 30, CanUserSort = false, IsReadOnly = false });
 
         }
 
@@ -172,6 +172,8 @@ namespace AquaMasters_Billing_App
 
             UpdateTotals();
         }
+
+        private void OpeningButton_Click(object sender, RoutedEventArgs e) => new addOpening();
 
     }
 
