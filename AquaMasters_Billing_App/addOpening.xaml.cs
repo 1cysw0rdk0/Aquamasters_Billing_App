@@ -30,6 +30,8 @@ namespace AquaMasters_Billing_App
             if (!this.AssembleOnlyCB.IsChecked.Value) {
                 CleanCoverCB.IsChecked = true;
                 AddChemsCB.IsChecked = true;
+                _5GalCB.IsChecked = true;
+                Poly60.IsChecked = true;
             }
             UpdateVisibility();
         }
@@ -68,7 +70,7 @@ namespace AquaMasters_Billing_App
             }
 
             // Logic for Cleaning Cover
-            if (!this.CleanCoverCB.IsChecked.Value) {
+            if (!this.CleanCoverCB.IsChecked.Value || !this.SolidRB.IsChecked.Value) {
                 PumpCoverCB.IsChecked = false;
                 PumpCoverCB.Opacity = 0;
             }
@@ -92,7 +94,6 @@ namespace AquaMasters_Billing_App
             }
         }
 
-        
 
     }
 }

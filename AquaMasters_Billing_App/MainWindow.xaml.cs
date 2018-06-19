@@ -68,11 +68,11 @@ namespace AquaMasters_Billing_App
         private void InitializeFrontendData() {
 
             // Initialize columns for the parts display
-            this.PartsDG.Columns.Add(new DataGridTextColumn { Header = "Quantity", Binding = new Binding("quantity"), Width=56 });
-            this.PartsDG.Columns.Add(new DataGridTextColumn { Header = "Name", Binding = new Binding("part.name"), Width=242});
-            this.PartsDG.Columns.Add(new DataGridTextColumn { Header = "Cost", Binding = new Binding("part.cost"), Width=50 });
-            this.PartsDG.Columns.Add(new DataGridCheckBoxColumn{ Header = " X", Width = 30, CanUserSort=false, IsReadOnly=false });
-            
+            this.PartsDG.Columns.Add(new DataGridTextColumn { Header = "Quantity", Binding = new Binding("quantity"), Width = 56 });
+            this.PartsDG.Columns.Add(new DataGridTextColumn { Header = "Name", Binding = new Binding("part.name"), Width = 242 });
+            this.PartsDG.Columns.Add(new DataGridTextColumn { Header = "Cost", Binding = new Binding("part.cost"), Width = 50 });
+            this.PartsDG.Columns.Add(new DataGridCheckBoxColumn { Header = " X", Width = 30, CanUserSort = false, IsReadOnly = false });
+
             // Initialize columns for the labor display
             this.LaborDG.Columns.Add(new DataGridTextColumn { Header = "Hours", Binding = new Binding("quantity"), Width = 42 });
             this.LaborDG.Columns.Add(new DataGridTextColumn { Header = "Men", Binding = new Binding("part.name"), Width = 50 });
@@ -83,7 +83,7 @@ namespace AquaMasters_Billing_App
 
 
         private void UpdateTotals() {
-            
+
             decimal runningTotal = 0;
             foreach (PurchaseSet purchase in this.partsList) {
                 runningTotal += Decimal.Parse(purchase.part.cost) * purchase.quantity;
@@ -151,7 +151,7 @@ namespace AquaMasters_Billing_App
             this.LaborDG.Items.Refresh();
 
 
-            
+
 
             /**
             // Uncomment this code block to condense all items of a single name into one block. otherwise, they will
@@ -173,7 +173,10 @@ namespace AquaMasters_Billing_App
             UpdateTotals();
         }
 
-        private void OpeningButton_Click(object sender, RoutedEventArgs e) => new addOpening();
+        private void OpeningButton_Click(object sender, RoutedEventArgs e) {
+            addOpening opening = new addOpening();
+            opening.Show();
+        }
 
     }
 
