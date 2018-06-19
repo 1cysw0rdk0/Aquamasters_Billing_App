@@ -5,42 +5,31 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AquaMasters_Billing_App"
         mc:Ignorable="d"
-        Title="Billing Sucks Don't It?" Height="450" Width="800">
+        Title="Billing Sucks Don't It?" Height="432.666" Width="707.667">
     <Grid>
-        <TextBox x:Name="TotalCostTB" HorizontalAlignment="Left" Height="23" Margin="558,371,0,0" TextWrapping="Wrap" Text="0.00" VerticalAlignment="Top" Width="120" IsEnabled="False" ToolTip="Total cost to bill" MaxLines="1"/>
-        <TextBox x:Name="SubtotalCostTB" HorizontalAlignment="Left" Height="23" Margin="558,343,0,0" TextWrapping="Wrap" Text="0.00" VerticalAlignment="Top" Width="120" IsEnabled="False" ToolTip="Total cost before tax" MaxLines="1"/>
-        <TextBox x:Name="LaborCostTB" HorizontalAlignment="Left" Height="23" Margin="558,315,0,0" TextWrapping="Wrap" Text="0.00" VerticalAlignment="Top" Width="120" IsEnabled="False" ToolTip="Total cost of labor" MaxLines="1"/>
-        <TextBox x:Name="PartCostTB" HorizontalAlignment="Left" Height="23" Margin="558,287,0,0" TextWrapping="Wrap" Text="0.00" VerticalAlignment="Top" Width="120" IsEnabled="False" ToolTip="Total cost of parts" MaxLines="1"/>
-        <Label Content="Parts:" HorizontalAlignment="Left" Margin="515,283,0,0" VerticalAlignment="Top"/>
-        <Label Content="Labor:" HorizontalAlignment="Left" Margin="510,311,0,0" VerticalAlignment="Top"/>
-        <Label Content="Subtotal:" HorizontalAlignment="Left" Margin="496,339,0,0" VerticalAlignment="Top"/>
-        <Label Content="Total:" HorizontalAlignment="Left" Margin="515,367,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="OpeningButton" Content="Opening" HorizontalAlignment="Left" Margin="26,37,0,0" VerticalAlignment="Top" Width="75"/>
-        <Label Content="Services" HorizontalAlignment="Left" Margin="42,6,0,0" VerticalAlignment="Top" Width="59"/>
-        <Button x:Name="InitialButton" Content="Initial" HorizontalAlignment="Left" Margin="26,62,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="OneCallButton" Content="One Call" HorizontalAlignment="Left" Margin="26,87,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="TwoCallButton" Content="Two Call" HorizontalAlignment="Left" Margin="26,112,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="RepairButton" Content="Plumbing" HorizontalAlignment="Left" Margin="26,137,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="LinerButton" Content="Liner" HorizontalAlignment="Left" Margin="26,162,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="InstallButton" Content="Install" HorizontalAlignment="Left" Margin="26,187,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="InstallButton_Copy" Content="Acid Wash" HorizontalAlignment="Left" Margin="26,212,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="InstallButton_Copy1" Content="Pump Work" HorizontalAlignment="Left" Margin="26,237,0,0" VerticalAlignment="Top" Width="75"/>
-        <DataGrid x:Name="dg" HorizontalAlignment="Left" Height="220" Margin="115,37,0,0" VerticalAlignment="Top" Width="395" AutoGenerateColumns="False">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Quantity" IsReadOnly="True" Width="Auto"/>
-                <DataGridTextColumn Header="Description" CanUserSort="False" IsReadOnly="True" Width="205"/>
-                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Cost per Unit" IsReadOnly="True" Width="Auto"/>
-                <DataGridCheckBoxColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Remove"/>
-            </DataGrid.Columns>
-        </DataGrid>
-        <DataGrid HorizontalAlignment="Left" Height="220" Margin="515,37,0,0" VerticalAlignment="Top" Width="163">
-            <DataGrid.Columns>
-                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Hours"/>
-                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Men"/>
-                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Rate"/>
-                <DataGridCheckBoxColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Remove"/>
-            </DataGrid.Columns>
-        </DataGrid>
+        <TextBox x:Name="TotalCostTB" HorizontalAlignment="Left" Height="23" Margin="562,361,0,0" TextWrapping="Wrap" Text="0.00" VerticalAlignment="Top" Width="120" IsEnabled="False" ToolTip="Total cost to bill" MaxLines="1"/>
+        <TextBox x:Name="SubtotalCostTB" HorizontalAlignment="Left" Height="23" Margin="562,333,0,0" TextWrapping="Wrap" Text="0.00" VerticalAlignment="Top" Width="120" IsEnabled="False" ToolTip="Total cost before tax" MaxLines="1"/>
+        <TextBox x:Name="LaborCostTB" HorizontalAlignment="Left" Height="23" Margin="562,305,0,0" TextWrapping="Wrap" Text="0.00" VerticalAlignment="Top" Width="120" IsEnabled="False" ToolTip="Total cost of labor" MaxLines="1"/>
+        <TextBox x:Name="PartCostTB" HorizontalAlignment="Left" Height="23" Margin="562,277,0,0" TextWrapping="Wrap" Text="0.00" VerticalAlignment="Top" Width="120" IsEnabled="False" ToolTip="Total cost of parts" MaxLines="1"/>
+        <Label Content="Parts:" HorizontalAlignment="Left" Margin="519,273,0,0" VerticalAlignment="Top"/>
+        <Label Content="Labor:" HorizontalAlignment="Left" Margin="514,301,0,0" VerticalAlignment="Top"/>
+        <Label Content="Subtotal:" HorizontalAlignment="Left" Margin="500,329,0,0" VerticalAlignment="Top"/>
+        <Label Content="Total:" HorizontalAlignment="Left" Margin="519,357,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="OpeningButton" Content="Opening" HorizontalAlignment="Left" Margin="10,27,0,0" VerticalAlignment="Top" Width="75"/>
+        <Label Content="Services" HorizontalAlignment="Left" Margin="26,1,0,0" VerticalAlignment="Top" Width="59"/>
+        <Button x:Name="InitialButton" Content="Initial" HorizontalAlignment="Left" Margin="10,52,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="OneCallButton" Content="One Call" HorizontalAlignment="Left" Margin="10,77,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="TwoCallButton" Content="Two Call" HorizontalAlignment="Left" Margin="10,102,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="RepairButton" Content="Plumbing" HorizontalAlignment="Left" Margin="10,127,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="LinerButton" Content="Liner" HorizontalAlignment="Left" Margin="10,152,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="InstallButton" Content="Install" HorizontalAlignment="Left" Margin="10,177,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="InstallButton_Copy" Content="Acid Wash" HorizontalAlignment="Left" Margin="10,202,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="InstallButton_Copy1" Content="Pump Work" HorizontalAlignment="Left" Margin="10,227,0,0" VerticalAlignment="Top" Width="75"/>
+        <DataGrid x:Name="PartsDG" HorizontalAlignment="Left" Height="220" Margin="98,27,0,0" VerticalAlignment="Top" Width="403" AutoGenerateColumns="False" CanUserDeleteRows="False" CanUserAddRows="False"/>
+        <DataGrid x:Name="LaborDG" HorizontalAlignment="Left" Height="220" Margin="506,26,0,0" VerticalAlignment="Top" Width="182" RowHeight="20" CanUserAddRows="False" AutoGenerateColumns="False"/>
+        <Button x:Name="REMOVE_ME" Content="TEST FUNCTION BUTTON REMOVE PLEASE" HorizontalAlignment="Left" Margin="159,316,0,0" VerticalAlignment="Top" Width="268" Height="67" Click="REMOVE_ME_Click"/>
+        <Label Content="Parts &amp; Services" HorizontalAlignment="Left" Margin="252,0,0,0" VerticalAlignment="Top" Width="94"/>
+        <Label Content="Labor" HorizontalAlignment="Left" Margin="574,0,0,0" VerticalAlignment="Top" Width="59"/>
 
     </Grid>
 </Window>
