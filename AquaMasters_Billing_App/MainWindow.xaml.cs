@@ -131,13 +131,33 @@ namespace AquaMasters_Billing_App
             AddPart(new Part(10.00m, "test2", "Chem"), 1);
             AddPart(new Part(10.00m, "test2", "Chem"), 1);
             AddPart(new Part(10.00m, "test2", "Chem"), 1);
-            AddPart(new Part(149.00m, "testLabor", "Labor"), 1);
+            AddPart(new Part(149.00m, "testLabor", "Labor"), 1.25m);
 
 
 
         }
 
-        private void AddPart(Part newPart, int quantity) {
+        private void AddPartsStrings(List<String> parts, List<decimal> quants) {
+
+            for (int i = 0; i < parts.Count; i++) {
+
+                String part = parts[i];
+                Decimal quant = quants[i];
+
+                if (this.PriceSheet.ContainsKey(part)) {
+                    this.PriceSheet.TryGetValue(part, out Part temp);
+
+                    AddPart(new Part(Decimal.Parse(temp.cost), temp.name, temp.type), quant);
+                } else {
+                    //Error handling?
+                }
+            }
+
+        }
+
+
+
+        private void AddPart(Part newPart, decimal quantity) {
 
             PurchaseSet purchaseSet = new PurchaseSet { part = newPart, quantity = quantity };
 
@@ -175,15 +195,16 @@ namespace AquaMasters_Billing_App
 
         private void OpeningButton_Click(object sender, RoutedEventArgs e) {
 
-            List<Part> newParts;
+            List<String> newParts;
+            List<decimal> newQuants;
             addOpening opening = new addOpening();
 
             if (opening.ShowDialog().Value == true) {
                 newParts = opening.parts;
-                foreach (Part part in newParts) {
-                    AddPart(part, 1);
-                }
+                newQuants = opening.quants;
+                AddPartsStrings(newParts, newQuants);
             }
+
 
             
         }
@@ -230,7 +251,7 @@ namespace AquaMasters_Billing_App
     public class PurchaseSet {
 
         public Part part { set; get; }
-        public int quantity { set; get; }
+        public decimal quantity { set; get; }
 
         public override bool Equals(Object test) {
 

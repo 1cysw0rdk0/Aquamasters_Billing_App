@@ -29,7 +29,7 @@
         <CheckBox x:Name="Heater" Content="Heater (+$10)" HorizontalAlignment="Left" Margin="300,170,0,0" VerticalAlignment="Top"/>
         <CheckBox x:Name="SaltGen" Content="Salt Generator (+$10)" HorizontalAlignment="Left" Margin="300,190,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="CoverCablesNum" HorizontalAlignment="Left" Height="23" Margin="330,231,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="47"/>
-        <RadioButton x:Name="FullRB" Content="Full Crew ($139/hr)" HorizontalAlignment="Left" Margin="10,50,0,0" VerticalAlignment="Top" IsChecked="True" GroupName="crewType"/>
+        <RadioButton x:Name="FullRB" Content="Full Crew ($149/hr)" HorizontalAlignment="Left" Margin="10,50,0,0" VerticalAlignment="Top" IsChecked="True" GroupName="crewType"/>
         <RadioButton x:Name="HalfRB" Content="Half Crew ($99/hr)" HorizontalAlignment="Left" Margin="141,50,0,0" VerticalAlignment="Top" GroupName="crewType"/>
         <CheckBox x:Name="_5GalCB" Content="5 Gal. of Shock" HorizontalAlignment="Left" Margin="200,95,0,0" VerticalAlignment="Top" IsChecked="True"/>
         <CheckBox x:Name="CaseCB" Content="1 Case of Shock" HorizontalAlignment="Left" Margin="330,95,0,0" VerticalAlignment="Top"/>
@@ -37,6 +37,9 @@
         <CheckBox x:Name="AddChemsCB" Content="Add Chemicals" HorizontalAlignment="Left" Margin="10,95,0,0" VerticalAlignment="Top" IsChecked="True" Click="AddChemsCB_Click"/>
         <Button x:Name="Accept" Content="Add" HorizontalAlignment="Left" Margin="382,266,0,0" VerticalAlignment="Top" Width="75" Click="Accept_Click"/>
         <Button x:Name="CancelButton" Content="Cancel" HorizontalAlignment="Left" Margin="462,266,0,0" VerticalAlignment="Top" Width="75" Click="CancelButton_Click"/>
+        <TextBox x:Name="HoursTB" HorizontalAlignment="Left" Height="15" Margin="436,48,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="37"/>
+        <Label Content="Hours:" HorizontalAlignment="Left" Margin="393,44,0,0" VerticalAlignment="Top"/>
+        <RadioButton x:Name="HalfRB_Copy" Content="No Additional Labor" HorizontalAlignment="Left" Margin="262,50,0,0" VerticalAlignment="Top" GroupName="crewType" RenderTransformOrigin="1.33,0.6"/>
 
 
     </Grid>
