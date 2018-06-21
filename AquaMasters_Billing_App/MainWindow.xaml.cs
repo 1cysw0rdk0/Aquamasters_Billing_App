@@ -107,7 +107,7 @@ namespace AquaMasters_Billing_App
         {
             //Write an object to a json formatted string in a file
             Part json = new Part();
-
+        
             json.setCost(5.00);
             json.setName("Shock");
             json.setType("Chem");
@@ -199,7 +199,7 @@ namespace AquaMasters_Billing_App
             List<decimal> newQuants;
             addOpening opening = new addOpening();
 
-            if (opening.ShowDialog().Value == true) {
+            if (opening.ShowDialog().Value) {
                 newParts = opening.parts;
                 newQuants = opening.quants;
                 AddPartsStrings(newParts, newQuants);
@@ -209,6 +209,20 @@ namespace AquaMasters_Billing_App
             
         }
 
+        private void InitialButton_Click(object sender, RoutedEventArgs e) {
+
+            List<String> newParts;
+            List<decimal> newQuants;
+            addInitial initial = new addInitial();
+
+            if (initial.ShowDialog().Value) {
+                newParts = initial.parts;
+                newQuants = initial.quants;
+                AddPartsStrings(newParts, newQuants);
+            }
+
+
+        }
     }
 
 
