@@ -12,16 +12,16 @@
         <CheckBox x:Name="fiver" Content="Five Week Month" HorizontalAlignment="Left" Margin="193,10,0,0" VerticalAlignment="Top"/>
         <Label Content="Shock" HorizontalAlignment="Left" Margin="10,44,0,0" VerticalAlignment="Top"/>
         <Label Content="Alkalinity" HorizontalAlignment="Left" Margin="63,44,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="shock1" Content="1" HorizontalAlignment="Left" Margin="10,75,0,0" VerticalAlignment="Top" Width="42"/>
-        <Button x:Name="shock2" Content="2" HorizontalAlignment="Left" Margin="10,100,0,0" VerticalAlignment="Top" Width="42"/>
-        <Button x:Name="shock3" Content="3" HorizontalAlignment="Left" Margin="10,125,0,0" VerticalAlignment="Top" Width="42"/>
-        <Button x:Name="shock4" Content="Case" HorizontalAlignment="Left" Margin="10,150,0,0" VerticalAlignment="Top" Width="42"/>
-        <Button x:Name="alk1" Content="1" HorizontalAlignment="Left" Margin="71,75,0,0" VerticalAlignment="Top" Width="42"/>
-        <Button x:Name="alk2" Content="2" HorizontalAlignment="Left" Margin="71,100,0,0" VerticalAlignment="Top" Width="42"/>
-        <Button x:Name="alk3" Content="3" HorizontalAlignment="Left" Margin="71,125,0,0" VerticalAlignment="Top" Width="42"/>
-        <DataGrid HorizontalAlignment="Left" Height="240" Margin="126,44,0,0" VerticalAlignment="Top" Width="179"/>
-        <Button Content="OK" HorizontalAlignment="Left" Margin="10,235,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button Content="Cancel" HorizontalAlignment="Left" Margin="10,260,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="shock1" Content="1" HorizontalAlignment="Left" Margin="10,75,0,0" VerticalAlignment="Top" Width="42" Click="shock1_Click"/>
+        <Button x:Name="shock2" Content="2" HorizontalAlignment="Left" Margin="10,100,0,0" VerticalAlignment="Top" Width="42" Click="shock2_Click"/>
+        <Button x:Name="shock3" Content="3" HorizontalAlignment="Left" Margin="10,125,0,0" VerticalAlignment="Top" Width="42" Click="shock3_Click"/>
+        <Button x:Name="shock4" Content="Case" HorizontalAlignment="Left" Margin="10,150,0,0" VerticalAlignment="Top" Width="42" Click="shock4_Click"/>
+        <Button x:Name="alk1" Content="1" HorizontalAlignment="Left" Margin="71,75,0,0" VerticalAlignment="Top" Width="42" Click="alk1_Click"/>
+        <Button x:Name="alk2" Content="2" HorizontalAlignment="Left" Margin="71,100,0,0" VerticalAlignment="Top" Width="42" Click="alk2_Click"/>
+        <Button x:Name="alk3" Content="3" HorizontalAlignment="Left" Margin="71,125,0,0" VerticalAlignment="Top" Width="42" Click="alk3_Click"/>
+        <DataGrid x:Name="shockList" HorizontalAlignment="Left" Height="240" Margin="126,44,0,0" VerticalAlignment="Top" Width="179" CanUserAddRows="False" AutoGenerateColumns="False"/>
+        <Button x:Name="Accept" Content="OK" HorizontalAlignment="Left" Margin="10,235,0,0" VerticalAlignment="Top" Width="75" Click="Accept_Click"/>
+        <Button x:Name="cancel" Content="Cancel" HorizontalAlignment="Left" Margin="10,260,0,0" VerticalAlignment="Top" Width="75" Click="cancel_Click"/>
 
     </Grid>
 </Window>

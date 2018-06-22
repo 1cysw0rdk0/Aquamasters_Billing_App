@@ -223,6 +223,18 @@ namespace AquaMasters_Billing_App
 
 
         }
+
+        private void VacButton_Click(object sender, RoutedEventArgs e) {
+            List<String> newParts;
+            List<decimal> newQuants;
+            addVac vac = new addVac();
+
+            if (vac.ShowDialog().Value) {
+                newParts = vac.parts;
+                newQuants = vac.quantities;
+                AddPartsStrings(newParts, newQuants);
+            }
+        }
     }
 
 
