@@ -1,0 +1,24 @@
+﻿<Window x:Class="AquaMasters_Billing_App.searchAndAdd"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AquaMasters_Billing_App"
+        mc:Ignorable="d"
+        Title="searchAndAdd" Height="496.084" Width="943.675" ResizeMode="CanMinimize">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="32*"/>
+            <ColumnDefinition Width="35*"/>
+        </Grid.ColumnDefinitions>
+        <DataGrid x:Name="priceListDG" HorizontalAlignment="Left" Height="350" Margin="10,62,0,0" VerticalAlignment="Top" Width="381" CanUserAddRows="False" AutoGenerateColumns="False" MouseDoubleClick="priceListDG_MouseDoubleClick" />
+        <DataGrid x:Name="cartDg" HorizontalAlignment="Left" Height="350" Margin="396,62,0,0" VerticalAlignment="Top" Width="381" CanUserAddRows="False" AutoGenerateColumns="False" Grid.ColumnSpan="2"/>
+        <Label Content="Price Sheet Entries" HorizontalAlignment="Left" Margin="147,31,0,0" VerticalAlignment="Top"/>
+        <Label Content="Items to Add" HorizontalAlignment="Left" Margin="89,31,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+        <CheckBox Content="Chems" HorizontalAlignment="Left" Margin="10,417,0,0" VerticalAlignment="Top"/>
+        <CheckBox Content="Parts" HorizontalAlignment="Left" Margin="84,417,0,0" VerticalAlignment="Top"/>
+        <CheckBox Content="Services" HorizontalAlignment="Left" Margin="318,417,0,0" VerticalAlignment="Top"/>
+        <CheckBox Content="Labor" HorizontalAlignment="Left" Margin="147,417,0,0" VerticalAlignment="Top"/>
+
+    </Grid>
+</Window>

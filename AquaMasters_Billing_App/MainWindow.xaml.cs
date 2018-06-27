@@ -122,16 +122,8 @@ namespace AquaMasters_Billing_App
         private void REMOVE_ME_Click(object sender, RoutedEventArgs e)
         {
 
-            AddPart(new Part(10.00M, "test2", "Chem"), 1);
-            AddPart(new Part(10.00M, "test2", "Chem"), 5);
-            AddPart(new Part(10.50M, "test2", "Chem"), 1);
-            AddPart(new Part(10.00M, "test2", "Chem"), 1);
-            AddPart(new Part(10.00M, "test2", "Chem"), 1);
-            AddPart(new Part(10.00m, "test2", "Chem"), 1);
-            AddPart(new Part(10.00m, "test2", "Chem"), 1);
-            AddPart(new Part(10.00m, "test2", "Chem"), 1);
-            AddPart(new Part(10.00m, "test2", "Chem"), 1);
-            AddPart(new Part(149.00m, "testLabor", "Labor"), 1.25m);
+            searchAndAdd search = new searchAndAdd(PriceSheet);
+            search.Show();
 
 
 
