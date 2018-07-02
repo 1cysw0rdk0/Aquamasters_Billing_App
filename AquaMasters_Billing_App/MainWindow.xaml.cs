@@ -69,14 +69,14 @@ namespace AquaMasters_Billing_App
 
             // Initialize columns for the parts display
             this.PartsDG.Columns.Add(new DataGridTextColumn { Header = "Quantity", Binding = new Binding("quantity"), Width = 56 });
-            this.PartsDG.Columns.Add(new DataGridTextColumn { Header = "Name", Binding = new Binding("part.name"), Width = 242 });
-            this.PartsDG.Columns.Add(new DataGridTextColumn { Header = "Cost", Binding = new Binding("part.cost"), Width = 50 });
+            this.PartsDG.Columns.Add(new DataGridTextColumn { Header = "Name", Binding = new Binding("part.name"), Width = 242, IsReadOnly = true });
+            this.PartsDG.Columns.Add(new DataGridTextColumn { Header = "Cost", Binding = new Binding("part.cost"), Width = 50, IsReadOnly = true});
             this.PartsDG.Columns.Add(new DataGridCheckBoxColumn { Header = " X", Width = 30, CanUserSort = false, IsReadOnly = false });
 
             // Initialize columns for the labor display
-            this.LaborDG.Columns.Add(new DataGridTextColumn { Header = "Hours", Binding = new Binding("quantity"), Width = 42 });
-            this.LaborDG.Columns.Add(new DataGridTextColumn { Header = "Men", Binding = new Binding("part.name"), Width = 50 });
-            this.LaborDG.Columns.Add(new DataGridTextColumn { Header = "Rate", Binding = new Binding("part.cost"), Width = 52 });
+            this.LaborDG.Columns.Add(new DataGridTextColumn { Header = "Quantity", Binding = new Binding("quantity"), Width = 56 });
+            this.LaborDG.Columns.Add(new DataGridTextColumn { Header = "Service", Binding = new Binding("part.name"), Width = 242, IsReadOnly = true });
+            this.LaborDG.Columns.Add(new DataGridTextColumn { Header = "Rate", Binding = new Binding("part.cost"), Width = 50, IsReadOnly = true });
             this.LaborDG.Columns.Add(new DataGridCheckBoxColumn { Header = " X", Width = 30, CanUserSort = false, IsReadOnly = false });
 
         }
