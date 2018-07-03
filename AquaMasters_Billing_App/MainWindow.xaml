@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AquaMasters_Billing_App"
         mc:Ignorable="d"
-        Title="Billing Sucks Don't It?" Height="432.666" Width="873.334">
+        Title="Billing Sucks Don't It?" Height="432.666" Width="849.334">
     <Grid>
         <TextBox x:Name="TotalCostTB" HorizontalAlignment="Left" Height="23" Margin="699,341,0,0" TextWrapping="Wrap" Text="0.00" VerticalAlignment="Top" Width="120" IsEnabled="False" ToolTip="Total cost to bill" MaxLines="1"/>
         <TextBox x:Name="SubtotalCostTB" HorizontalAlignment="Left" Height="23" Margin="699,313,0,0" TextWrapping="Wrap" Text="0.00" VerticalAlignment="Top" Width="120" IsEnabled="False" ToolTip="Total cost before tax" MaxLines="1"/>

@@ -43,7 +43,7 @@ namespace AquaMasters_Billing_App {
             this.ShockList.ItemsSource = tempParts;
 
             this.ShockList.Columns.Add(new DataGridTextColumn { Header = "Quantity", Binding = new Binding("quantity"), Width = 56 });
-            this.ShockList.Columns.Add(new DataGridTextColumn { Header = "Name", Binding = new Binding("name"), Width = 150 });
+            this.ShockList.Columns.Add(new DataGridTextColumn { Header = "Name", Binding = new Binding("name"), Width = 150, IsReadOnly=true });
 
 
 

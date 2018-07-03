@@ -35,7 +35,7 @@ namespace AquaMasters_Billing_App {
             this.shockList.ItemsSource = tempParts;
 
             shockList.Columns.Add(new DataGridTextColumn { Header = "Quantity", Binding = new Binding("quantity"), Width=56 });
-            shockList.Columns.Add(new DataGridTextColumn { Header = "Name", Binding = new Binding("name"), Width=150 });
+            shockList.Columns.Add(new DataGridTextColumn { Header = "Name", Binding = new Binding("name"), Width=242, IsReadOnly=true });
         }
 
 
@@ -44,19 +44,7 @@ namespace AquaMasters_Billing_App {
 
         private void Accept_Click(object sender, RoutedEventArgs e) {
 
-            if (twoCall.IsChecked.Value) {
-                if (fiver.IsChecked.Value) {
-                    this.parts.Add("2 Call Vac Service - 5 Week");
-                } else {
-                    this.parts.Add("2 Call Vac Service");              
-                }
-            } else {
-                if (fiver.IsChecked.Value) {
-                    this.parts.Add("1 Call Vac Service - 5 Week");
-                } else {
-                    this.parts.Add("1 Call Vac Service");
-                }
-            }
+            
             this.quantities.Add(1m);
 
             this.DialogResult = true;
@@ -114,6 +102,27 @@ namespace AquaMasters_Billing_App {
             this.parts.Add("10 lbs. Alkalinity");
             this.quantities.Add(3m);
             this.tempParts.Add(new tempPart { name = "10 lbs. Alkalinity", quantity = 3m });
+            this.shockList.Items.Refresh();
+        }
+
+        private void addCheck_Click(object sender, RoutedEventArgs e) {
+            this.parts.Add("Vac Service - Check");
+            this.quantities.Add(1m);
+            this.tempParts.Add(new tempPart { name = "Vac Service - Check", quantity = 1m });
+            this.shockList.Items.Refresh();
+        }
+
+        private void addNoVac_Click(object sender, RoutedEventArgs e) {
+            this.parts.Add("Vac Service - Can't Vac");
+            this.quantities.Add(1m);
+            this.tempParts.Add(new tempPart { name = "Vac Service - Can't Vac", quantity = 1m });
+            this.shockList.Items.Refresh();
+        }
+
+        private void addVac_Click(object sender, RoutedEventArgs e) {
+            this.parts.Add("Vac Service - Full Vac");
+            this.quantities.Add(1m);
+            this.tempParts.Add(new tempPart { name = "Vac Service - Full Vac", quantity = 1m });
             this.shockList.Items.Refresh();
         }
     }

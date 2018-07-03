@@ -14,7 +14,7 @@
         <Button x:Name="_2Gal" Content="2 Gallons Shock" HorizontalAlignment="Left" Margin="20,71,0,0" VerticalAlignment="Top" Width="92" Click="_2Gal_Click"/>
         <Button x:Name="_3Gal" Content="3 Gallons Shock" HorizontalAlignment="Left" Margin="20,96,0,0" VerticalAlignment="Top" Width="92" Click="_3Gal_Click"/>
         <Button x:Name="FullCase" Content="Full Case Shock" HorizontalAlignment="Left" Margin="20,121,0,0" VerticalAlignment="Top" Width="92" Click="FullCase_Click"/>
-        <DataGrid x:Name="ShockList" HorizontalAlignment="Left" Height="160" Margin="129,71,0,0" VerticalAlignment="Top" Width="204" CanUserAddRows="False" AutoGenerateColumns="False"/>
+        <DataGrid x:Name="ShockList" HorizontalAlignment="Left" Height="160" Margin="129,71,0,0" VerticalAlignment="Top" Width="204" CanUserAddRows="False" AutoGenerateColumns="False" CanUserDeleteRows="True"/>
         <Button x:Name="Accept" Content="OK" HorizontalAlignment="Left" Margin="20,186,0,0" VerticalAlignment="Top" Width="75" Click="Accept_Click"/>
         <Button x:Name="Accept_Copy" Content="Cancel" HorizontalAlignment="Left" Margin="20,211,0,0" VerticalAlignment="Top" Width="75" Click="Accept_Copy_Click"/>
         <Button x:Name="AddLabor" Content="Add" HorizontalAlignment="Left" Margin="242,29,0,0" VerticalAlignment="Top" Width="39" Click="AddLabor_Click"/>
