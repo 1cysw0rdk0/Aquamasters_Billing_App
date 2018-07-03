@@ -5,20 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AquaMasters_Billing_App"
         mc:Ignorable="d"
-        Title="searchAndAdd" Height="496.084" Width="943.675" ResizeMode="CanMinimize">
+        Title="searchAndAdd" Height="459.054" Width="804.536" ResizeMode="CanMinimize">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="32*"/>
-            <ColumnDefinition Width="35*"/>
+            <ColumnDefinition Width="382*"/>
+            <ColumnDefinition Width="29*"/>
+            <ColumnDefinition Width="388*"/>
         </Grid.ColumnDefinitions>
-        <DataGrid x:Name="priceListDG" HorizontalAlignment="Left" Height="350" Margin="10,41,0,0" VerticalAlignment="Top" Width="381" CanUserAddRows="False" AutoGenerateColumns="False" MouseDoubleClick="priceListDG_MouseDoubleClick" />
-        <DataGrid x:Name="cartDg" HorizontalAlignment="Left" Height="350" Margin="396,41,0,0" VerticalAlignment="Top" Width="381" CanUserAddRows="False" AutoGenerateColumns="False" Grid.ColumnSpan="2"/>
-        <Label Content="Price Sheet Entries" HorizontalAlignment="Left" Margin="147,10,0,0" VerticalAlignment="Top"/>
-        <Label Content="Items to Add" HorizontalAlignment="Left" Margin="89,10,0,0" VerticalAlignment="Top" Grid.Column="1"/>
-        <CheckBox Content="Chems" HorizontalAlignment="Left" Margin="10,396,0,0" VerticalAlignment="Top"/>
-        <CheckBox Content="Parts" HorizontalAlignment="Left" Margin="84,396,0,0" VerticalAlignment="Top"/>
-        <CheckBox Content="Services" HorizontalAlignment="Left" Margin="84,416,0,0" VerticalAlignment="Top"/>
-        <CheckBox Content="Labor" HorizontalAlignment="Left" Margin="10,416,0,0" VerticalAlignment="Top"/>
+        <DataGrid x:Name="priceListDG" HorizontalAlignment="Left" Height="350" Margin="10,26,0,0" VerticalAlignment="Top" Width="381" CanUserAddRows="False" AutoGenerateColumns="False" MouseDoubleClick="priceListDG_MouseDoubleClick" Grid.ColumnSpan="2" />
+        <DataGrid x:Name="cartDg" HorizontalAlignment="Left" Height="350" Margin="19,26,0,0" VerticalAlignment="Top" Width="381" CanUserAddRows="False" AutoGenerateColumns="False" Grid.Column="1" Grid.ColumnSpan="2"/>
+        <Label Content="Price Sheet Entries" HorizontalAlignment="Left" Margin="147,0,0,0" VerticalAlignment="Top"/>
+        <Label Content="Items to Add" HorizontalAlignment="Left" Margin="58.95,0,0,0" VerticalAlignment="Top" Grid.Column="2"/>
+        <CheckBox Content="Chems" HorizontalAlignment="Left" Margin="10,379,0,0" VerticalAlignment="Top" IsChecked="True"/>
+        <CheckBox Content="Parts" HorizontalAlignment="Left" Margin="84,379,0,0" VerticalAlignment="Top" IsChecked="True"/>
+        <CheckBox Content="Services" HorizontalAlignment="Left" Margin="84,399,0,0" VerticalAlignment="Top" IsChecked="True"/>
+        <CheckBox Content="Labor" HorizontalAlignment="Left" Margin="10,399,0,0" VerticalAlignment="Top" IsChecked="True"/>
+        <Button x:Name="Checkout" Content="Accept" Grid.Column="2" HorizontalAlignment="Left" Margin="216,393,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="Cancel" Content="Cancel" Grid.Column="2" HorizontalAlignment="Left" Margin="296,393,0,0" VerticalAlignment="Top" Width="75"/>
+        <TextBox x:Name="FilterBox" HorizontalAlignment="Left" Height="23" Margin="161,385,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="206"/>
 
     </Grid>
 </Window>
