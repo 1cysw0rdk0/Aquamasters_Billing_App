@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Newtonsoft.Json;
 using System.IO;
+using System.Collections.Specialized;
 
 namespace AquaMasters_Billing_App
 {
@@ -25,8 +27,8 @@ namespace AquaMasters_Billing_App
 
         public Dictionary<string, Part> PriceSheet;
         public string savePath;
-        public List<PurchaseSet> partsList;
-        public List<PurchaseSet> laborList;
+        public ObservableCollection<PurchaseSet> partsList;
+        public ObservableCollection<PurchaseSet> laborList;
 
         public MainWindow()
         {
@@ -56,10 +58,10 @@ namespace AquaMasters_Billing_App
             }
 
             // Create and Bind data lists
-            this.partsList = new List<PurchaseSet>();
+            this.partsList = new ObservableCollection<PurchaseSet>();
             this.PartsDG.ItemsSource = this.partsList;
 
-            this.laborList = new List<PurchaseSet>();
+            this.laborList = new ObservableCollection<PurchaseSet>();
             this.LaborDG.ItemsSource = this.laborList;
 
         }
@@ -71,36 +73,21 @@ namespace AquaMasters_Billing_App
             this.PartsDG.Columns.Add(new DataGridTextColumn { Header = "Quantity", Binding = new Binding("quantity"), Width = 56 });
             this.PartsDG.Columns.Add(new DataGridTextColumn { Header = "Name", Binding = new Binding("part.name"), Width = 242, IsReadOnly = true });
             this.PartsDG.Columns.Add(new DataGridTextColumn { Header = "Cost", Binding = new Binding("part.cost"), Width = 50, IsReadOnly = true});
-            this.PartsDG.Columns.Add(new DataGridCheckBoxColumn { Header = " X", Width = 30, CanUserSort = false, IsReadOnly = false });
 
             // Initialize columns for the labor display
             this.LaborDG.Columns.Add(new DataGridTextColumn { Header = "Quantity", Binding = new Binding("quantity"), Width = 56 });
             this.LaborDG.Columns.Add(new DataGridTextColumn { Header = "Service", Binding = new Binding("part.name"), Width = 242, IsReadOnly = true });
             this.LaborDG.Columns.Add(new DataGridTextColumn { Header = "Rate", Binding = new Binding("part.cost"), Width = 50, IsReadOnly = true });
-            this.LaborDG.Columns.Add(new DataGridCheckBoxColumn { Header = " X", Width = 30, CanUserSort = false, IsReadOnly = false });
+
+            //Assign update function to both data lists
+            laborList.CollectionChanged += listUpdated;
+            partsList.CollectionChanged += listUpdated;
+
 
         }
 
 
-        private void UpdateTotals() {
-
-            decimal runningTotal = 0;
-            foreach (PurchaseSet purchase in this.partsList) {
-                runningTotal += Decimal.Parse(purchase.part.cost) * purchase.quantity;
-            }
-            this.PartCostTB.Text = runningTotal.ToString("0.00");
-
-            runningTotal = 0;
-            foreach (PurchaseSet purchase in this.laborList) {
-                runningTotal += Decimal.Parse(purchase.part.cost) * purchase.quantity;
-            }
-            this.LaborCostTB.Text = runningTotal.ToString("0.00");
-
-            this.SubtotalCostTB.Text = (Decimal.Parse(this.PartCostTB.Text) + Decimal.Parse(this.LaborCostTB.Text)).ToString("0.00");
-            string cost = (Decimal.Parse(this.SubtotalCostTB.Text) * 1.0635m).ToString("0.00");
-            this.TotalCostTB.Text = cost;
-
-        }
+        
 
         // Save to file example
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -147,8 +134,6 @@ namespace AquaMasters_Billing_App
 
         }
 
-
-
         private void AddPart(Part newPart, decimal quantity) {
 
             PurchaseSet purchaseSet = new PurchaseSet { part = newPart, quantity = quantity };
@@ -183,6 +168,28 @@ namespace AquaMasters_Billing_App
             */
 
             UpdateTotals();
+        }
+
+        private void listUpdated(object sender, NotifyCollectionChangedEventArgs a) => UpdateTotals();
+
+        private void UpdateTotals() {
+
+            decimal runningTotal = 0;
+            foreach (PurchaseSet purchase in this.partsList) {
+                runningTotal += Decimal.Parse(purchase.part.cost) * purchase.quantity;
+            }
+            this.PartCostTB.Text = runningTotal.ToString("0.00");
+
+            runningTotal = 0;
+            foreach (PurchaseSet purchase in this.laborList) {
+                runningTotal += Decimal.Parse(purchase.part.cost) * purchase.quantity;
+            }
+            this.LaborCostTB.Text = runningTotal.ToString("0.00");
+
+            this.SubtotalCostTB.Text = (Decimal.Parse(this.PartCostTB.Text) + Decimal.Parse(this.LaborCostTB.Text)).ToString("0.00");
+            string cost = (Decimal.Parse(this.SubtotalCostTB.Text) * 1.0635m).ToString("0.00");
+            this.TotalCostTB.Text = cost;
+
         }
 
         private void OpeningButton_Click(object sender, RoutedEventArgs e) {
@@ -226,6 +233,33 @@ namespace AquaMasters_Billing_App
                 newQuants = vac.quantities;
                 AddPartsStrings(newParts, newQuants);
             }
+        }
+
+        private void LaborDG_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e) {
+            
+            if (LaborDG.SelectedItem != null) {
+                (sender as DataGrid).CellEditEnding -= LaborDG_CellEditEnding;
+                (sender as DataGrid).CommitEdit();
+                (sender as DataGrid).CommitEdit();
+                (sender as DataGrid).Items.Refresh();
+                (sender as DataGrid).CellEditEnding += LaborDG_CellEditEnding;
+            }
+
+            UpdateTotals();
+       
+        }
+
+        private void PartsDG_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e) {
+
+            if (PartsDG.SelectedItem != null) {
+                (sender as DataGrid).CellEditEnding -= PartsDG_CellEditEnding;
+                (sender as DataGrid).CommitEdit();
+                (sender as DataGrid).CommitEdit();
+                (sender as DataGrid).Items.Refresh();
+                (sender as DataGrid).CellEditEnding += PartsDG_CellEditEnding;
+            }
+
+            UpdateTotals();
         }
     }
 
