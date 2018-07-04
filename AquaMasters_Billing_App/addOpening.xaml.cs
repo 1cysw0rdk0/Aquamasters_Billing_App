@@ -123,12 +123,14 @@ namespace AquaMasters_Billing_App
 
             // Labor
             if (this.FullRB.IsChecked.Value) {
+                quants.Add(Decimal.Parse(HoursTB.Text));
                 parts.Add("2 Men");
             } else if (this.HalfRB.IsChecked.Value) {
+                quants.Add(Decimal.Parse(HoursTB.Text));
                 parts.Add("1 Man");
             }
 
-            quants.Add(Decimal.Parse(HoursTB.Text));
+            
 
             // 
             if (!this.CleanCoverCB.IsChecked.Value) {

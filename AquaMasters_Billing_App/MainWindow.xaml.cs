@@ -1,43 +1,43 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Newtonsoft.Json;
 using System.IO;
 using System.Collections.Specialized;
 
-namespace AquaMasters_Billing_App
-{
+namespace AquaMasters_Billing_App {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
-    {
+    public partial class MainWindow : Window {
 
         public Dictionary<string, Part> PriceSheet;
         public string savePath;
         public ObservableCollection<PurchaseSet> partsList;
         public ObservableCollection<PurchaseSet> laborList;
 
-        public MainWindow()
-        {
+        /**
+         * Constructor for the main window
+         * Initializes the components that the users sees
+         * and all the supporting data 
+         */
+        public MainWindow() {
             InitializeComponent();
             InitializeBackendData();
             InitializeFrontendData();
 
         }
 
+        /**
+         * Initializes the backend data, including
+         *      - The save path
+         *      - Opening and reading the config file
+         *      - Creating and filling the price list
+         *      - Creating and binding data lists to data grids
+         */
         private void InitializeBackendData() {
 
             // Generate save path for this computer
@@ -66,7 +66,14 @@ namespace AquaMasters_Billing_App
 
         }
 
-
+        /**
+         * Initialize Frontend Data, including:
+         *      - The columns for parts
+         *      - The properties for parts columns
+         *      - The columns for labor
+         *      - The properties for labor columns
+         *      - Set the update cost function to run on list update
+         */
         private void InitializeFrontendData() {
 
             // Initialize columns for the parts display
@@ -85,43 +92,21 @@ namespace AquaMasters_Billing_App
 
 
         }
-
-
         
-
-        // Save to file example
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            //Write an object to a json formatted string in a file
-            Part json = new Part();
-        
-            json.setCost(5.00);
-            json.setName("Shock");
-            json.setType("Chem");
-
-            string strPath = Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
-            strPath = strPath + "\\Aquamasters\\test.ini";
-
-            string jsonData = JsonConvert.SerializeObject(json, Formatting.None);
-            System.IO.File.WriteAllText(strPath, jsonData);
-        }
-
-        private void REMOVE_ME_Click(object sender, RoutedEventArgs e)
-        {
-
-            List<searchAndAdd.partOrder> newParts = new List<searchAndAdd.partOrder>();
-            Dictionary<string, Part> updates = new Dictionary<string, Part>();
-
-            searchAndAdd search = new searchAndAdd(PriceSheet);
-            if (search.ShowDialog().Value) {
-                newParts = search.cart;
-                updates = search.masterPriceList;
-
-                writeToFile(updates);
-
-            }
-        }
-
+        /// <summary>
+        /// 
+        /// AddPartsStrings - Adds parts to the cart from a list of strings
+        /// 
+        ///     This function is called after each window closes, and passes it a list
+        ///     of all parts to be added, formatted as a list of strings, and a list of 
+        ///     quantities, in a synchronous order.
+        /// 
+        /// NOTE: This method is marked to be reworked, passing two lists is terrible form!
+        /// 
+        /// </summary>
+        /// 
+        /// <param name="parts">List of part names to be added.</param>
+        /// <param name="quants">List of quantities of the parts to be added.</param>
         private void AddPartsStrings(List<String> parts, List<decimal> quants) {
 
             for (int i = 0; i < parts.Count; i++) {
@@ -140,6 +125,16 @@ namespace AquaMasters_Billing_App
 
         }
 
+        /// <summary>
+        /// 
+        /// AddPart - Adds a single part to the correct list, when given the part object
+        /// 
+        ///     and a quantity of the item to add.
+        ///     
+        /// </summary>
+        /// 
+        /// <param name="newPart">The new part to add.</param>
+        /// <param name="quantity">The quantity of that part to add.</param>
         private void AddPart(Part newPart, decimal quantity) {
 
             PurchaseSet purchaseSet = new PurchaseSet { part = newPart, quantity = quantity };
@@ -152,9 +147,6 @@ namespace AquaMasters_Billing_App
 
             this.PartsDG.Items.Refresh();
             this.LaborDG.Items.Refresh();
-
-
-
 
             /**
             // Uncomment this code block to condense all items of a single name into one block. otherwise, they will
@@ -176,8 +168,37 @@ namespace AquaMasters_Billing_App
             UpdateTotals();
         }
 
+        /// <summary>
+        /// 
+        /// listUpdated - Runs when a change is made to either the labor or parts lists.
+        /// 
+        ///     - Calls the updateTotals function to update the cost boxes.
+        ///     
+        /// </summary>
+        /// 
+        /// <param name="sender">Unused.</param>
+        /// <param name="a">Unused.</param>
         private void listUpdated(object sender, NotifyCollectionChangedEventArgs a) => UpdateTotals();
 
+        /// <summary>
+        /// 
+        /// updateTotals - Updates the textbox displays for the final sums
+        /// 
+        ///     - Loops through each item in the parts list
+        ///         - Multiplies quantity by item cost
+        ///         - Adds to running total
+        ///     - Updates PartCostTB
+        ///     - Loops through each item in the labor list
+        ///         - Multiplies quantity by item cost
+        ///         - Adds to running total
+        ///     - Updates LaborCostTB
+        ///     - Adds PartCostTB and LaborCostTB to set the SubtotalCostTB
+        ///     - Sets the TotalCostTB to the SubtotalTB times tax (1.0635 as of 7/3/2018)
+        ///     - Sets the TaxTB to the cost of the tax (.0635 as of 7/3/2018)
+        ///     
+        /// NOTE: This method is marked to be updated such that tax is not a static number
+        /// 
+        /// </summary>
         private void UpdateTotals() {
 
             decimal runningTotal = 0;
@@ -193,110 +214,123 @@ namespace AquaMasters_Billing_App
             this.LaborCostTB.Text = runningTotal.ToString("0.00");
 
             this.SubtotalCostTB.Text = (Decimal.Parse(this.PartCostTB.Text) + Decimal.Parse(this.LaborCostTB.Text)).ToString("0.00");
-            string cost = (Decimal.Parse(this.SubtotalCostTB.Text) * 1.0635m).ToString("0.00");
+            this.TotalCostTB.Text = (Decimal.Parse(this.SubtotalCostTB.Text) * 1.0635m).ToString("0.00");
             TaxTB.Text = (Decimal.Parse(this.SubtotalCostTB.Text) * .0635m).ToString("0.00");
-            this.TotalCostTB.Text = cost;
-
         }
 
+        /// <summary>
+        /// 
+        /// writeToFile - Saves changes made to the price list to the file
+        /// 
+        ///     - Creates an empty string for the file data
+        ///     - Loops through every item in the price list
+        ///         - Serializes the object into a json string
+        ///         - Adds a newline character
+        ///         - Adds to the end of the json string
+        ///     - Writes json string to file
+        ///     
+        /// </summary>
+        /// 
+        /// <param name="updates">The list of parts to write to file.</param>
         private void writeToFile(Dictionary<string, Part> updates) {
-
-            //Write an object to a json formatted string in a file
-            Part json = new Part();
-
-            json.setCost(5.00);
-            json.setName("Shock");
-            json.setType("Chem");
-
-            string strPath = Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
-            strPath = strPath + "\\Aquamasters\\test.ini";
 
             string jsonData = "";
 
             foreach (Part part in updates.Values) {
                 jsonData += JsonConvert.SerializeObject(part, Formatting.None) + "\n";
             }
-            System.IO.File.WriteAllText(strPath, jsonData);
+            System.IO.File.WriteAllText(savePath, jsonData);
         }
 
+        /// <summary>
+        /// 
+        /// OpeningButton_Click - Handles the event that fires when the opening button is clicked
+        /// 
+        ///     - Constructs the new opening window
+        ///     - Displays the new window
+        ///         - Upon success Save the returned lists to the part lists
+        ///        
+        /// </summary>
+        /// <param name="sender">Unused.</param>
+        /// <param name="e">Unused.</param>
         private void OpeningButton_Click(object sender, RoutedEventArgs e) {
 
-            List<String> newParts;
-            List<decimal> newQuants;
             addOpening opening = new addOpening();
 
             if (opening.ShowDialog().Value) {
-                newParts = opening.parts;
-                newQuants = opening.quants;
-                AddPartsStrings(newParts, newQuants);
+                AddPartsStrings(opening.parts, opening.quants);
             }
-
-
-            
         }
 
+        /// <summary>
+        /// 
+        /// InitialButton_Click - Handles the event that fires when the initial button is clicked
+        /// 
+        ///     - Constructs the new initial window
+        ///     - Displays the new window
+        ///         - Upon success Save the returned lists to the part lists
+        ///     
+        /// </summary>
+        /// <param name="sender">Unused.</param>
+        /// <param name="e">Unused.</param>
         private void InitialButton_Click(object sender, RoutedEventArgs e) {
 
-            List<String> newParts;
-            List<decimal> newQuants;
             addInitial initial = new addInitial();
 
             if (initial.ShowDialog().Value) {
-                newParts = initial.parts;
-                newQuants = initial.quants;
-                AddPartsStrings(newParts, newQuants);
+                AddPartsStrings(initial.parts, initial.quants);
             }
-
-
         }
 
+        /// <summary>
+        /// 
+        /// VacButton_Click - Handles the event that fires when the vac button is clicked
+        /// 
+        ///     - Constructs the new vac window
+        ///     - Displays the new window
+        ///         - Upong success save the returned lists to the part lists
+        ///         
+        /// </summary>
+        /// 
+        /// <param name="sender">Unused.</param>
+        /// <param name="e">Unused.</param>
         private void VacButton_Click(object sender, RoutedEventArgs e) {
-            List<String> newParts;
-            List<decimal> newQuants;
+
             addVac vac = new addVac();
 
-            if (vac.ShowDialog().Value) {
-                newParts = vac.parts;
-                newQuants = vac.quantities;
-                AddPartsStrings(newParts, newQuants);
+            if (vac.ShowDialog().Value) { 
+                AddPartsStrings(vac.parts, vac.quantities);
             }
         }
 
-        private void LaborDG_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e) {
-            
-            if (LaborDG.SelectedItem != null) {
-                (sender as DataGrid).CellEditEnding -= LaborDG_CellEditEnding;
-                (sender as DataGrid).CommitEdit();
-                (sender as DataGrid).CommitEdit();
-                (sender as DataGrid).Items.Refresh();
-                (sender as DataGrid).CellEditEnding += LaborDG_CellEditEnding;
+        /// <summary>
+        /// 
+        /// searchAndAddB_Click - Handles the event that fires when the search button is clicked
+        /// 
+        ///     
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void searchAndAddB_Click(object sender, RoutedEventArgs e) {
+
+            searchAndAdd search = new searchAndAdd(PriceSheet);
+
+            if (search.ShowDialog().Value) {
+                
+                writeToFile(search.masterPriceList);
+
+                foreach (searchAndAdd.partOrder partOrder in search.cart) {
+                    AddPart(partOrder.part, partOrder.quantity);
+                }
             }
-
-            UpdateTotals();
-       
-        }
-
-        private void PartsDG_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e) {
-
-            if (PartsDG.SelectedItem != null) {
-                (sender as DataGrid).CellEditEnding -= PartsDG_CellEditEnding;
-                (sender as DataGrid).CommitEdit();
-                (sender as DataGrid).CommitEdit();
-                (sender as DataGrid).Items.Refresh();
-                (sender as DataGrid).CellEditEnding += PartsDG_CellEditEnding;
-            }
-
-            UpdateTotals();
         }
     }
-
 
     /**
      * Part: the basic framework for a part or chem
      *      has a name, type and cost.
      *      fields are public to allow JsonConvert
-     *      to serialize the object, and DataGrid to 
-     *      Autopopulate the row fields
+     *      to serialize the object
      */
     public class Part {
 
@@ -339,3 +373,22 @@ namespace AquaMasters_Billing_App
         public override int GetHashCode() => base.GetHashCode();
     }
 }
+
+/**
+        * // Example code demonstrating how to save a single part object to a json file
+        private void Button_Click(object sender, RoutedEventArgs e) {
+
+            //Write an object to a json formatted string in a file
+            Part json = new Part();
+        
+            json.setCost(5.00);
+            json.setName("Shock");
+            json.setType("Chem");
+
+            string strPath = Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
+            strPath = strPath + "\\Aquamasters\\test.ini";
+
+            string jsonData = JsonConvert.SerializeObject(json, Formatting.None);
+            System.IO.File.WriteAllText(strPath, jsonData);
+        }
+        */

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AquaMasters_Billing_App"
         mc:Ignorable="d"
-        Title="Billing Sucks Don't It?" Height="439.666" Width="849.334">
+        Title="Billing Sucks Don't It?" Height="440" Width="850">
     <Grid>
         <TextBox x:Name="TotalCostTB" HorizontalAlignment="Left" Height="23" Margin="699,369,0,0" TextWrapping="Wrap" Text="0.00" VerticalAlignment="Top" Width="120" IsEnabled="False" ToolTip="Total cost to bill" MaxLines="1"/>
         <TextBox x:Name="SubtotalCostTB" HorizontalAlignment="Left" Height="23" Margin="699,313,0,0" TextWrapping="Wrap" Text="0.00" VerticalAlignment="Top" Width="120" IsEnabled="False" ToolTip="Total cost before tax" MaxLines="1"/>
@@ -24,9 +24,9 @@
         <Button x:Name="InstallButton" Content="Install" HorizontalAlignment="Left" Margin="10,177,0,0" VerticalAlignment="Top" Width="75"/>
         <Button x:Name="InstallButton_Copy" Content="Acid Wash" HorizontalAlignment="Left" Margin="10,202,0,0" VerticalAlignment="Top" Width="75"/>
         <Button x:Name="InstallButton_Copy1" Content="Pump Work" HorizontalAlignment="Left" Margin="10,227,0,0" VerticalAlignment="Top" Width="75"/>
-        <DataGrid x:Name="PartsDG" HorizontalAlignment="Left" Height="220" Margin="98,27,0,0" VerticalAlignment="Top" Width="360" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="True" CellEditEnding="PartsDG_CellEditEnding"/>
-        <DataGrid x:Name="LaborDG" HorizontalAlignment="Left" Height="220" Margin="463,27,0,0" VerticalAlignment="Top" Width="360" RowHeight="20" CanUserAddRows="False" CanUserDeleteRows="True" AutoGenerateColumns="False" CellEditEnding="LaborDG_CellEditEnding"/>
-        <Button x:Name="REMOVE_ME" Content="TEST FUNCTION BUTTON REMOVE PLEASE" HorizontalAlignment="Left" Margin="159,316,0,0" VerticalAlignment="Top" Width="268" Height="67" Click="REMOVE_ME_Click"/>
+        <DataGrid x:Name="PartsDG" HorizontalAlignment="Left" Height="220" Margin="98,27,0,0" VerticalAlignment="Top" Width="360" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="True"/>
+        <DataGrid x:Name="LaborDG" HorizontalAlignment="Left" Height="220" Margin="463,27,0,0" VerticalAlignment="Top" Width="360" RowHeight="20" CanUserAddRows="False" CanUserDeleteRows="True" AutoGenerateColumns="False"/>
+        <Button x:Name="searchAndAddB" Content="All Parts" HorizontalAlignment="Left" Margin="10,252,0,0" VerticalAlignment="Top" Width="75" Height="20" Click="searchAndAddB_Click"/>
         <Label Content="Parts Chems and Addons" HorizontalAlignment="Left" Margin="202,0,0,0" VerticalAlignment="Top" Width="144"/>
         <Label Content="Labor and Services" HorizontalAlignment="Left" Margin="594,0,0,0" VerticalAlignment="Top" Width="110"/>
         <TextBox x:Name="TaxTB" HorizontalAlignment="Left" Height="23" Margin="699,341,0,0" TextWrapping="Wrap" Text="0.00" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
