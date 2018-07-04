@@ -108,5 +108,15 @@ namespace AquaMasters_Billing_App {
 
         }
 
+        private void Cancel_Click(object sender, RoutedEventArgs e) {
+            DialogResult = false;
+            this.Close();
+        }
+
+        private void Checkout_Click(object sender, RoutedEventArgs e) {
+            DialogResult = true;
+            this.Close();
+
+        }
     }
 }

@@ -109,11 +109,17 @@ namespace AquaMasters_Billing_App
         private void REMOVE_ME_Click(object sender, RoutedEventArgs e)
         {
 
+            List<searchAndAdd.partOrder> newParts = new List<searchAndAdd.partOrder>();
+            Dictionary<string, Part> updates = new Dictionary<string, Part>();
+
             searchAndAdd search = new searchAndAdd(PriceSheet);
-            search.Show();
+            if (search.ShowDialog().Value) {
+                newParts = search.cart;
+                updates = search.masterPriceList;
 
+                writeToFile(updates);
 
-
+            }
         }
 
         private void AddPartsStrings(List<String> parts, List<decimal> quants) {
@@ -193,6 +199,26 @@ namespace AquaMasters_Billing_App
 
         }
 
+        private void writeToFile(Dictionary<string, Part> updates) {
+
+            //Write an object to a json formatted string in a file
+            Part json = new Part();
+
+            json.setCost(5.00);
+            json.setName("Shock");
+            json.setType("Chem");
+
+            string strPath = Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
+            strPath = strPath + "\\Aquamasters\\test.ini";
+
+            string jsonData = "";
+
+            foreach (Part part in updates.Values) {
+                jsonData += JsonConvert.SerializeObject(part, Formatting.None) + "\n";
+            }
+            System.IO.File.WriteAllText(strPath, jsonData);
+        }
+
         private void OpeningButton_Click(object sender, RoutedEventArgs e) {
 
             List<String> newParts;
@@ -263,10 +289,6 @@ namespace AquaMasters_Billing_App
             UpdateTotals();
         }
     }
-
-
-
-
 
 
     /**
