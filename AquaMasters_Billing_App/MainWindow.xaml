@@ -26,11 +26,12 @@
         <Button x:Name="InstallButton_Copy1" Content="Pump Work" HorizontalAlignment="Left" Margin="10,227,0,0" VerticalAlignment="Top" Width="75"/>
         <DataGrid x:Name="PartsDG" HorizontalAlignment="Left" Height="220" Margin="98,27,0,0" VerticalAlignment="Top" Width="360" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="True"/>
         <DataGrid x:Name="LaborDG" HorizontalAlignment="Left" Height="220" Margin="463,27,0,0" VerticalAlignment="Top" Width="360" RowHeight="20" CanUserAddRows="False" CanUserDeleteRows="True" AutoGenerateColumns="False"/>
-        <Button x:Name="searchAndAddB" Content="All Parts" HorizontalAlignment="Left" Margin="10,252,0,0" VerticalAlignment="Top" Width="75" Height="20" Click="searchAndAddB_Click"/>
+        <Button x:Name="searchAndAddB" Content="All Parts" HorizontalAlignment="Left" Margin="10,340,0,0" VerticalAlignment="Top" Width="75" Height="20" Click="searchAndAddB_Click"/>
         <Label Content="Parts Chems and Addons" HorizontalAlignment="Left" Margin="202,0,0,0" VerticalAlignment="Top" Width="144"/>
         <Label Content="Labor and Services" HorizontalAlignment="Left" Margin="594,0,0,0" VerticalAlignment="Top" Width="110"/>
         <TextBox x:Name="TaxTB" HorizontalAlignment="Left" Height="23" Margin="699,341,0,0" TextWrapping="Wrap" Text="0.00" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
         <Label Content="Tax:" HorizontalAlignment="Left" Margin="665,337,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="Clear" Content="Clear" HorizontalAlignment="Left" Margin="10,368,0,0" VerticalAlignment="Top" Width="75" Click="Clear_Click"/>
 
     </Grid>
 </Window>

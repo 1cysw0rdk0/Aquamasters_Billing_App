@@ -306,11 +306,16 @@ namespace AquaMasters_Billing_App {
         /// <summary>
         /// 
         /// searchAndAddB_Click - Handles the event that fires when the search button is clicked
-        /// 
+        ///     
+        ///     - Construct the new search window
+        ///     - Displays the new window
+        ///     - Calls writeToFile to save changes
+        ///     - Add each part to the parts lists
         ///     
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// 
+        /// <param name="sender">Unused.</param>
+        /// <param name="e">Unused.</param>
         private void searchAndAddB_Click(object sender, RoutedEventArgs e) {
 
             searchAndAdd search = new searchAndAdd(PriceSheet);
@@ -323,6 +328,22 @@ namespace AquaMasters_Billing_App {
                     AddPart(partOrder.part, partOrder.quantity);
                 }
             }
+        }
+
+        /// <summary>
+        /// 
+        /// Clear_Click - Handles the event that fires what the clear button is clicked
+        /// 
+        ///     - Clears both parts and labor lists
+        ///     - Both lists automatically update the cost
+        ///     
+        /// </summary>
+        /// 
+        /// <param name="sender">Unused.</param>
+        /// <param name="e">Unused.</param>
+        private void Clear_Click(object sender, RoutedEventArgs e) {
+            partsList.Clear();
+            laborList.Clear();
         }
     }
 

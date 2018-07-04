@@ -14,8 +14,8 @@
         </Grid.ColumnDefinitions>
         <DataGrid x:Name="priceListDG" HorizontalAlignment="Left" Height="350" Margin="10,26,0,0" VerticalAlignment="Top" Width="381" CanUserAddRows="False" AutoGenerateColumns="False" MouseDoubleClick="priceListDG_MouseDoubleClick" Grid.ColumnSpan="2" />
         <DataGrid x:Name="cartDg" HorizontalAlignment="Left" Height="350" Margin="19,26,0,0" VerticalAlignment="Top" Width="381" CanUserAddRows="False" AutoGenerateColumns="False" Grid.Column="1" Grid.ColumnSpan="2"/>
-        <Label Content="Price Sheet Entries" HorizontalAlignment="Left" Margin="147,0,0,0" VerticalAlignment="Top"/>
-        <Label Content="Items to Add" HorizontalAlignment="Left" Margin="58.95,0,0,0" VerticalAlignment="Top" Grid.Column="2"/>
+        <Label Content="Price Sheet Entries" HorizontalAlignment="Left" Margin="151,0,0,0" VerticalAlignment="Top"/>
+        <Label Content="Items to Add" HorizontalAlignment="Left" Margin="147,0,0,0" VerticalAlignment="Top" Grid.Column="2"/>
         <CheckBox x:Name="ShowChems" Content="Chems" HorizontalAlignment="Left" Margin="10,379,0,0" VerticalAlignment="Top" IsChecked="True" Click="updatePriceList"/>
         <CheckBox x:Name="ShowParts" Content="Parts" HorizontalAlignment="Left" Margin="84,379,0,0" VerticalAlignment="Top" IsChecked="True" Click="updatePriceList"/>
         <CheckBox x:Name="ShowServices" Content="Services" HorizontalAlignment="Left" Margin="84,399,0,0" VerticalAlignment="Top" IsChecked="True" Click="updatePriceList"/>
