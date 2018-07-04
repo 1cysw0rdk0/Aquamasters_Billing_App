@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AquaMasters_Billing_App"
         mc:Ignorable="d"
-        Title="Opening A Pool" Height="330.723" Width="565.964">
+        Title="Opening A Pool" Height="331" Width="566" ResizeMode="CanMinimize">
     <Grid>
         <RadioButton x:Name="SmallRB" Content="15x30 - 16x32" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" GroupName="sizeGroup" IsChecked="True"/>
         <RadioButton x:Name="LargeRB" Content="18x36 - 20x40" HorizontalAlignment="Left" Margin="141,10,0,0" VerticalAlignment="Top" IsChecked="True" GroupName="sizeGroup"/>

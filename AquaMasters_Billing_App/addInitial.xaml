@@ -5,19 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AquaMasters_Billing_App"
         mc:Ignorable="d"
-        Title="Add An Initial" Height="293.674" Width="365.361">
+        Title="Add An Initial" Height="264" Width="360" ResizeMode="CanMinimize">
     <Grid>
-        <RadioButton x:Name="FullRB" Content="Full Crew ($149/hr) " HorizontalAlignment="Left" Margin="20,23,0,0" VerticalAlignment="Top" GroupName="crewType" IsChecked="True"/>
-        <RadioButton x:Name="HalfRB" Content="Half Crew ($99/hr)" HorizontalAlignment="Left" Margin="20,43,0,0" VerticalAlignment="Top" GroupName="crewType"/>
-        <TextBox x:Name="Hours" HorizontalAlignment="Left" Height="20" Margin="191,29,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="46"/>
-        <Label Content="Hours:" HorizontalAlignment="Left" Margin="148,25,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="_2Gal" Content="2 Gallons Shock" HorizontalAlignment="Left" Margin="20,71,0,0" VerticalAlignment="Top" Width="92" Click="_2Gal_Click"/>
-        <Button x:Name="_3Gal" Content="3 Gallons Shock" HorizontalAlignment="Left" Margin="20,96,0,0" VerticalAlignment="Top" Width="92" Click="_3Gal_Click"/>
-        <Button x:Name="FullCase" Content="Full Case Shock" HorizontalAlignment="Left" Margin="20,121,0,0" VerticalAlignment="Top" Width="92" Click="FullCase_Click"/>
-        <DataGrid x:Name="ShockList" HorizontalAlignment="Left" Height="160" Margin="129,71,0,0" VerticalAlignment="Top" Width="204" CanUserAddRows="False" AutoGenerateColumns="False" CanUserDeleteRows="True"/>
-        <Button x:Name="Accept" Content="OK" HorizontalAlignment="Left" Margin="20,186,0,0" VerticalAlignment="Top" Width="75" Click="Accept_Click"/>
-        <Button x:Name="Accept_Copy" Content="Cancel" HorizontalAlignment="Left" Margin="20,211,0,0" VerticalAlignment="Top" Width="75" Click="Accept_Copy_Click"/>
-        <Button x:Name="AddLabor" Content="Add" HorizontalAlignment="Left" Margin="242,29,0,0" VerticalAlignment="Top" Width="39" Click="AddLabor_Click"/>
+        <RadioButton x:Name="FullRB" Content="Full Crew ($149/hr) " HorizontalAlignment="Left" Margin="22,10,0,0" VerticalAlignment="Top" GroupName="crewType" IsChecked="True"/>
+        <RadioButton x:Name="HalfRB" Content="Half Crew ($99/hr)" HorizontalAlignment="Left" Margin="22,30,0,0" VerticalAlignment="Top" GroupName="crewType"/>
+        <TextBox x:Name="Hours" HorizontalAlignment="Left" Height="20" Margin="193,16,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="46"/>
+        <Label Content="Hours:" HorizontalAlignment="Left" Margin="150,12,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="_2Gal" Content="2 Gallons Shock" HorizontalAlignment="Left" Margin="22,58,0,0" VerticalAlignment="Top" Width="92" Click="_2Gal_Click"/>
+        <Button x:Name="_3Gal" Content="3 Gallons Shock" HorizontalAlignment="Left" Margin="22,83,0,0" VerticalAlignment="Top" Width="92" Click="_3Gal_Click"/>
+        <Button x:Name="FullCase" Content="Full Case Shock" HorizontalAlignment="Left" Margin="22,108,0,0" VerticalAlignment="Top" Width="92" Click="FullCase_Click"/>
+        <DataGrid x:Name="ShockList" HorizontalAlignment="Left" Height="160" Margin="131,58,0,0" VerticalAlignment="Top" Width="204" CanUserAddRows="False" AutoGenerateColumns="False" CanUserDeleteRows="True"/>
+        <Button x:Name="Accept" Content="OK" HorizontalAlignment="Left" Margin="22,173,0,0" VerticalAlignment="Top" Width="75" Click="Accept_Click"/>
+        <Button x:Name="Accept_Copy" Content="Cancel" HorizontalAlignment="Left" Margin="22,198,0,0" VerticalAlignment="Top" Width="75" Click="Accept_Copy_Click"/>
+        <Button x:Name="AddLabor" Content="Add" HorizontalAlignment="Left" Margin="244,16,0,0" VerticalAlignment="Top" Width="39" Click="AddLabor_Click"/>
 
     </Grid>
 </Window>

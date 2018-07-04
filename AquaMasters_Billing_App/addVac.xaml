@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AquaMasters_Billing_App"
         mc:Ignorable="d"
-        Title="Vac Service" Height="330.348" Width="453.674">
+        Title="Vac Service" Height="330" Width="454" ResizeMode="CanMinimize">
     <Grid>
         <Label Content="Shock" HorizontalAlignment="Left" Margin="10,44,0,0" VerticalAlignment="Top"/>
         <Label Content="Alkalinity" HorizontalAlignment="Left" Margin="49,44,0,0" VerticalAlignment="Top"/>

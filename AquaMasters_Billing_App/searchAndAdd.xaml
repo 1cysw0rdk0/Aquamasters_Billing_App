@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AquaMasters_Billing_App"
         mc:Ignorable="d"
-        Title="searchAndAdd" Height="459.054" Width="804.536" ResizeMode="CanMinimize">
+        Title="Search Add or Edit" Height="460" Width="805" ResizeMode="CanMinimize">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="382*"/>

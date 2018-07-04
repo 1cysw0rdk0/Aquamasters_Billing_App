@@ -58,7 +58,7 @@ namespace AquaMasters_Billing_App {
             // Add the double clicked item, if the item was clicked on the name label.
             // Refresh the cart so it will update
             if (priceListDG.CurrentColumn == priceListDG.Columns[0]) {
-                cart.Add(new partOrder { part = (Part)priceListDG.SelectedItem, quantity = 0 });
+                cart.Add(new partOrder { part = (Part)priceListDG.SelectedItem, quantity = 1m });
                 cartDg.Items.Refresh();
             }
             
