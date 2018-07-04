@@ -123,9 +123,9 @@ namespace AquaMasters_Billing_App
 
             // Labor
             if (this.FullRB.IsChecked.Value) {
-                parts.Add("2 Men - Opening");
+                parts.Add("2 Men");
             } else if (this.HalfRB.IsChecked.Value) {
-                parts.Add("1 Man - Opening");
+                parts.Add("1 Man");
             }
 
             quants.Add(Decimal.Parse(HoursTB.Text));

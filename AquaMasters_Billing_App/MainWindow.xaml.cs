@@ -138,7 +138,7 @@ namespace AquaMasters_Billing_App
 
             PurchaseSet purchaseSet = new PurchaseSet { part = newPart, quantity = quantity };
 
-            if (purchaseSet.part.type.Equals("Labor")) {
+            if (purchaseSet.part.type.Equals("Labor") || purchaseSet.part.type.Equals("Service")) {
                 this.laborList.Add(purchaseSet);
             } else {
                 this.partsList.Add(purchaseSet);
@@ -188,6 +188,7 @@ namespace AquaMasters_Billing_App
 
             this.SubtotalCostTB.Text = (Decimal.Parse(this.PartCostTB.Text) + Decimal.Parse(this.LaborCostTB.Text)).ToString("0.00");
             string cost = (Decimal.Parse(this.SubtotalCostTB.Text) * 1.0635m).ToString("0.00");
+            TaxTB.Text = (Decimal.Parse(this.SubtotalCostTB.Text) * .0635m).ToString("0.00");
             this.TotalCostTB.Text = cost;
 
         }

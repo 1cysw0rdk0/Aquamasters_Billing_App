@@ -25,6 +25,7 @@ namespace AquaMasters_Billing_App {
 
         public List<Part> priceSheetList;
         public List<partOrder> cart;
+        public Dictionary<string, Part> masterPriceList;
 
         public searchAndAdd(Dictionary<string, Part> PriceSheet) {
             InitializeComponent();
@@ -33,6 +34,7 @@ namespace AquaMasters_Billing_App {
             // Copy items from dictionary to a list so as to avoid having to deal with MultiBinding cause fuck that
             priceSheetList = new List<Part>();
             cart = new List<partOrder>();
+            masterPriceList = PriceSheet;
             foreach (Part part in PriceSheet.Values) { priceSheetList.Add(part); };
 
             
@@ -62,6 +64,49 @@ namespace AquaMasters_Billing_App {
             
         }
 
-      
+        private void updatePriceList(object sender, RoutedEventArgs e) {
+            checkTypes();
+        }
+
+        private void FilterBox_KeyUp(object sender, KeyEventArgs e) {
+            checkTypes();
+        }
+
+        private void checkTypes() {
+            priceSheetList = new List<Part>();
+
+            if (ShowChems.IsChecked.Value) {
+                foreach (Part part in masterPriceList.Values) { if (part.type == "Chem") { priceSheetList.Add(part); } }
+            }
+
+            if (ShowLabor.IsChecked.Value) {
+                foreach (Part part in masterPriceList.Values) { if (part.type == "Labor") { priceSheetList.Add(part); } }
+            }
+
+            if (ShowServices.IsChecked.Value) {
+                foreach (Part part in masterPriceList.Values) { if (part.type == "Service") { priceSheetList.Add(part); } }
+            }
+
+            if (ShowParts.IsChecked.Value) {
+                foreach (Part part in masterPriceList.Values) { if (part.type == "Part") { priceSheetList.Add(part); } }
+            }
+
+            List<Part> tempPriceSheet = new List<Part>();
+
+            if (FilterBox.Text != null) {
+                foreach (Part part in priceSheetList) {
+                    if ((part.name.ToUpper().Contains(FilterBox.Text.ToUpper()))) {
+                        tempPriceSheet.Add(part);
+                    }
+                }
+            }
+
+            priceSheetList = tempPriceSheet;
+
+            priceListDG.ItemsSource = priceSheetList;
+            priceListDG.Items.Refresh();
+
+        }
+
     }
 }

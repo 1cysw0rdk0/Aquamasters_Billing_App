@@ -16,13 +16,13 @@
         <DataGrid x:Name="cartDg" HorizontalAlignment="Left" Height="350" Margin="19,26,0,0" VerticalAlignment="Top" Width="381" CanUserAddRows="False" AutoGenerateColumns="False" Grid.Column="1" Grid.ColumnSpan="2"/>
         <Label Content="Price Sheet Entries" HorizontalAlignment="Left" Margin="147,0,0,0" VerticalAlignment="Top"/>
         <Label Content="Items to Add" HorizontalAlignment="Left" Margin="58.95,0,0,0" VerticalAlignment="Top" Grid.Column="2"/>
-        <CheckBox Content="Chems" HorizontalAlignment="Left" Margin="10,379,0,0" VerticalAlignment="Top" IsChecked="True"/>
-        <CheckBox Content="Parts" HorizontalAlignment="Left" Margin="84,379,0,0" VerticalAlignment="Top" IsChecked="True"/>
-        <CheckBox Content="Services" HorizontalAlignment="Left" Margin="84,399,0,0" VerticalAlignment="Top" IsChecked="True"/>
-        <CheckBox Content="Labor" HorizontalAlignment="Left" Margin="10,399,0,0" VerticalAlignment="Top" IsChecked="True"/>
+        <CheckBox x:Name="ShowChems" Content="Chems" HorizontalAlignment="Left" Margin="10,379,0,0" VerticalAlignment="Top" IsChecked="True" Click="updatePriceList"/>
+        <CheckBox x:Name="ShowParts" Content="Parts" HorizontalAlignment="Left" Margin="84,379,0,0" VerticalAlignment="Top" IsChecked="True" Click="updatePriceList"/>
+        <CheckBox x:Name="ShowServices" Content="Services" HorizontalAlignment="Left" Margin="84,399,0,0" VerticalAlignment="Top" IsChecked="True" Click="updatePriceList"/>
+        <CheckBox x:Name="ShowLabor" Content="Labor" HorizontalAlignment="Left" Margin="10,399,0,0" VerticalAlignment="Top" IsChecked="True" Click="updatePriceList"/>
         <Button x:Name="Checkout" Content="Accept" Grid.Column="2" HorizontalAlignment="Left" Margin="216,393,0,0" VerticalAlignment="Top" Width="75"/>
         <Button x:Name="Cancel" Content="Cancel" Grid.Column="2" HorizontalAlignment="Left" Margin="296,393,0,0" VerticalAlignment="Top" Width="75"/>
-        <TextBox x:Name="FilterBox" HorizontalAlignment="Left" Height="23" Margin="161,385,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="206"/>
+        <TextBox x:Name="FilterBox" HorizontalAlignment="Left" Height="23" Margin="161,385,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="206" KeyUp="FilterBox_KeyUp"/>
 
     </Grid>
 </Window>

@@ -5,16 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AquaMasters_Billing_App"
         mc:Ignorable="d"
-        Title="Billing Sucks Don't It?" Height="432.666" Width="849.334">
+        Title="Billing Sucks Don't It?" Height="439.666" Width="849.334">
     <Grid>
-        <TextBox x:Name="TotalCostTB" HorizontalAlignment="Left" Height="23" Margin="699,341,0,0" TextWrapping="Wrap" Text="0.00" VerticalAlignment="Top" Width="120" IsEnabled="False" ToolTip="Total cost to bill" MaxLines="1"/>
+        <TextBox x:Name="TotalCostTB" HorizontalAlignment="Left" Height="23" Margin="699,369,0,0" TextWrapping="Wrap" Text="0.00" VerticalAlignment="Top" Width="120" IsEnabled="False" ToolTip="Total cost to bill" MaxLines="1"/>
         <TextBox x:Name="SubtotalCostTB" HorizontalAlignment="Left" Height="23" Margin="699,313,0,0" TextWrapping="Wrap" Text="0.00" VerticalAlignment="Top" Width="120" IsEnabled="False" ToolTip="Total cost before tax" MaxLines="1"/>
         <TextBox x:Name="LaborCostTB" HorizontalAlignment="Left" Height="23" Margin="699,257,0,0" TextWrapping="Wrap" Text="0.00" VerticalAlignment="Top" Width="120" IsEnabled="False" ToolTip="Total cost of labor" MaxLines="1"/>
         <TextBox x:Name="PartCostTB" HorizontalAlignment="Left" Height="23" Margin="699,285,0,0" TextWrapping="Wrap" Text="0.00" VerticalAlignment="Top" Width="120" IsEnabled="False" ToolTip="Total cost of parts" MaxLines="1"/>
         <Label Content="Parts:" HorizontalAlignment="Left" Margin="656,281,0,0" VerticalAlignment="Top"/>
         <Label Content="Labor:" HorizontalAlignment="Left" Margin="651,253,0,0" VerticalAlignment="Top"/>
         <Label Content="Subtotal:" HorizontalAlignment="Left" Margin="637,309,0,0" VerticalAlignment="Top"/>
-        <Label Content="Total:" HorizontalAlignment="Left" Margin="656,337,0,0" VerticalAlignment="Top"/>
+        <Label Content="Total:" HorizontalAlignment="Left" Margin="656,365,0,0" VerticalAlignment="Top"/>
         <Button x:Name="OpeningButton" Content="Opening" HorizontalAlignment="Left" Margin="10,27,0,0" VerticalAlignment="Top" Width="75" Click="OpeningButton_Click"/>
         <Label Content="Services" HorizontalAlignment="Left" Margin="26,1,0,0" VerticalAlignment="Top" Width="59"/>
         <Button x:Name="InitialButton" Content="Initial" HorizontalAlignment="Left" Margin="10,52,0,0" VerticalAlignment="Top" Width="75" Click="InitialButton_Click"/>
@@ -29,6 +29,8 @@
         <Button x:Name="REMOVE_ME" Content="TEST FUNCTION BUTTON REMOVE PLEASE" HorizontalAlignment="Left" Margin="159,316,0,0" VerticalAlignment="Top" Width="268" Height="67" Click="REMOVE_ME_Click"/>
         <Label Content="Parts Chems and Addons" HorizontalAlignment="Left" Margin="202,0,0,0" VerticalAlignment="Top" Width="144"/>
         <Label Content="Labor and Services" HorizontalAlignment="Left" Margin="594,0,0,0" VerticalAlignment="Top" Width="110"/>
+        <TextBox x:Name="TaxTB" HorizontalAlignment="Left" Height="23" Margin="699,341,0,0" TextWrapping="Wrap" Text="0.00" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
+        <Label Content="Tax:" HorizontalAlignment="Left" Margin="665,337,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>
