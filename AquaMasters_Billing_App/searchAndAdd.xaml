@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AquaMasters_Billing_App"
         mc:Ignorable="d"
-        Title="Search Add or Edit" Height="460" Width="805" ResizeMode="CanMinimize">
+        Title="Search Add or Edit" Height="502" Width="805" ResizeMode="CanMinimize">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="382*"/>
@@ -20,9 +20,12 @@
         <CheckBox x:Name="ShowParts" Content="Parts" HorizontalAlignment="Left" Margin="84,379,0,0" VerticalAlignment="Top" IsChecked="True" Click="updatePriceList"/>
         <CheckBox x:Name="ShowServices" Content="Services" HorizontalAlignment="Left" Margin="84,399,0,0" VerticalAlignment="Top" IsChecked="True" Click="updatePriceList"/>
         <CheckBox x:Name="ShowLabor" Content="Labor" HorizontalAlignment="Left" Margin="10,399,0,0" VerticalAlignment="Top" IsChecked="True" Click="updatePriceList"/>
-        <Button x:Name="Checkout" Content="Accept" Grid.Column="2" HorizontalAlignment="Left" Margin="216,393,0,0" VerticalAlignment="Top" Width="75" Click="Checkout_Click"/>
-        <Button x:Name="Cancel" Content="Cancel" Grid.Column="2" HorizontalAlignment="Left" Margin="296,393,0,0" VerticalAlignment="Top" Width="75" Click="Cancel_Click"/>
+        <Button x:Name="Checkout" Content="Accept" Grid.Column="2" HorizontalAlignment="Left" Margin="216,434,0,0" VerticalAlignment="Top" Width="75" Click="Checkout_Click"/>
+        <Button x:Name="Cancel" Content="Cancel" Grid.Column="2" HorizontalAlignment="Left" Margin="296,434,0,0" VerticalAlignment="Top" Width="75" Click="Cancel_Click"/>
         <TextBox x:Name="FilterBox" HorizontalAlignment="Left" Height="23" Margin="161,385,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="206" KeyUp="FilterBox_KeyUp"/>
+        <TextBox x:Name="FilterBox_Copy" HorizontalAlignment="Left" Height="23" Margin="10,431,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="200" />
+        <Button x:Name="Checkout_Copy" Content="Add New Part" HorizontalAlignment="Left" Margin="215,431,0,0" VerticalAlignment="Top" Width="87" Click="Checkout_Copy_Click" Height="23"/>
+        <Button x:Name="Checkout_Copy1" Content="Delete Selected" HorizontalAlignment="Left" Margin="307,431,0,0" VerticalAlignment="Top" Width="94" Click="Checkout_Copy1_Click" Height="23" Grid.ColumnSpan="2"/>
 
     </Grid>
 </Window>

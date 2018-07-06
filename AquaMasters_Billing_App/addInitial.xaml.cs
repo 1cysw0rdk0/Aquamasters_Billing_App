@@ -18,23 +18,31 @@ namespace AquaMasters_Billing_App {
     /// </summary>
     public partial class addInitial : Window {
 
+        // Lists used to pass data back to the main window
         public List<String> parts;
         public List<decimal> quants;
         public List<tempPart> tempParts;
 
+        // TempPart used to store pairs of data accurately
         public class tempPart {
             public decimal quantity { get; set; }
             public String name { get; set; }
         }
 
+        // Constructs a new addInitial window
         public addInitial() {
             InitializeComponent();
             InitializeFrontEndData();
         }
 
-
+        /// <summary>
+        /// 
+        /// InitializeFrontEndData - Initializes data lists for the window
+        ///     - Sets the item source for the dataGrid
+        ///     - Adds columns to the dataGrid
+        /// 
+        /// </summary>
         private void InitializeFrontEndData() {
-
 
             this.parts = new List<string>();
             this.quants = new List<decimal>();
@@ -44,22 +52,48 @@ namespace AquaMasters_Billing_App {
 
             this.ShockList.Columns.Add(new DataGridTextColumn { Header = "Quantity", Binding = new Binding("quantity"), Width = 56 });
             this.ShockList.Columns.Add(new DataGridTextColumn { Header = "Name", Binding = new Binding("name"), Width = 150, IsReadOnly=true });
-
-
-
         }
 
+        /// <summary>
+        /// 
+        /// Accept_Click - Handles the event when accept is clicked
+        ///     - Allows the main window to collect data
+        ///     - Closes the window
+        /// 
+        /// </summary>
+        /// <param name="sender">Unused.</param>
+        /// <param name="e">Unused.</param>
         private void Accept_Click(object sender, RoutedEventArgs e) {
             this.DialogResult = true;
             this.Close();
-
         }
 
+        /// <summary>
+        /// 
+        /// Accept_Copy_Click - Handles the event when the cancel button is clicked
+        ///     - Prevents the main window from collecting data
+        ///     - Closes the window
+        ///     
+        /// NOTE: This method is marked to be changed, the naming is incorrect
+        /// 
+        /// </summary>
+        /// <param name="sender">Unused.</param>
+        /// <param name="e">Unused.</param>
         private void Accept_Copy_Click(object sender, RoutedEventArgs e) {
             this.DialogResult = false;
             this.Close();
         }
 
+        /// <summary>
+        /// 
+        /// AddLabor_Click - Adds a new labor object to the lists 
+        ///     - Adds the proper rate for the labor used.
+        ///     - Adds the quantity to the proper lists
+        ///     - Refreshes the dataGrid
+        ///     
+        /// </summary>
+        /// <param name="sender">Unused.</param>
+        /// <param name="e">Unused.</param>
         public void AddLabor_Click(object sender, RoutedEventArgs e) {
 
             tempPart part = new tempPart();
