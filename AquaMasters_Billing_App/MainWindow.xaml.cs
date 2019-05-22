@@ -42,7 +42,7 @@ namespace AquaMasters_Billing_App {
 
             // Generate save path for this computer
             this.savePath = Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
-            this.savePath += "\\Aquamasters\\test.ini";
+            this.savePath += "\\Aquamasters\\priceSheet.ini";
 
             // Initialize file to read text
             StreamReader file = File.OpenText(this.savePath);
