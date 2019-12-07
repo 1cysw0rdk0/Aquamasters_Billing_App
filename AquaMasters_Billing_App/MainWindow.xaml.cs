@@ -7,6 +7,8 @@ using System.Windows.Data;
 using Newtonsoft.Json;
 using System.IO;
 using System.Collections.Specialized;
+using MySql.Data.MySqlClient;
+
 
 namespace AquaMasters_Billing_App {
     /// <summary>
@@ -18,6 +20,14 @@ namespace AquaMasters_Billing_App {
         public string savePath;
         public ObservableCollection<PurchaseSet> partsList;
         public ObservableCollection<PurchaseSet> laborList;
+        public ObservableCollection<CustomerRecord> customerRecords;
+        public ObservableCollection<ServiceRecord> serviceRecords;
+        // TODO //
+        // remove hardcoded password before deplyoment
+        private String Connection_String = @"server=localhost;userid=root;password=Gunf!r#AndTurp3nt1n3;database=aquamastersservice";
+        // TODO //
+        private String poolID;
+
 
         /**
          * Constructor for the main window
@@ -29,7 +39,11 @@ namespace AquaMasters_Billing_App {
             InitializeBackendData();
             InitializeFrontendData();
 
+            
         }
+
+
+
 
         /**
          * Initializes the backend data, including
@@ -37,6 +51,8 @@ namespace AquaMasters_Billing_App {
          *      - Opening and reading the config file
          *      - Creating and filling the price list
          *      - Creating and binding data lists to data grids
+         *      - Querying the database for customer list
+         *      - Adding customer records to the data grid
          */
         private void InitializeBackendData() {
 
@@ -64,6 +80,30 @@ namespace AquaMasters_Billing_App {
             this.laborList = new ObservableCollection<PurchaseSet>();
             this.LaborDG.ItemsSource = this.laborList;
 
+            this.customerRecords = new ObservableCollection<CustomerRecord>();
+            this.customerDB.ItemsSource = this.customerRecords;
+
+            this.serviceRecords = new ObservableCollection<ServiceRecord>();
+            this.recordsDB.ItemsSource = this.serviceRecords;
+
+
+            // Connect to database and pull list of all customers
+            String query = "SELECT CustID, LastName, FirstName, Address, Town, Phone, ZipCode, AltPhone1, AltPhone2 FROM customers;";
+
+            using (MySqlConnection conn = new MySqlConnection(Connection_String)) {
+                MySqlCommand comm = new MySqlCommand(query, conn);
+                conn.Open();
+                MySqlDataReader read = comm.ExecuteReader();
+
+                try {
+                    while (read.Read()) {
+                        this.customerRecords.Add(new CustomerRecord(read["FirstName"].ToString(), read["LastName"].ToString(), read["Address"].ToString(), read["Town"].ToString(), read["ZipCode"].ToString(), read["CustID"].ToString(), read["Phone"].ToString(), read["AltPhone1"].ToString(), read["AltPhone2"].ToString()));
+
+                    }
+                } finally { read.Close(); }
+
+            }
+
         }
 
         /**
@@ -72,7 +112,10 @@ namespace AquaMasters_Billing_App {
          *      - The properties for parts columns
          *      - The columns for labor
          *      - The properties for labor columns
+         *      - The columns for customers
+         *      - The properties for customer columns
          *      - Set the update cost function to run on list update
+         *      - Set the update customer data function 
          */
         private void InitializeFrontendData() {
 
@@ -86,13 +129,133 @@ namespace AquaMasters_Billing_App {
             this.LaborDG.Columns.Add(new DataGridTextColumn { Header = "Service", Binding = new Binding("part.name"), Width = 242, IsReadOnly = true });
             this.LaborDG.Columns.Add(new DataGridTextColumn { Header = "Rate", Binding = new Binding("part.cost"), Width = 50, IsReadOnly = true });
 
+            // Initialize columns for the customer display
+            this.customerDB.Columns.Add(new DataGridTextColumn { Header = "Last Name", Binding = new Binding("lastName"), Width = 135 });
+            this.customerDB.Columns.Add(new DataGridTextColumn { Header = "Town", Binding = new Binding("city"), Width = 110 });
+            this.customerDB.Columns.Add(new DataGridTextColumn { Header = "Phone", Binding = new Binding("phone"), Width = 140 });
+
+            // Initialize columns for the records display
+            this.recordsDB.Columns.Add(new DataGridTextColumn { Header = "Date", Binding = new Binding("date"), Width = 50 });
+            this.recordsDB.Columns.Add(new DataGridTextColumn { Header = "", Binding = new Binding(), Width = 50 });
+            this.recordsDB.Columns.Add(new DataGridTextColumn { Header = "", Binding = new Binding(), Width = 50 });
+
             //Assign update function to both data lists
-            laborList.CollectionChanged += listUpdated;
-            partsList.CollectionChanged += listUpdated;
+            this.laborList.CollectionChanged += this.listUpdated;
+            this.partsList.CollectionChanged += this.listUpdated;
+            this.customerDB.SelectedCellsChanged += this.customerSelected;
 
 
         }
-        
+
+        /// <summary>
+        /// 
+        /// customerSelected - Fills in appropriate boxes with customer information
+        /// 
+        ///     This function is called whenever a new customer record is selected in 
+        ///     the datagrid. The database is queried, and the pool data for that 
+        ///     customer is pulled from the database, and is used to fill in the correct
+        ///     boxes. 
+        ///     In the event that multiple customers are selected, the last customer selected
+        ///     is chosen to be used to fill in information.
+        /// 
+        /// </summary>
+        /// 
+        /// <param name="sender">Heck if I know man. I'm still learning this stuff. </param>
+        /// <param name="e">The event args passed when a new cell is selected. </param>
+        public void customerSelected(object sender, SelectedCellsChangedEventArgs e) {
+            if (e.AddedCells.Count < 1) {
+
+                custNameTB.Text = "";
+                custCityTB.Text = "";
+                custAddressTB.Text = "";
+                custAltPhone1TB.Text = "";
+                custAltPhone2TB.Text = "";
+                custPhoneTB.Text = "";
+                custZipCodeTB.Text = "";
+
+                poolDimTB.Text = "";
+                poolCoverTB.Text = "";
+                poolMainDrainTB.Text = "";
+                poolReturnsTB.Text = "";
+                poolSkimmersTB.Text = "";
+                poolSpaTB.Text = "";
+                poolHeaterTB.Text = "";
+                poolConstructionTB.Text = "";
+                poolPumpTB.Text = "";
+                poolFilterTB.Text = "";
+                poolID = "";
+                return;
+            } 
+
+            CustomerRecord customer = (CustomerRecord)e.AddedCells[0].Item;
+
+            custNameTB.Text = customer.firstName + customer.lastName;
+            custCityTB.Text = customer.city;
+            custAddressTB.Text = customer.address;
+            custAltPhone1TB.Text = customer.altphone;
+            custAltPhone2TB.Text = customer.altphone2;
+            custPhoneTB.Text = customer.phone;
+            custZipCodeTB.Text = customer.zip;
+
+
+            // Pull Pool Info
+            String query = "SELECT PoolID, Dimensions, Construction, Cover, Spa, Heater, Returns, Skimmers, MainDrains, Pumps, BigL, Turbo, AutoFills, Controller, WaterFeatrues, LeafCatches, BuddaJet, SaltGenerator, Notes FROM pools WHERE customers_CustID = @CustID";
+            using (MySqlConnection conn = new MySqlConnection(this.Connection_String)) {
+
+                // Set up SQL query
+                MySqlCommand command = new MySqlCommand(query, conn);
+                command.Parameters.AddWithValue("@CustID", customer.id);
+                conn.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+
+                // Parse Response and set text boxes
+                try {
+                    while (reader.Read()) {
+                        String main, skim, ret, spa, heater;
+
+                        if (reader["MainDrains"].ToString() == "-1") {  main = "Unknown"; } else {  main = reader["MainDrains"].ToString(); }
+                        if (reader["Skimmers"].ToString() == "-1") {  skim = "Unknown"; } else {  skim = reader["Skimmers"].ToString(); }
+                        if (reader["Returns"].ToString() == "-1") {  ret = "Unknown"; } else {  ret = reader["Returns"].ToString(); }
+                        if (reader["Spa"].ToString() == "-1") { spa = "Unknown"; } else if (reader["Spa"].ToString() == "1") { spa = "Yes"; } else if (reader["Spa"].ToString() == "0") { spa = "No"; } else {  spa = reader["Spa"].ToString(); }
+                        if (reader["Heater"].ToString() == "-1") {  heater = "Unknown"; } else if (reader["Heater"].ToString() == "1") { heater = "Yes"; } else if (reader["Heater"].ToString() == "0") { heater = "No"; } else {  heater = reader["Heater"].ToString(); }
+
+                        poolDimTB.Text = reader["Dimensions"].ToString();
+                        poolCoverTB.Text = reader["Cover"].ToString();
+                        poolMainDrainTB.Text = main;
+                        poolReturnsTB.Text = ret;
+                        poolSkimmersTB.Text = skim;
+                        poolSpaTB.Text = spa;
+                        poolHeaterTB.Text = heater;
+                        poolConstructionTB.Text = reader["Construction"].ToString();
+                        poolPumpTB.Text = reader["Pumps"].ToString();
+                        poolFilterTB.Text = "Unknown";
+                        poolID = reader["PoolID"].ToString();
+                    }
+
+                } finally { reader.Close(); }
+            }
+
+            // Pull Service History
+            query = "SELECT * FROM service_records WHERE pools_PoolID = @PoolID";
+            using (MySqlConnection conn = new MySqlConnection(this.Connection_String)) {
+
+                // Set up SQL Query
+                MySqlCommand command = new MySqlCommand(query, conn);
+                command.Parameters.AddWithValue("@PoolID", poolID);
+                conn.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+
+                // Parse Response and populate datagrid
+                try {
+                    while (reader.Read()) {
+                        this.serviceRecords.Add(new ServiceRecord((int)reader["RecordID"], (int)reader["customers_CustID"], poolID, (int)reader["Day"], (int)reader["Month"], (int)reader["Year"], reader["Description"].ToString(), reader["WorkType"].ToString(), reader["PartsList"].ToString(), reader["LaborList"].ToString()));
+
+                    }
+                } finally { reader.Close(); }
+            }
+
+        }
+
         /// <summary>
         /// 
         /// AddPartsStrings - Adds parts to the cart from a list of strings
@@ -345,6 +508,107 @@ namespace AquaMasters_Billing_App {
             partsList.Clear();
             laborList.Clear();
         }
+
+        private void CheckBox_Checked(object sender, RoutedEventArgs e) {
+
+        }
+
+        /// <summary>
+        /// Search_Update - Updates the list of customers based on search criteria
+        /// 
+        ///     Takes the input values from non-default seach boxes and applies them to
+        ///     the list of customers read from the database. 
+        ///     
+        /// </summary>
+        /// <param name="sender">*shrug*</param>
+        /// <param name="e">also unused</param>
+        private void Search_Update(object sender, System.Windows.Input.KeyEventArgs e) {
+
+            String name = this.searchLastNameTB.Text.ToString().ToLower();
+            String zip = this.searchZipTB.Text.ToString().ToLower();
+            String phone = this.searchPhoneTB.Text.ToString().ToLower();
+            ObservableCollection<CustomerRecord> customerRecordsTemp = new ObservableCollection<CustomerRecord>();
+
+            if (name != "last name") {
+                foreach (CustomerRecord customer in this.customerRecords) {
+                    if (customer.lastName.ToLower().Contains(name)) {
+                        customerRecordsTemp.Add(customer);
+                    }
+                }
+            } else {
+                customerRecordsTemp = this.customerRecords;
+            }
+
+            ObservableCollection<CustomerRecord> customerRecordsTemp2 = new ObservableCollection<CustomerRecord>();
+
+            if (zip != "zip") {
+                foreach (CustomerRecord customer in customerRecordsTemp) {
+                    if (customer.zip.ToLower().Contains(zip)) {
+                        customerRecordsTemp2.Add(customer);
+                    } else if (customer.zip.ToLower().Contains("-1")) {
+                        customerRecordsTemp2.Add(customer);
+                    } 
+                }
+            } else {
+                customerRecordsTemp2 = customerRecordsTemp;
+            }
+
+            customerRecordsTemp = new ObservableCollection<CustomerRecord>();
+            if (phone.Length >= 9) {
+                foreach (CustomerRecord customer in customerRecordsTemp2) {
+                    if (customer.phone.Replace(" ","").Replace(")","").Replace("(","").Replace("-","").Contains(phone.Replace(" ","")) 
+                        | customer.altphone.Replace(" ", "").Replace(")", "").Replace("(", "").Replace("-", "").Contains(phone.Replace(" ", "")) 
+                        | customer.altphone2.Replace(" ", "").Replace(")", "").Replace("(", "").Replace("-", "").Contains(phone.Replace(" ", ""))) {
+
+                        customerRecordsTemp.Add(customer);
+                    }
+                }
+            } else {
+                customerRecordsTemp = customerRecordsTemp2;
+            }
+
+            this.customerDB.ItemsSource = customerRecordsTemp;
+            this.customerDB.Items.Refresh();
+
+        }
+
+        // The next 6 functions handle search box io
+        private void searchLastNameTB_GotFocus(object sender, RoutedEventArgs e) {
+            if (this.searchLastNameTB.Text.ToLower() == "last name") {
+                this.searchLastNameTB.Text = "";
+            }
+        }
+
+        private void searchLastNameTB_LostFocus(object sender, RoutedEventArgs e) {
+            if (this.searchLastNameTB.Text == "") {
+                this.searchLastNameTB.Text = "Last Name";
+            }
+        }
+
+        private void searchZipTB_GotFocus(object sender, RoutedEventArgs e) {
+            if (this.searchZipTB.Text == "Zip") {
+                this.searchZipTB.Text = "";
+            }
+        }
+
+        private void searchZipTB_LostFocus(object sender, RoutedEventArgs e) {
+            if (this.searchZipTB.Text == "") {
+                this.searchZipTB.Text = "Zip";
+            }
+        }
+
+        private void searchPhoneTB_GotFocus(object sender, RoutedEventArgs e) {
+            if (this.searchPhoneTB.Text == "Phone") {
+                this.searchPhoneTB.Text = "";
+
+            }
+        }
+
+        private void searchPhoneTB_LostFocus(object sender, RoutedEventArgs e) {
+            if (this.searchPhoneTB.Text == "") {
+                this.searchPhoneTB.Text = "Phone";
+            }
+        }
     }
 
     /**
@@ -368,8 +632,7 @@ namespace AquaMasters_Billing_App {
         public void setType(string  type) => this.type = type;
 
 
-        public Part(decimal cost, string name, string type)
-        {
+        public Part(decimal cost, string name, string type) {
             this.cost = cost.ToString("0.00");
             this.name = name;
             this.type = type;
@@ -392,6 +655,91 @@ namespace AquaMasters_Billing_App {
         }
 
         public override int GetHashCode() => base.GetHashCode();
+    }
+
+    public class CustomerRecord {
+
+        public string firstName { set; get; }
+        public string lastName { set; get; }
+        public string address { set; get; }
+        public string city { set; get; }
+        public string zip { set; get; }
+        public string id { set; get; }
+        public string phone { set; get; }
+        public string altphone { set; get; }
+        public string altphone2 { set; get; }
+        
+
+        public CustomerRecord(string firstName, string lastName, string address, string city, string zip, string id, string phone, string altphone, string altphone2) {
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.address = address;
+            this.city = city;
+
+            // Handle Unknown zip codes
+            if (zip == "-1") {
+                this.zip = "Unknown";
+            } else {
+                this.zip = "0" + zip;
+            }
+            
+            this.id = id;
+
+            // Handles phones. Moves blank entries to the end
+            List<String> phones = new List<string>();
+            if (phone != "") { phones.Add(phone); }
+            if (altphone != "") { phones.Add(altphone); }
+            if (altphone2 != "") { phones.Add(altphone2); }
+            phones.Add("");
+            phones.Add("");
+            phones.Add("");
+            this.phone = phones[0];
+            this.altphone = phones[1];
+            this.altphone2 = phones[2];
+        }
+
+
+    }
+
+    public class ServiceRecord {
+
+        public int recordID { set; get; }
+        public int day { set; get; }
+        public int month { set; get; }
+        public int year { set; get; }
+        public string poolID { set; get; }
+        public int custID { set; get; }
+        public int cost { get; }
+        public string description { set; get; }
+        public string workType { set; get; }
+        public string date { get; }
+        public ObservableCollection<PurchaseSet> parts { set; get; }
+        public ObservableCollection<PurchaseSet> labor { set; get; }
+        
+
+        public ServiceRecord(int recordID, int custID, string poolID, int day, int month, int year, string description, string workType, string parts, string labor) {
+            this.recordID = recordID;
+            this.custID = custID;
+            this.poolID = poolID;
+            this.day = day;
+            this.month = month;
+            this.year = year;
+            this.description = description;
+            this.workType = workType;
+
+            this.date = month.ToString() + "-" + day.ToString() + "-" + year.ToString();
+
+            // TODO handle parse parts and labor strings -> ObservableCollection<PurchaseSet>
+            // String should be exported as {part, quant}{part2, quant2}
+
+            // Handle parse parts
+            string[] splitParts = parts.Split('}');
+            foreach (string pair in splitParts) {
+                
+            }
+        }
+
+
     }
 }
 

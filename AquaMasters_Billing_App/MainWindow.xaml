@@ -5,33 +5,211 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AquaMasters_Billing_App"
         mc:Ignorable="d"
-        Title="Billing Sucks Don't It?" Height="440" Width="850" ResizeMode="CanMinimize">
+        Title="Aquamasters' Billing and Records" Height="1080" Width="1920" ResizeMode="CanResize" WindowState="Maximized">
     <Grid>
-        <TextBox x:Name="TotalCostTB" HorizontalAlignment="Left" Height="23" Margin="699,369,0,0" TextWrapping="Wrap" Text="0.00" VerticalAlignment="Top" Width="120" IsEnabled="False" ToolTip="Total cost to bill" MaxLines="1"/>
-        <TextBox x:Name="SubtotalCostTB" HorizontalAlignment="Left" Height="23" Margin="699,313,0,0" TextWrapping="Wrap" Text="0.00" VerticalAlignment="Top" Width="120" IsEnabled="False" ToolTip="Total cost before tax" MaxLines="1"/>
-        <TextBox x:Name="LaborCostTB" HorizontalAlignment="Left" Height="23" Margin="699,257,0,0" TextWrapping="Wrap" Text="0.00" VerticalAlignment="Top" Width="120" IsEnabled="False" ToolTip="Total cost of labor" MaxLines="1"/>
-        <TextBox x:Name="PartCostTB" HorizontalAlignment="Left" Height="23" Margin="699,285,0,0" TextWrapping="Wrap" Text="0.00" VerticalAlignment="Top" Width="120" IsEnabled="False" ToolTip="Total cost of parts" MaxLines="1"/>
-        <Label Content="Parts:" HorizontalAlignment="Left" Margin="656,281,0,0" VerticalAlignment="Top"/>
-        <Label Content="Labor:" HorizontalAlignment="Left" Margin="651,253,0,0" VerticalAlignment="Top"/>
-        <Label Content="Subtotal:" HorizontalAlignment="Left" Margin="637,309,0,0" VerticalAlignment="Top"/>
-        <Label Content="Total:" HorizontalAlignment="Left" Margin="656,365,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="OpeningButton" Content="Opening" HorizontalAlignment="Left" Margin="10,27,0,0" VerticalAlignment="Top" Width="75" Click="OpeningButton_Click"/>
-        <Label Content="Services" HorizontalAlignment="Left" Margin="26,1,0,0" VerticalAlignment="Top" Width="59"/>
-        <Button x:Name="InitialButton" Content="Initial" HorizontalAlignment="Left" Margin="10,52,0,0" VerticalAlignment="Top" Width="75" Click="InitialButton_Click"/>
-        <Button x:Name="VacButton" Content="Vac Service" HorizontalAlignment="Left" Margin="10,77,0,0" VerticalAlignment="Top" Width="75" Click="VacButton_Click"/>
-        <Button x:Name="RepairButton" Content="Plumbing" HorizontalAlignment="Left" Margin="10,127,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="LinerButton" Content="Liner" HorizontalAlignment="Left" Margin="10,152,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="InstallButton" Content="Install" HorizontalAlignment="Left" Margin="10,177,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="InstallButton_Copy" Content="Acid Wash" HorizontalAlignment="Left" Margin="10,202,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="InstallButton_Copy1" Content="Pump Work" HorizontalAlignment="Left" Margin="10,227,0,0" VerticalAlignment="Top" Width="75"/>
-        <DataGrid x:Name="PartsDG" HorizontalAlignment="Left" Height="220" Margin="98,27,0,0" VerticalAlignment="Top" Width="360" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="True"/>
-        <DataGrid x:Name="LaborDG" HorizontalAlignment="Left" Height="220" Margin="463,27,0,0" VerticalAlignment="Top" Width="360" RowHeight="20" CanUserAddRows="False" CanUserDeleteRows="True" AutoGenerateColumns="False"/>
-        <Button x:Name="searchAndAddB" Content="All Parts" HorizontalAlignment="Left" Margin="10,340,0,0" VerticalAlignment="Top" Width="75" Height="20" Click="searchAndAddB_Click"/>
-        <Label Content="Parts Chems and Addons" HorizontalAlignment="Left" Margin="202,0,0,0" VerticalAlignment="Top" Width="144"/>
-        <Label Content="Labor and Services" HorizontalAlignment="Left" Margin="594,0,0,0" VerticalAlignment="Top" Width="110"/>
-        <TextBox x:Name="TaxTB" HorizontalAlignment="Left" Height="23" Margin="699,341,0,0" TextWrapping="Wrap" Text="0.00" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
-        <Label Content="Tax:" HorizontalAlignment="Left" Margin="665,337,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="Clear" Content="Clear" HorizontalAlignment="Left" Margin="10,368,0,0" VerticalAlignment="Top" Width="75" Click="Clear_Click"/>
+        <DockPanel x:Name="CustomerPanel" HorizontalAlignment="Left" LastChildFill="False" VerticalAlignment="Stretch" Width="410" Margin="10,10,0,10" >
+            <Button Content="Add Customer" DockPanel.Dock="Bottom" HorizontalAlignment="Center" VerticalAlignment="Center" Width="250" Margin="0,10,0,5"/>
+            <Grid x:Name="SearchGrid" Height="23" Width="410" DockPanel.Dock="Top" Margin="10,5,10,10" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="135" />
+                    <ColumnDefinition Width="110" />
+                    <ColumnDefinition Width="155" />
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="searchZipTB" Height="23" TextWrapping="Wrap" Text="Zip" VerticalAlignment="Top" Width="75" KeyUp="Search_Update" GotFocus="searchZipTB_GotFocus" LostFocus="searchZipTB_LostFocus" Grid.Column="1" />
+                <TextBox x:Name="searchPhoneTB"  Height="23" TextWrapping="Wrap" Text="Phone" VerticalAlignment="Top" Width="100" GotFocus="searchPhoneTB_GotFocus" LostFocus="searchPhoneTB_LostFocus" KeyUp="Search_Update" Grid.Column="2" />
+                <TextBox x:Name="searchLastNameTB" Height="23" TextWrapping="Wrap" Text="Last Name" VerticalAlignment="Top" Width="135" KeyUp="Search_Update" GotFocus="searchLastNameTB_GotFocus" LostFocus="searchLastNameTB_LostFocus"/>
+            </Grid>
+            <DataGrid x:Name="customerDB" Width="410" AutoGenerateColumns="False" Margin="0,0,0,0" />
+
+        </DockPanel>
+
+        <DockPanel x:Name="RecordsPanel" HorizontalAlignment="Left" LastChildFill="False" Margin="430,10,0,45" VerticalAlignment="Stretch" Width="250">
+            <Grid x:Name="RecordsTopGrid" DockPanel.Dock="Top" HorizontalAlignment="Stretch" Height="69" VerticalAlignment="Stretch">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <CheckBox Content="Opening" Grid.Column="0" Grid.Row="0" IsChecked="True"/>
+                <CheckBox Content="Initial" Grid.Column="1" Grid.Row="0" IsChecked="True"/>
+                <CheckBox Content="Vac Service" Grid.Column="2" Grid.Row="0" IsChecked="True"/>
+                <CheckBox Content="Closing" Grid.Column="0" Grid.Row="1" IsChecked="True"/>
+                <CheckBox Content="Pump Work" Grid.Column="1" Grid.Row="1" IsChecked="True"/>
+                <CheckBox Content="Other" Grid.Column="2" Grid.Row="1" IsChecked="True"/>
+                <TextBox HorizontalAlignment="Stretch" Height="23" TextWrapping="Wrap" Text="Search Service Records" VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="3" />
+
+
+
+            </Grid>
+            <DataGrid x:Name="recordsDB" Width="250" AutoGenerateColumns="False" Margin="0,10,0,0" />
+        </DockPanel>
+
+        <Grid x:Name="DisplayPanel" HorizontalAlignment="Stretch" Margin="690,0,0,45" VerticalAlignment="Stretch">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="150"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="23"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1.5*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width=".5*"/>
+            </Grid.ColumnDefinitions>
+
+
+            <DataGrid x:Name="PartsDG" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch"  AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="True" Grid.Column="0" Grid.Row="4" Grid.RowSpan="1" Margin="0,0,5,5"/>
+            <DataGrid x:Name="LaborDG" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch"  RowHeight="20" CanUserAddRows="False" CanUserDeleteRows="True" AutoGenerateColumns="False" Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2" Margin="5,0,10,5"/>
+
+            <Label Content="Parts Chems and Addons" HorizontalAlignment="Center" VerticalAlignment="Center" Width="144" Grid.Column="0" Grid.Row="3"/>
+            <Label Content="Labor and Services" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="110" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2"/>
+            <TextBox HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="Service Description" VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="2" Margin="0,5,0,0" />
+
+
+            <Grid x:Name="TotalsGrid" Grid.Column="2" Grid.Row="5" VerticalAlignment="Top">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height=".75*"/>
+                    <RowDefinition Height=".75*"/>
+                    <RowDefinition Height=".75*"/>
+                    <RowDefinition Height=".75*"/>
+                    <RowDefinition Height=".75*"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width=".5*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBox x:Name="LaborCostTB" Height="23" TextWrapping="Wrap" Text="0.00" VerticalAlignment="Center"  IsEnabled="False" ToolTip="Total cost of labor" Grid.Column="1" Grid.Row="0" Margin="0,0,10,0"/>
+                <TextBox x:Name="PartCostTB" Height="23" TextWrapping="Wrap" Text="0.00" VerticalAlignment="Center"  IsEnabled="False" ToolTip="Total cost of parts" Grid.Column="1" Grid.Row="1" Margin="0,0,10,0"/>
+                <TextBox x:Name="TaxTB" Height="23" TextWrapping="Wrap" Text="0.00" VerticalAlignment="Center"  IsEnabled="False" ToolTip="Total CT Sales Tax" Grid.Column="1" Grid.Row="2" Margin="0,0,10,0"/>
+                <TextBox x:Name="SubtotalCostTB" Height="23" TextWrapping="Wrap" Text="0.00" VerticalAlignment="Center"  IsEnabled="False" ToolTip="Total cost before tax" Grid.Column="1" Grid.Row="3" Margin="0,0,10,0"/>
+                <TextBox x:Name="TotalCostTB" Height="23" TextWrapping="Wrap" Text="0.00" VerticalAlignment="Center"  IsEnabled="False" ToolTip="Total cost to bill" Grid.Column="1" Grid.Row="4" Margin="0,0,10,0"/>
+
+                <Label Content="Parts:" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="1"/>
+                <Label Content="Labor:" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="0"/>
+                <Label Content="Subtotal:" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="2"/>
+                <Label Content="Total:" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="4"/>
+                <Label Content="Tax:" HorizontalAlignment="Right"  Grid.Column="0" Grid.Row="3"/>
+
+            </Grid>
+
+            <Grid x:Name="ServiceGrid" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Center" Margin="0,5,0,0">
+                <Button x:Name="OpeningButton" Content="Opening" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Click="OpeningButton_Click"/>
+                <Button x:Name="InitialButton" Content="Initial" HorizontalAlignment="Left" Margin="0,25,0,0" VerticalAlignment="Top" Width="75" Click="InitialButton_Click"/>
+                <Button x:Name="VacButton" Content="Vac Service" HorizontalAlignment="Left" Margin="80,25,0,0" VerticalAlignment="Top" Width="75" Click="VacButton_Click"/>
+                <Button x:Name="RepairButton" Content="Plumbing" HorizontalAlignment="Left" Margin="80,0,0,0" VerticalAlignment="Top" Width="75"/>
+                <Button x:Name="LinerButton" Content="Liner" HorizontalAlignment="Left" Margin="160,0,0,0" VerticalAlignment="Top" Width="75"/>
+                <Button x:Name="InstallButton" Content="Install" HorizontalAlignment="Left" Margin="160,25,0,0" VerticalAlignment="Top" Width="75"/>
+                <Button x:Name="InstallButton_Copy" Content="Acid Wash" HorizontalAlignment="Left" Margin="240,0,0,0" VerticalAlignment="Top" Width="75"/>
+                <Button x:Name="InstallButton_Copy1" Content="Pump Work" HorizontalAlignment="Left" Margin="240,25,0,0" VerticalAlignment="Top" Width="75"/>
+            </Grid>
+
+            <Grid x:Name="UtilGrid" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Center" Margin="0,5,0,0" >
+                <Button x:Name="searchAndAddB" Content="All Parts" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Height="20" Click="searchAndAddB_Click"/>
+                <Button x:Name="Clear" Content="Clear" HorizontalAlignment="Left" Margin="0,25,0,0" VerticalAlignment="Top" Width="75" Click="Clear_Click"/>
+            </Grid>
+
+            <Grid x:Name="PoolInfo" Grid.Column="0" Grid.Row="1">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBox x:Name="poolDimTB" Height="23" TextWrapping="Wrap" Text="Dimensions" VerticalAlignment="Center" Width="135" IsReadOnly="True" HorizontalAlignment="Left" Grid.Column="1"/>
+                <TextBox x:Name="poolConstructionTB" Height="23" TextWrapping="Wrap" Text="Construction" VerticalAlignment="Center" Width="135" IsReadOnly="True" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="1"/>
+                <TextBox x:Name="poolCoverTB" Height="23" TextWrapping="Wrap" Text="Cover" VerticalAlignment="Center" Width="135" IsReadOnly="True" HorizontalAlignment="Left" Grid.Row="2" Grid.Column="1"/>
+                <TextBox x:Name="poolSpaTB" Height="23" TextWrapping="Wrap" Text="Spa" VerticalAlignment="Center" Width="135" IsReadOnly="True" HorizontalAlignment="Left" Grid.Row="3" Grid.Column="1"/>
+                <TextBox x:Name="poolHeaterTB" Height="23" TextWrapping="Wrap" Text="Heater" VerticalAlignment="Center" Width="135" IsReadOnly="True" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="4"/>
+
+                <Label Content="Size:" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                <Label Content="Style:" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="1"/>
+                <Label Content="Cover:" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="2"/>
+                <Label Content="Spa:" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="3"/>
+                <Label Content="Heater:" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="4"/>
+
+                <TextBox x:Name="poolMainDrainTB" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="Main Drains" VerticalAlignment="Center" Width="135" IsReadOnly="True" Grid.Row="1" Grid.Column="3"/>
+                <TextBox x:Name="poolFilterTB" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="Filter" VerticalAlignment="Center" Width="135" IsReadOnly="True" Grid.Row="4" Grid.Column="3"/>
+                <TextBox x:Name="poolSkimmersTB" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="Skimmers" VerticalAlignment="Center" Width="135" IsReadOnly="True" Grid.Column="3"/>
+                <TextBox x:Name="poolReturnsTB" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="Returns" VerticalAlignment="Center" Width="135" IsReadOnly="True" Grid.Row="2" Grid.Column="3"/>
+                <TextBox x:Name="poolPumpTB" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="Pump" VerticalAlignment="Center" Width="135" IsReadOnly="True" Grid.Row="3" Grid.Column="3"/>
+
+                <Label Content="Skimmers:" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="2"/>
+                <Label Content="Main Drains:" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="1" Grid.Column="2"/>
+                <Label Content="Returns:" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="2" Grid.Column="2"/>
+                <Label Content="Pump:" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="3" Grid.Column="2"/>
+                <Label Content="Filter Style:" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="4" Grid.Column="2"/>
+            </Grid>
+
+            <Grid x:Name="AddressInfo" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBox x:Name="custAddressTB" TextWrapping="Wrap" Text="Street Address" IsEnabled="False" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="4" Margin="0,0,0,5"/>
+                <TextBox x:Name="custCityTB" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Town" Width="140" IsEnabled="False" Grid.Column="0" Grid.Row="1" Margin="0,5,0,0"/>
+                <TextBox x:Name="custZipCodeTB" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Zip" Width="75" IsEnabled="False" Grid.Column="1" Grid.Row="1" Margin="0,5,0,0"/>
+            </Grid>
+
+            <Grid x:Name="CustomerInfo" Grid.ColumnSpan="2" Grid.Column="1" Grid.RowSpan="2" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBox x:Name="custNameTB" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="Last name, First Name" VerticalAlignment="Center" Width="350" IsEnabled="False" Margin="0,2.5" Grid.Column="0" Grid.ColumnSpan="2"/>
+                <TextBox x:Name="custPhoneTB" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="(860) 555 - 5555" VerticalAlignment="Center" Width="135" IsEnabled="False" Margin="0,2.5" Grid.Column="1" Grid.Row="1"/>
+                <TextBox x:Name="custAltPhone1TB" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="(860) 555 - 5555" VerticalAlignment="Center" Width="135" IsEnabled="False" Margin="0,2.5" Grid.Column="1" Grid.Row="2"/>
+                <TextBox x:Name="custAltPhone2TB" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="(860) 555 - 5555" VerticalAlignment="Center" Width="135" IsEnabled="False" Margin="0,2.5" Grid.Column="1" Grid.Row="3"/>
+                <Label Content="Primary Phone:" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,2.5" Grid.Column="0" Grid.Row="1"/>
+                <Label Content="Alternate Phone:" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,2.5" Grid.Column="0" Grid.Row="2"/>
+                <Label Content="Alternate Phone:" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,2.5" Grid.Column="0" Grid.Row="3"/>
+
+            </Grid>
+
+
+
+        </Grid>
 
     </Grid>
 </Window>

@@ -99,11 +99,11 @@ namespace AquaMasters_Billing_App {
             tempPart part = new tempPart();
 
             if (this.FullRB.IsChecked.Value) {
-                this.parts.Add("2 Men - Initial");
-                part.name = "2 Men - Initial";
+                this.parts.Add("2 Men");
+                part.name = "2 Men";
             } else { 
-                this.parts.Add("1 Man - Initial");
-                part.name = "1 Man - Initial";
+                this.parts.Add("1 Man");
+                part.name = "1 Man";
             }
 
             this.quants.Add(decimal.Parse(this.Hours.Text));
