@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AquaMasters_Billing_App"
         mc:Ignorable="d"
-        Title="Window1" Height="450" Width="800">
+        Title="New Customer" Height="275" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid x:Name="Grid">
 
         <Grid.ColumnDefinitions>
@@ -22,97 +22,109 @@
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height=".5*"/>
+                <RowDefinition Height=".5*"/>
+                <RowDefinition Height=".5*"/>
+                <RowDefinition Height=".5*"/>
+                <RowDefinition Height=".5*"/>
+                <RowDefinition Height=".5*"/>
+                <RowDefinition Height=".5*"/>
+                <RowDefinition Height=".5*"/>
+                <RowDefinition Height=".5*"/>
             </Grid.RowDefinitions>
 
-            
-            
+            <!-- Textboxes and Labels -->
+            <Label x:Name="NameInfo" Content="Name" HorizontalAlignment="Left" VerticalAlignment="Top" Width="42" Height="26" Grid.ColumnSpan="2"/>
+            <TextBox x:Name="FirstNameTB" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="First Name" VerticalAlignment="Top" Width="120" Grid.Row="1" Margin="5,0,0,0"/>
+            <TextBox x:Name="LastNameTB" Height="23" TextWrapping="Wrap" Text="Last Name" VerticalAlignment="Top" Grid.Row="1" Margin="130,0,5,0" Grid.ColumnSpan="2" />
+
+            <Label x:Name="AddressInfo" Content="Address" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="2" Grid.ColumnSpan="2"/>
+            <TextBox x:Name="AddressTB" Height="23" TextWrapping="Wrap" Text="Address" VerticalAlignment="Top" Grid.Row="3" Grid.ColumnSpan="2" Margin="5,0"/>
+            <TextBox x:Name="TownTB" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="Town" VerticalAlignment="Top" Width="120" Grid.Row="4" Margin="5,0,0,0"/>
+            <TextBox x:Name="ZipTB" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="Zip" VerticalAlignment="Top" Width="75" Grid.Row="4" Margin="130,0,0,0" Grid.ColumnSpan="2"/>
+
+            <Label x:Name="ContactInfo" Content="Contact" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="5" Grid.ColumnSpan="2"/>
+            <TextBox x:Name="PrimaryPhoneTB" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="Primary Phone" VerticalAlignment="Top" Width="245" Grid.Row="6" Grid.ColumnSpan="2" Margin="5,0,0,0"/>
+            <TextBox x:Name="AltPhone1TB" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="Alternate Phone" VerticalAlignment="Top" Width="245" Grid.Row="7" Grid.ColumnSpan="2" Margin="5,0,0,0"/>
+            <TextBox x:Name="AltPhone2TB" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="Alternate Phone" VerticalAlignment="Top" Width="245" Grid.Row="8" Grid.ColumnSpan="2" Margin="5,0,0,0"/>
+
+
         </Grid>
 
         <Grid x:Name="PoolInfo" Grid.Column="1">
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            
+
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            
-            
+            <!-- DropDowns, Textboxes, and Labels -->
+
+            <Label Content="Size" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,26,0,0"/>
+            <TextBox Height="23" TextWrapping="Wrap" Text="18x36" Grid.Column="1" Margin="5,25,5,0" Width="90" VerticalAlignment="Center"/>
+
+            <Label Content="Style" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="1"/>
+            <ComboBox x:Name="ConstructionDD" Grid.Row="1" Grid.Column="1" Margin="5,0" Width="90" VerticalAlignment="Center">
+                <ComboBoxItem Content="Vinyl"/>
+                <ComboBoxItem Content="Gunite"/>
+                <ComboBoxItem Content="Other"/>
+            </ComboBox>
+
+
+            <Label Content="Cover" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="2"/>
+            <ComboBox x:Name="CoverDD" Grid.Row="2" Grid.Column="1" Margin="5,0" Width="90" VerticalAlignment="Center">
+                <ComboBoxItem Content="Meyco / Mesh"/>
+                <ComboBoxItem Content="Solid / Tarp"/>
+                <ComboBoxItem Content="None"/>
+                <ComboBoxItem Content="Other"/>
+            </ComboBox>
+
+
+            <Label Content="Spa" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="3"/>
+            <ComboBox x:Name="SpaDD" Grid.Column="1" Grid.Row="3" Margin="5,0" Width="90" VerticalAlignment="Center">
+                <ComboBoxItem Content="Yes"/>
+                <ComboBoxItem Content="No"/>
+            </ComboBox>
+
+
+            <Label Content="Heater" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="4"/>
+            <ComboBox x:Name="HeaterDD" Grid.Row="4" Grid.Column="1" Margin="5,0" Width="90" VerticalAlignment="Center">
+                <ComboBoxItem Content="Yes"/>
+                <ComboBoxItem Content="No"/>
+            </ComboBox>
+
+
+            <Label Content="Skimmers" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="2" Margin="0,25,0,0"/>
+            <TextBox Height="23" TextWrapping="Wrap" Text="0" Grid.Column="4" Margin="5,25,5,0" Width="90" VerticalAlignment="Center"/>
+
+            <Label Content="Main Drains" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="1" Grid.Column="2"/>
+            <TextBox Height="23" TextWrapping="Wrap" Text="0" Grid.Row="1" Grid.Column="4" Margin="5,0" Width="90" VerticalAlignment="Center"/>
+
+            <Label Content="Returns" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="2" Grid.Column="2"/>
+            <TextBox Height="23" TextWrapping="Wrap" Text="0" Grid.Row="2" Grid.Column="4" Margin="5,0" Width="90" VerticalAlignment="Center"/>
+
+            <Label Content="Pump" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="3" Grid.Column="2"/>
+            <TextBox Height="23" TextWrapping="Wrap" Text="0" Grid.Row="3" Grid.Column="4" Margin="5,0" Width="90" VerticalAlignment="Center"/>
+
+            <Label Content="Filter Media" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="4" Grid.Column="2"/>
+            <ComboBox x:Name="FilterMediaDD" Grid.Row="4" Grid.Column="4" Margin="5,0" Width="90" VerticalAlignment="Center">
+                <ComboBoxItem Content="Sand"/>
+                <ComboBoxItem Content="DE"/>
+                <ComboBoxItem Content="Cartridge"/>
+                <ComboBoxItem Content="Other"/>
+            </ComboBox>
+
         </Grid>
-        
-        
-        
-        
-        
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="10,35.96,0,0" TextWrapping="Wrap" Text="First Name" VerticalAlignment="Top" Width="120"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="135,35.96,0,0" TextWrapping="Wrap" Text="Last Name" VerticalAlignment="Top" Width="175"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="10,84.283,0,0" TextWrapping="Wrap" Text="Address" VerticalAlignment="Top" Width="300"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="10,112.283,0,0" TextWrapping="Wrap" Text="Town" VerticalAlignment="Top" Width="120"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="135,112.283,0,0" TextWrapping="Wrap" Text="Zip" VerticalAlignment="Top" Width="120"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="10,162.022,0,0" TextWrapping="Wrap" Text="Primary Phone" VerticalAlignment="Top" Width="245"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="10,190.022,0,0" TextWrapping="Wrap" Text="Alternate Phone" VerticalAlignment="Top" Width="245"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="10,218.022,0,0" TextWrapping="Wrap" Text="Alternate Phone" VerticalAlignment="Top" Width="245"/>
-        <Label Content="Contact" HorizontalAlignment="Left" Margin="10,136.061,0,0" VerticalAlignment="Top"/>
-        <Label Content="Address" HorizontalAlignment="Left" Margin="8.523,58.322,0,0" VerticalAlignment="Top"/>
-        <Label Content="Name" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="ConstructionDD" HorizontalAlignment="Left" Margin="395.538,63.96,0,0" VerticalAlignment="Top" Width="120">
-            <ComboBoxItem Content="Vinyl"/>
-            <ComboBoxItem Content="Gunite"/>
-            <ComboBoxItem Content="Other"/>
-        </ComboBox>
-        <Label Content="Size" HorizontalAlignment="Left" Margin="359.482,31.96,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="395.538,35.96,0,0" TextWrapping="Wrap" Text="18x36" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Style" HorizontalAlignment="Left" Margin="355.422,58.322,0,0" VerticalAlignment="Top"/>
-        <Label Content="Cover" HorizontalAlignment="Left" Margin="349.809,85.739,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="CoverDD" HorizontalAlignment="Left" Margin="395.538,90.92,0,0" VerticalAlignment="Top" Width="120">
-            <ComboBoxItem Content="Meyco / Mesh"/>
-            <ComboBoxItem Content="Solid / Tarp"/>
-            <ComboBoxItem Content="None"/>
-            <ComboBoxItem Content="Other"/>
-        </ComboBox>
-        <Label Content="Spa" HorizontalAlignment="Left" Margin="360.932,112.283,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="SpaDD" HorizontalAlignment="Left" Margin="395.538,116.283,0,0" VerticalAlignment="Top" Width="120">
-            <ComboBoxItem Content="Yes"/>
-            <ComboBoxItem Content="No"/>
-        </ComboBox>
-        <Label Content="Heater" HorizontalAlignment="Left" Margin="344.971,139.243,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="HeaterDD" HorizontalAlignment="Left" Margin="395.538,143.243,0,0" VerticalAlignment="Top" Width="120">
-            <ComboBoxItem Content="Yes"/>
-            <ComboBoxItem Content="No"/>
-        </ComboBox>
-        <Label Content="Skimmers" HorizontalAlignment="Left" Margin="528.459,31.96,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="594.663,35.96,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Main Drains" HorizontalAlignment="Left" Margin="517.315,58.322,0,0" VerticalAlignment="Top"/>
-        <Label Content="Returns" HorizontalAlignment="Left" Margin="540.053,85.739,0,0" VerticalAlignment="Top"/>
-        <Label Content="Pump" HorizontalAlignment="Left" Margin="548.519,112.283,0,0" VerticalAlignment="Top"/>
-        <Label Content="Filter Media" HorizontalAlignment="Left" Margin="517.496,139.243,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="FilterMediaDD" HorizontalAlignment="Left" Margin="594.663,147.96,0,0" VerticalAlignment="Top" Width="120">
-            <ComboBoxItem Content="Sand"/>
-            <ComboBoxItem Content="DE"/>
-            <ComboBoxItem Content="Cartridge"/>
-            <ComboBoxItem Content="Other"/>
-        </ComboBox>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="594.663,63.96,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="595.07,91.96,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="594.663,119.96,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120"/>
 
     </Grid>
 </Window>
