@@ -621,6 +621,10 @@ namespace AquaMasters_Billing_App {
                 this.searchPhoneTB.Text = "Phone";
             }
         }
+
+        private void NewCustomer_Click(object sender, RoutedEventArgs e) {
+
+        }
     }
 
     /**
