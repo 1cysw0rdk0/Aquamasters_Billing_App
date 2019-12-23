@@ -96,9 +96,7 @@ namespace AquaMasters_Billing_App {
         /// 
         /// <param name="sender">Unused.</param>
         /// <param name="e">Unused.</param>
-        private void updatePriceList(object sender, RoutedEventArgs e) {
-            checkTypes();
-        }
+        private void updatePriceList(object sender, RoutedEventArgs e) => checkTypes();
 
         /// <summary>
         /// 
@@ -109,9 +107,7 @@ namespace AquaMasters_Billing_App {
         /// 
         /// <param name="sender">Unused.</param>
         /// <param name="e">Unused.</param>
-        private void FilterBox_KeyUp(object sender, KeyEventArgs e) {
-            checkTypes();
-        }
+        private void FilterBox_KeyUp(object sender, KeyEventArgs e) => checkTypes();
 
         /// <summary>
         /// 

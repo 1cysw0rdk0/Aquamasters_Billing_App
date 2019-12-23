@@ -24,7 +24,7 @@ namespace AquaMasters_Billing_App {
         public ObservableCollection<ServiceRecord> serviceRecords;
         // TODO //
         // remove hardcoded password before deplyoment
-        private String Connection_String = @"server=localhost;userid=root;password=Gunf!r#AndTurp3nt1n3;database=aquamastersservice";
+        private String Connection_String = @"server=localhost;userid=root;password=password;database=aquamastersservice";
         // TODO //
         private String poolID;
 
@@ -43,8 +43,6 @@ namespace AquaMasters_Billing_App {
         }
 
 
-
-
         /**
          * Initializes the backend data, including
          *      - The save path
@@ -61,17 +59,24 @@ namespace AquaMasters_Billing_App {
             this.savePath += "\\Aquamasters\\priceSheet.ini";
 
             // Initialize file to read text
-            StreamReader file = File.OpenText(this.savePath);
-
-            // Initialize price sheet with new empty dictionary
-            this.PriceSheet = new Dictionary<string, Part>();
-
-            // Read every line from the file, desearializing into parts and adding to dictonary
-            while (!file.EndOfStream)
+            try
             {
-                Part part = (Part)JsonConvert.DeserializeObject(file.ReadLine(), typeof(Part));
-                this.PriceSheet.Add(part.name, part);
+                StreamReader file = File.OpenText(this.savePath);
+                // Initialize price sheet with new empty dictionary
+                this.PriceSheet = new Dictionary<string, Part>();
+
+                // Read every line from the file, desearializing into parts and adding to dictonary
+                while (!file.EndOfStream)
+                {
+                    Part part = (Part)JsonConvert.DeserializeObject(file.ReadLine(), typeof(Part));
+                    this.PriceSheet.Add(part.name, part);
+                }
+            } catch
+            {
+                Console.Error.WriteLine("Unable to open file.");
             }
+
+            
 
             // Create and Bind data lists
             this.partsList = new ObservableCollection<PurchaseSet>();
@@ -87,21 +92,28 @@ namespace AquaMasters_Billing_App {
             this.recordsDB.ItemsSource = this.serviceRecords;
 
 
-            // Connect to database and pull list of all customers
-            String query = "SELECT CustID, LastName, FirstName, Address, Town, Phone, ZipCode, AltPhone1, AltPhone2 FROM customers;";
+            try {
 
-            using (MySqlConnection conn = new MySqlConnection(Connection_String)) {
-                MySqlCommand comm = new MySqlCommand(query, conn);
-                conn.Open();
-                MySqlDataReader read = comm.ExecuteReader();
 
-                try {
-                    while (read.Read()) {
-                        this.customerRecords.Add(new CustomerRecord(read["FirstName"].ToString(), read["LastName"].ToString(), read["Address"].ToString(), read["Town"].ToString(), read["ZipCode"].ToString(), read["CustID"].ToString(), read["Phone"].ToString(), read["AltPhone1"].ToString(), read["AltPhone2"].ToString()));
+                // Connect to database and pull list of all customers
+                String query = "SELECT CustID, LastName, FirstName, Address, Town, Phone, ZipCode, AltPhone1, AltPhone2 FROM customers;";
 
-                    }
-                } finally { read.Close(); }
+                using (MySqlConnection conn = new MySqlConnection(Connection_String)) {
+                    MySqlCommand comm = new MySqlCommand(query, conn);
+                    conn.Open();
+                    MySqlDataReader read = comm.ExecuteReader();
 
+                    try {
+                        while (read.Read()) {
+                            this.customerRecords.Add(new CustomerRecord(read["FirstName"].ToString(), read["LastName"].ToString(), read["Address"].ToString(), read["Town"].ToString(), read["ZipCode"].ToString(), read["CustID"].ToString(), read["Phone"].ToString(), read["AltPhone1"].ToString(), read["AltPhone2"].ToString()));
+
+                        }
+                    } finally { read.Close(); }
+
+                }
+
+            } catch {
+                Console.Error.WriteLine("Unable to contact database!");
             }
 
         }

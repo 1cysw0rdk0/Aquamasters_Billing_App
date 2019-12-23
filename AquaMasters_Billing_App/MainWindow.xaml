@@ -107,14 +107,27 @@
             </Grid>
 
             <Grid x:Name="ServiceGrid" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Center" Margin="0,5,0,0">
-                <Button x:Name="OpeningButton" Content="Opening" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Click="OpeningButton_Click"/>
-                <Button x:Name="InitialButton" Content="Initial" HorizontalAlignment="Left" Margin="0,25,0,0" VerticalAlignment="Top" Width="75" Click="InitialButton_Click"/>
-                <Button x:Name="VacButton" Content="Vac Service" HorizontalAlignment="Left" Margin="80,25,0,0" VerticalAlignment="Top" Width="75" Click="VacButton_Click"/>
-                <Button x:Name="RepairButton" Content="Plumbing" HorizontalAlignment="Left" Margin="80,0,0,0" VerticalAlignment="Top" Width="75"/>
-                <Button x:Name="LinerButton" Content="Liner" HorizontalAlignment="Left" Margin="160,0,0,0" VerticalAlignment="Top" Width="75"/>
-                <Button x:Name="InstallButton" Content="Install" HorizontalAlignment="Left" Margin="160,25,0,0" VerticalAlignment="Top" Width="75"/>
-                <Button x:Name="InstallButton_Copy" Content="Acid Wash" HorizontalAlignment="Left" Margin="240,0,0,0" VerticalAlignment="Top" Width="75"/>
-                <Button x:Name="InstallButton_Copy1" Content="Pump Work" HorizontalAlignment="Left" Margin="240,25,0,0" VerticalAlignment="Top" Width="75"/>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Button x:Name="OpeningButton" Content="Opening" HorizontalAlignment="Left" VerticalAlignment="Top" Width="70" Click="OpeningButton_Click" Grid.Row="0" Grid.Column="0" Margin="0,0,5,0" />
+                <Button x:Name="InitialButton" Content="Initial" HorizontalAlignment="Left" VerticalAlignment="Top" Width="70" Click="InitialButton_Click" Grid.Row="0" Grid.Column="1" Margin="0,0,5,0" />
+                <Button x:Name="VacButton" Content="Vac Service" HorizontalAlignment="Left" VerticalAlignment="Top" Width="70" Click="VacButton_Click" Grid.Row="1" Grid.Column="0" />
+                <Button x:Name="RepairButton" Content="Plumbing" HorizontalAlignment="Left" VerticalAlignment="Top" Width="70" Grid.Row="1" Grid.Column="1" />
+                <Button x:Name="LinerButton" Content="Liner" HorizontalAlignment="Left" VerticalAlignment="Top" Width="70" Grid.Row="0" Grid.Column="2" Margin="0,0,5,0"/>
+                <Button x:Name="InstallButton" Content="Install" HorizontalAlignment="Left" VerticalAlignment="Top" Width="70" Grid.Row="0" Grid.Column="3"/>
+                <Button x:Name="InstallButton_Copy" Content="Acid Wash" HorizontalAlignment="Left" VerticalAlignment="Top" Width="70" Grid.Row="1" Grid.Column="2" />
+                <Button x:Name="InstallButton_Copy1" Content="Pump Work" HorizontalAlignment="Left" VerticalAlignment="Top" Width="70" Grid.Row="1" Grid.Column="3" />
             </Grid>
 
             <Grid x:Name="UtilGrid" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Center" Margin="0,5,0,0" >
@@ -139,11 +152,11 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <TextBox x:Name="poolDimTB" Height="23" TextWrapping="Wrap" Text="Dimensions" VerticalAlignment="Center" Width="135" IsReadOnly="True" HorizontalAlignment="Left" Grid.Column="1"/>
-                <TextBox x:Name="poolConstructionTB" Height="23" TextWrapping="Wrap" Text="Construction" VerticalAlignment="Center" Width="135" IsReadOnly="True" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="1"/>
-                <TextBox x:Name="poolCoverTB" Height="23" TextWrapping="Wrap" Text="Cover" VerticalAlignment="Center" Width="135" IsReadOnly="True" HorizontalAlignment="Left" Grid.Row="2" Grid.Column="1"/>
-                <TextBox x:Name="poolSpaTB" Height="23" TextWrapping="Wrap" Text="Spa" VerticalAlignment="Center" Width="135" IsReadOnly="True" HorizontalAlignment="Left" Grid.Row="3" Grid.Column="1"/>
-                <TextBox x:Name="poolHeaterTB" Height="23" TextWrapping="Wrap" Text="Heater" VerticalAlignment="Center" Width="135" IsReadOnly="True" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="4"/>
+                <TextBox x:Name="poolDimTB" Height="23" TextWrapping="Wrap" Text="Dimensions" VerticalAlignment="Center" Width="74" IsReadOnly="True" HorizontalAlignment="Left" Grid.Column="1"/>
+                <TextBox x:Name="poolConstructionTB" Height="23" TextWrapping="Wrap" Text="Construction" VerticalAlignment="Center" Width="74" IsReadOnly="True" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="1"/>
+                <TextBox x:Name="poolCoverTB" Height="23" TextWrapping="Wrap" Text="Cover" VerticalAlignment="Center"  IsReadOnly="True" Width="74" HorizontalAlignment="Left" Grid.Row="2" Grid.Column="1"/>
+                <TextBox x:Name="poolSpaTB" Height="23" TextWrapping="Wrap" Text="Spa" VerticalAlignment="Center" IsReadOnly="True" Width="74" HorizontalAlignment="Left" Grid.Row="3" Grid.Column="1"/>
+                <TextBox x:Name="poolHeaterTB" Height="23" TextWrapping="Wrap" Text="Heater" VerticalAlignment="Center" IsReadOnly="True" Width="74" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="4"/>
 
                 <Label Content="Size:" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                 <Label Content="Style:" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="1"/>
@@ -151,11 +164,11 @@
                 <Label Content="Spa:" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="3"/>
                 <Label Content="Heater:" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="4"/>
 
-                <TextBox x:Name="poolMainDrainTB" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="Main Drains" VerticalAlignment="Center" Width="135" IsReadOnly="True" Grid.Row="1" Grid.Column="3"/>
-                <TextBox x:Name="poolFilterTB" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="Filter" VerticalAlignment="Center" Width="135" IsReadOnly="True" Grid.Row="4" Grid.Column="3"/>
-                <TextBox x:Name="poolSkimmersTB" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="Skimmers" VerticalAlignment="Center" Width="135" IsReadOnly="True" Grid.Column="3"/>
-                <TextBox x:Name="poolReturnsTB" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="Returns" VerticalAlignment="Center" Width="135" IsReadOnly="True" Grid.Row="2" Grid.Column="3"/>
-                <TextBox x:Name="poolPumpTB" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="Pump" VerticalAlignment="Center" Width="135" IsReadOnly="True" Grid.Row="3" Grid.Column="3"/>
+                <TextBox x:Name="poolMainDrainTB" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="Main Drains" VerticalAlignment="Center" Width="74" IsReadOnly="True" Grid.Row="1" Grid.Column="3"/>
+                <TextBox x:Name="poolFilterTB" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="Filter" VerticalAlignment="Center" Width="74" IsReadOnly="True" Grid.Row="4" Grid.Column="3"/>
+                <TextBox x:Name="poolSkimmersTB" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="Skimmers" VerticalAlignment="Center" Width="74" IsReadOnly="True" Grid.Column="3"/>
+                <TextBox x:Name="poolReturnsTB" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="Returns" VerticalAlignment="Center" Width="74" IsReadOnly="True" Grid.Row="2" Grid.Column="3"/>
+                <TextBox x:Name="poolPumpTB" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="Pump" VerticalAlignment="Center" Width="74" IsReadOnly="True" Grid.Row="3" Grid.Column="3"/>
 
                 <Label Content="Skimmers:" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="2"/>
                 <Label Content="Main Drains:" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="1" Grid.Column="2"/>
