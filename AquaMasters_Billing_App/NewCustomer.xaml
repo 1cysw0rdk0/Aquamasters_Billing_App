@@ -75,32 +75,32 @@
 
             <Label Content="Style" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="1"/>
             <ComboBox x:Name="ConstructionDD" Grid.Row="1" Grid.Column="1" Margin="5,0" Width="90" VerticalAlignment="Center">
-                <ComboBoxItem Content="Vinyl"/>
-                <ComboBoxItem Content="Gunite"/>
-                <ComboBoxItem Content="Other"/>
+                <ComboBoxItem x:Name="ConstructionV" Content="Vinyl"/>
+                <ComboBoxItem x:Name="ConstructionG" Content="Gunite"/>
+                <ComboBoxItem x:Name="ConstructionO" Content="Other"/>
             </ComboBox>
 
 
             <Label Content="Cover" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="2"/>
             <ComboBox x:Name="CoverDD" Grid.Row="2" Grid.Column="1" Margin="5,0" Width="90" VerticalAlignment="Center">
-                <ComboBoxItem Content="Meyco / Mesh"/>
-                <ComboBoxItem Content="Solid / Tarp"/>
-                <ComboBoxItem Content="None"/>
-                <ComboBoxItem Content="Other"/>
+                <ComboBoxItem x:Name="CoverMesh" Content="Meyco / Mesh"/>
+                <ComboBoxItem x:Name="CoverSolid" Content="Solid / Tarp"/>
+                <ComboBoxItem x:Name="CoverNone" Content="None"/>
+                <ComboBoxItem x:Name="CoverOther" Content="Other"/>
             </ComboBox>
 
 
             <Label Content="Spa" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="3"/>
             <ComboBox x:Name="SpaDD" Grid.Column="1" Grid.Row="3" Margin="5,0" Width="90" VerticalAlignment="Center">
-                <ComboBoxItem Content="Yes"/>
-                <ComboBoxItem Content="No"/>
+                <ComboBoxItem x:Name="SpaYes" Content="Yes"/>
+                <ComboBoxItem x:Name="SpaNo" Content="No"/>
             </ComboBox>
 
 
             <Label Content="Heater" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="4"/>
             <ComboBox x:Name="HeaterDD" Grid.Row="4" Grid.Column="1" Margin="5,0" Width="90" VerticalAlignment="Center">
-                <ComboBoxItem Content="Yes"/>
-                <ComboBoxItem Content="No"/>
+                <ComboBoxItem x:Name="HeatYes" Content="Yes"/>
+                <ComboBoxItem x:Name="HeatNo" Content="No"/>
             </ComboBox>
 
 
@@ -118,11 +118,12 @@
 
             <Label Content="Filter Media" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="4" Grid.Column="2"/>
             <ComboBox x:Name="FilterMediaDD" Grid.Row="4" Grid.Column="4" Margin="5,0" Width="90" VerticalAlignment="Center">
-                <ComboBoxItem Content="Sand"/>
-                <ComboBoxItem Content="DE"/>
-                <ComboBoxItem Content="Cartridge"/>
-                <ComboBoxItem Content="Other"/>
+                <ComboBoxItem x:Name="FilterSand" Content="Sand"/>
+                <ComboBoxItem x:Name="FilterDE" Content="DE"/>
+                <ComboBoxItem x:Name="FilterCart" Content="Cartridge"/>
+                <ComboBoxItem x:Name="FilterOther" Content="Other"/>
             </ComboBox>
+            
             <Button x:Name="CancelButton" Grid.ColumnSpan="2" Content="Cancel" HorizontalAlignment="Left" Height="42.47" Margin="32.45,55.455,0,-71.965" Grid.Row="4" VerticalAlignment="Top" Width="130.9" Grid.Column="2" Click="CancelButton_Click"/>
             <Button x:Name="AcceptButton" Grid.ColumnSpan="3" Content="Add" HorizontalAlignment="Left" Height="42.47" Margin="15.887,55.455,0,-71.965" Grid.Row="4" VerticalAlignment="Top" Width="140.657" Click="AcceptButton_Click"/>
 

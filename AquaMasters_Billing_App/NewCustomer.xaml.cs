@@ -128,6 +128,55 @@ namespace AquaMasters_Billing_App {
              *   Close DB Connection
              *   this.Close()
              */
+
+            string firstName = FirstNameTB.Text.Trim();
+            string lastName = LastNameTB.Text.Trim();
+            string address = AddressTB.Text.Trim();
+            string town = TownTB.Text.Trim();
+            string size = SizeTB.Text.Trim();
+            string primaryPhone, altPhone, alt2Phone;
+
+            if (int.TryParse(ZipTB.Text.Trim(), out int zip)) {
+                zip = int.Parse(ZipTB.Text.Trim());
+            } else {
+                // ERROR in ZIP box
+            }
+
+
+            Boolean tryParsePhone(TextBox tb) {
+                if (tb.Text.Equals("Primary Phone") || tb.Text.Equals("Alternate Phone")) { return false; }
+
+                string temp = tb.Text.Trim().Replace(")","").Replace("(","").Replace("-","").Replace(" ","");
+                if (int.TryParse(temp, out _)) {
+                    return true;
+                } else {
+                    // ERROR in Phone Box (tb)
+                    return false;
+                }
+            }
+
+            if (tryParsePhone(PrimaryPhoneTB)) {
+                primaryPhone = PrimaryPhoneTB.Text.Trim();
+            } else {
+                primaryPhone = "";
+            }
+
+            if (tryParsePhone(AltPhone1TB)) {
+                altPhone = AltPhone1TB.Text.Trim();
+            } else {
+                altPhone = "";
+            }
+
+            if (tryParsePhone(AltPhone2TB)) {
+                alt2Phone = AltPhone2TB.Text.Trim();
+            } else {
+                alt2Phone = "";
+            }
+
+
+            
+
+
         }
     }
 }
