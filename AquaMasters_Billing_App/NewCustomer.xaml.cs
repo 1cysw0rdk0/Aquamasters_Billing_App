@@ -103,5 +103,31 @@ namespace AquaMasters_Billing_App {
 
         private void AltPhone2TB_GotFocus(object sender, RoutedEventArgs e) => updateStartPhone("Alternate Phone", e.Source);
         private void AltPhone2TB_LostFocus(object sender, RoutedEventArgs e) => updateEndPhone("Alternate Phone", e.Source);
+
+        // Right Side TB's 
+        // This is called by all boxes
+        private void SkimmerTB_GotFocus(object sender, RoutedEventArgs e) => updateGotFocus("0", e.Source);
+        private void SkimmerTB_LostFocus(object sender, RoutedEventArgs e) => updateLostFocus("0", e.Source);
+
+        private void SizeTB_GotFocus(object sender, RoutedEventArgs e) => updateGotFocus("18x36", e.Source);
+        private void SizeTB_LostFocus(object sender, RoutedEventArgs e) => updateLostFocus("18x36", e.Source);
+
+        private void CancelButton_Click(object sender, RoutedEventArgs e) => this.Close();
+
+        private void AcceptButton_Click(object sender, RoutedEventArgs e) {
+            // TODO 
+            /**
+             * Handle Accept Click
+             *   Parse All Boxes
+             *   Construct SQL Query to check for duplicate
+             *     Display warning iff duplicate suspected
+             *   Construct SQL Query to add Customer
+             *   Open DB Connection
+             *   Execute Query
+             *     Verify success
+             *   Close DB Connection
+             *   this.Close()
+             */
+        }
     }
 }
