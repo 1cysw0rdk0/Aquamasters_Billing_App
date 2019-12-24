@@ -624,6 +624,9 @@ namespace AquaMasters_Billing_App {
 
         private void NewCustomer_Click(object sender, RoutedEventArgs e) {
 
+            newCustomer window = new newCustomer();
+            window.ShowDialog();
+
         }
     }
 
