@@ -118,7 +118,7 @@ namespace AquaMasters_Billing_App {
             // TODO 
             /**
              * Handle Accept Click
-             *   Parse All Boxes
+             *   X Parse All Boxes 
              *   Construct SQL Query to check for duplicate
              *     Display warning iff duplicate suspected
              *   Construct SQL Query to add Customer
@@ -186,6 +186,12 @@ namespace AquaMasters_Billing_App {
                 construction = (string)((ComboBoxItem)ConstructionDD.SelectedItem).Content;
             } else {
                 // NO CONSTRUCTION SELECTED, CREATE ERROR MESSAGE
+                string message = "No construction style selected. Please select a style.";
+                string caption = "Error detected in input";
+                MessageBoxButton button = MessageBoxButton.OK;
+
+                MessageBox.Show(message, caption, button);
+                return;
             }
 
             // Cover
@@ -220,6 +226,12 @@ namespace AquaMasters_Billing_App {
                 filter = (string)((ComboBoxItem)FilterMediaDD.SelectedItem).Content;
             } else {
                 // NO FILTER MEDIA SELECTED, GENERATE ERROR MESSAGE
+                string message = "No filter style selected. Please select a style.";
+                string caption = "Error detected in input";
+                MessageBoxButton button = MessageBoxButton.OK;
+
+                MessageBox.Show(message, caption, button);
+                return;
             }
 
         }
