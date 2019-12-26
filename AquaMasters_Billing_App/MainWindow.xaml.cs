@@ -85,36 +85,7 @@ namespace AquaMasters_Billing_App {
             this.laborList = new ObservableCollection<PurchaseSet>();
             this.LaborDG.ItemsSource = this.laborList;
 
-            this.customerRecords = new ObservableCollection<CustomerRecord>();
-            this.customerDB.ItemsSource = this.customerRecords;
-
-            this.serviceRecords = new ObservableCollection<ServiceRecord>();
-            this.recordsDB.ItemsSource = this.serviceRecords;
-
-
-            try {
-
-
-                // Connect to database and pull list of all customers
-                String query = "SELECT CustID, LastName, FirstName, Address, Town, Phone, ZipCode, AltPhone1, AltPhone2 FROM customers;";
-
-                using (MySqlConnection conn = new MySqlConnection(Connection_String)) {
-                    MySqlCommand comm = new MySqlCommand(query, conn);
-                    conn.Open();
-                    MySqlDataReader read = comm.ExecuteReader();
-
-                    try {
-                        while (read.Read()) {
-                            this.customerRecords.Add(new CustomerRecord(read["FirstName"].ToString(), read["LastName"].ToString(), read["Address"].ToString(), read["Town"].ToString(), read["ZipCode"].ToString(), read["CustID"].ToString(), read["Phone"].ToString(), read["AltPhone1"].ToString(), read["AltPhone2"].ToString()));
-
-                        }
-                    } finally { read.Close(); }
-
-                }
-
-            } catch {
-                Console.Error.WriteLine("Unable to contact database!");
-            }
+            updateCustomerList();
 
         }
 
@@ -156,6 +127,38 @@ namespace AquaMasters_Billing_App {
             this.partsList.CollectionChanged += this.listUpdated;
             this.customerDB.SelectedCellsChanged += this.customerSelected;
 
+        }
+
+        private void updateCustomerList() {
+
+            this.customerRecords = new ObservableCollection<CustomerRecord>();
+            this.customerDB.ItemsSource = this.customerRecords;
+
+            this.serviceRecords = new ObservableCollection<ServiceRecord>();
+            this.recordsDB.ItemsSource = this.serviceRecords;
+
+            try {
+
+                // Connect to database and pull list of all customers
+                String query = "SELECT CustID, LastName, FirstName, Address, Town, Phone, ZipCode, AltPhone1, AltPhone2 FROM customers;";
+
+                using (MySqlConnection conn = new MySqlConnection(Connection_String)) {
+                    MySqlCommand comm = new MySqlCommand(query, conn);
+                    conn.Open();
+                    MySqlDataReader read = comm.ExecuteReader();
+
+                    try {
+                        while (read.Read()) {
+                            this.customerRecords.Add(new CustomerRecord(read["FirstName"].ToString(), read["LastName"].ToString(), read["Address"].ToString(), read["Town"].ToString(), read["ZipCode"].ToString(), read["CustID"].ToString(), read["Phone"].ToString(), read["AltPhone1"].ToString(), read["AltPhone2"].ToString()));
+
+                        }
+                    } finally { read.Close(); }
+
+                }
+
+            } catch {
+                Console.Error.WriteLine("Unable to contact database!");
+            }
 
         }
 
@@ -585,6 +588,7 @@ namespace AquaMasters_Billing_App {
         }
 
         // The next 6 functions handle search box io
+        #region Search Box IO
         private void searchLastNameTB_GotFocus(object sender, RoutedEventArgs e) {
             if (this.searchLastNameTB.Text.ToLower() == "last name") {
                 this.searchLastNameTB.Text = "";
@@ -622,11 +626,14 @@ namespace AquaMasters_Billing_App {
             }
         }
 
+        #endregion Search Box IO
+
         private void NewCustomer_Click(object sender, RoutedEventArgs e) {
 
             newCustomer window = new newCustomer();
             window.ShowDialog();
-
+            // Reload the customer list from the database
+            updateCustomerList();
         }
     }
 
