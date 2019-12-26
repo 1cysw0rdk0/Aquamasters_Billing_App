@@ -120,7 +120,7 @@ namespace AquaMasters_Billing_App {
              * Handle Accept Click
              *   X Parse All Boxes 
              *   Construct SQL Query to check for duplicate
-             *     Display warning iff duplicate suspected
+             *     X Display warning iff duplicate suspected
              *   Construct SQL Query to add Customer
              *   Open DB Connection
              *   Execute Query
@@ -129,19 +129,63 @@ namespace AquaMasters_Billing_App {
              *   this.Close()
              */
 
-            string firstName = FirstNameTB.Text.Trim();
-            string lastName = LastNameTB.Text.Trim();
-            string address = AddressTB.Text.Trim();
-            string town = TownTB.Text.Trim();
-            string primaryPhone = "", altPhone = "" , alt2Phone = "";
+            void errorMessage(string message) {
+                string caption = "Error detected in input";
+                MessageBox.Show(message, caption, MessageBoxButton.OK);
+            }
 
+            // Parse all input
+            #region Parse
+
+            // Parse CustomerInfo
+            #region CustomerInfo
+            // Parse First Name
+            string firstName = FirstNameTB.Text.Trim();
+            if (firstName.Equals("First Name")) {
+                errorMessage("Please enter a first name");
+                return;
+            }
+
+            // Parse Last Name
+            string lastName = LastNameTB.Text.Trim();
+            if (lastName.Equals("Last Name")) {
+                errorMessage("Please enter a last name");
+                return;
+            }
+
+            // Parse Address
+            string address = AddressTB.Text.Trim();
+            if (address.Equals("Address")) {
+                errorMessage("Please enter an address");
+                return;
+            }
+
+            // Parse Town
+            string town = TownTB.Text.Trim();
+            if (town.Equals("Town")) {
+                errorMessage("Please enter a town");
+                return;
+            }
+            #endregion CustomerInfo
+
+            // Parse Zip Code
+            #region ZipCode
             if (int.TryParse(ZipTB.Text.Trim(), out int zip)) {
                 zip = int.Parse(ZipTB.Text.Trim());
             } else {
                 // ERROR in ZIP box
+                string message = "Zip code is invalid";
+                string caption = "Error detected in input";
+                MessageBoxButton button = MessageBoxButton.OK;
+
+                MessageBox.Show(message, caption, button);
+                return;
             }
+            #endregion ZipCode
 
-
+            // Parse Phone Numbers
+            #region PhoneNumbers
+            string primaryPhone = "", altPhone = "", alt2Phone = "";
             Boolean tryParsePhone(TextBox tb) {
                 if (tb.Text.Equals("Primary Phone") || tb.Text.Equals("Alternate Phone")) { return false; }
 
@@ -171,16 +215,20 @@ namespace AquaMasters_Billing_App {
             } else {
                 alt2Phone = "";
             }
+            #endregion PhoneNumbers
 
             // Parse Right Side
+            #region RightSide
             string size = SizeTB.Text.Trim();
             string skimmers = SkimmerTB.Text.Trim();
             string drains = MainDrainTB.Text.Trim();
             string returns = ReturnsTB.Text.Trim();
             string pump = PumpTB.Text.Trim();
+            #endregion RightSide
 
             // Parse Drop Downs
-            // Style
+            // Parse Style
+            #region Style
             string construction = "";
             if (ConstructionDD.SelectedItem != null) {
                 construction = (string)((ComboBoxItem)ConstructionDD.SelectedItem).Content;
@@ -193,8 +241,10 @@ namespace AquaMasters_Billing_App {
                 MessageBox.Show(message, caption, button);
                 return;
             }
+            #endregion Style
 
-            // Cover
+            // Parse Cover
+            #region Cover
             string cover = "";
             if (CoverDD.SelectedItem != null) {
                 cover = ((string)((ComboBoxItem)CoverDD.SelectedItem).Content).Split(' ')[0];
@@ -203,8 +253,10 @@ namespace AquaMasters_Billing_App {
                 // ?TODO? verify no cover before defaulting
                 cover = "None";
             }
+            #endregion Cover
 
-            // Spa
+            // Parse Spa + Heater
+            #region Spa and Heater
             Boolean spa = false;
             if (SpaDD.SelectedItem != null) {
                 if (((ComboBoxItem)SpaDD.SelectedItem).Content.ToString().Equals("Yes")) {
@@ -219,8 +271,10 @@ namespace AquaMasters_Billing_App {
                     heater = true;
                 }
             }
+            #endregion Spa and Heater
 
-            // Fiter Media
+            // Parse Fiter Media
+            #region Filter
             string filter = "";
             if (FilterMediaDD.SelectedItem != null) {
                 filter = (string)((ComboBoxItem)FilterMediaDD.SelectedItem).Content;
@@ -232,6 +286,68 @@ namespace AquaMasters_Billing_App {
 
                 MessageBox.Show(message, caption, button);
                 return;
+            }
+            #endregion Filter
+            #endregion Parse
+
+            // Check for duplicate customer information in the database
+            if (checkDuplicate(new CustomerInfo(firstName, lastName, zip, primaryPhone, altPhone, alt2Phone, address), out CustomerInfo[] duplicates)) {
+
+                foreach (CustomerInfo duplicate in duplicates) {
+                    string caption = "Duplicate suspected";
+                    string message = "Review the customer found in the database, and ensure the proposed customer is not a duplicate." +
+                        "Existing Customer Information for" +
+                        "Name: " + duplicate.FirstName + " " + duplicate.LastName +
+                        "Address: " + duplicate.Address + ", " + duplicate.Zip.ToString() +
+                        "Phone 1: " + duplicate.Phone1 +
+                        "Phone 2: " + duplicate.Phone2 +
+                        "Phone 3: " + duplicate.Phone3;
+                    MessageBoxButton buttons = MessageBoxButton.OKCancel;
+                    MessageBoxResult result = MessageBox.Show(message, caption, buttons);
+
+                    if(result.Equals(MessageBoxResult.Cancel)) {
+                        // This customer is a duplicate, close the window.
+                        this.Close();
+                    }
+                }
+            }
+
+            // Customer is not a duplicate, add them to the database
+
+
+
+            // Close windwo when done
+            this.Close();
+
+        }
+
+
+        private bool checkDuplicate(CustomerInfo customer, out CustomerInfo[] duplicate) {
+            // Create SQL Query to check for Duplicates
+            // Use first name, last name, zip, phone numbers, address
+            // Fuzzy logic, if >3 match, add match to output array
+
+            duplicate = null;
+            return false;
+        }
+
+        class CustomerInfo {
+            public string FirstName { get; set; }
+            public string LastName { get; set; }
+            public string Phone1 { get; set; }
+            public string Phone2 { get; set; }
+            public string Phone3 { get; set; }
+            public string Address { get; set; }
+            public int Zip { get; set; }
+
+            public CustomerInfo(string firstName, string lastName, int zip, string primaryPhone, string altPhone, string alt2Phone, string address) {
+                FirstName = firstName;
+                LastName = lastName;
+                Zip = zip;
+                Phone1 = primaryPhone;
+                Phone2 = altPhone;
+                Phone3 = alt2Phone;
+                Address = address;
             }
 
         }

@@ -14,7 +14,7 @@
         </Grid.ColumnDefinitions>
 
 
-        <Grid x:Name="CustomerInfo" Grid.Column="0">
+        <Grid x:Name="CustomerInfoPanel" Grid.Column="0">
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
