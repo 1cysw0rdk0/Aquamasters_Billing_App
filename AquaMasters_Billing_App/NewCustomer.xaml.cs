@@ -133,8 +133,7 @@ namespace AquaMasters_Billing_App {
             string lastName = LastNameTB.Text.Trim();
             string address = AddressTB.Text.Trim();
             string town = TownTB.Text.Trim();
-            string size = SizeTB.Text.Trim();
-            string primaryPhone, altPhone, alt2Phone;
+            string primaryPhone = "", altPhone = "" , alt2Phone = "";
 
             if (int.TryParse(ZipTB.Text.Trim(), out int zip)) {
                 zip = int.Parse(ZipTB.Text.Trim());
@@ -173,9 +172,55 @@ namespace AquaMasters_Billing_App {
                 alt2Phone = "";
             }
 
+            // Parse Right Side
+            string size = SizeTB.Text.Trim();
+            string skimmers = SkimmerTB.Text.Trim();
+            string drains = MainDrainTB.Text.Trim();
+            string returns = ReturnsTB.Text.Trim();
+            string pump = PumpTB.Text.Trim();
 
-            
+            // Parse Drop Downs
+            // Style
+            string construction = "";
+            if (ConstructionDD.SelectedItem != null) {
+                construction = (string)((ComboBoxItem)ConstructionDD.SelectedItem).Content;
+            } else {
+                // NO CONSTRUCTION SELECTED, CREATE ERROR MESSAGE
+            }
 
+            // Cover
+            string cover = "";
+            if (CoverDD.SelectedItem != null) {
+                cover = ((string)((ComboBoxItem)CoverDD.SelectedItem).Content).Split(' ')[0];
+            } else {
+                // NO COVER SELECTED, DEFAULTS TO NONE?
+                // ?TODO? verify no cover before defaulting
+                cover = "None";
+            }
+
+            // Spa
+            Boolean spa = false;
+            if (SpaDD.SelectedItem != null) {
+                if (((ComboBoxItem)SpaDD.SelectedItem).Content.ToString().Equals("Yes")) {
+                    spa = true;
+                }
+            }
+
+            // Heater
+            Boolean heater = false;
+            if (HeaterDD.SelectedItem != null) {
+                if (((ComboBoxItem)HeaterDD.SelectedItem).Content.ToString().Equals("Yes")) {
+                    heater = true;
+                }
+            }
+
+            // Fiter Media
+            string filter = "";
+            if (FilterMediaDD.SelectedItem != null) {
+                filter = (string)((ComboBoxItem)FilterMediaDD.SelectedItem).Content;
+            } else {
+                // NO FILTER MEDIA SELECTED, GENERATE ERROR MESSAGE
+            }
 
         }
     }
