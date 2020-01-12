@@ -1,0 +1,133 @@
+﻿<Window x:Class="AquaMasters_Billing_App.newCustomer"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AquaMasters_Billing_App"
+        mc:Ignorable="d"
+        Title="New Customer" Height="275" Width="688" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Grid x:Name="Grid">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+
+        <Grid x:Name="CustomerInfoPanel" Grid.Column="0">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height=".5*"/>
+                <RowDefinition Height=".5*"/>
+                <RowDefinition Height=".5*"/>
+                <RowDefinition Height=".5*"/>
+                <RowDefinition Height=".5*"/>
+                <RowDefinition Height=".5*"/>
+                <RowDefinition Height=".5*"/>
+                <RowDefinition Height=".5*"/>
+                <RowDefinition Height=".5*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Textboxes and Labels -->
+            <Label x:Name="NameInfo" Content="Name" HorizontalAlignment="Left" VerticalAlignment="Top" Width="42" Height="26" Grid.ColumnSpan="2"/>
+            <TextBox x:Name="FirstNameTB" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="First Name" VerticalAlignment="Top" Width="120" Grid.Row="1" Margin="5,0,0,0" GotFocus="FirstNameTB_GotFocus" MaxLines="214" LostFocus="FirstNameTB_LostFocus"/>
+            <TextBox x:Name="LastNameTB" Height="23" TextWrapping="Wrap" Text="Last Name" VerticalAlignment="Top" Grid.Row="1" Margin="130,0,5,0" Grid.ColumnSpan="2" GotFocus="LastNameTB_GotFocus" LostFocus="LastNameTB_LostFocus" />
+
+            <Label x:Name="AddressInfo" Content="Address" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="2" Grid.ColumnSpan="2"/>
+            <TextBox x:Name="AddressTB" Height="23" TextWrapping="Wrap" Text="Address" VerticalAlignment="Top" Grid.Row="3" Grid.ColumnSpan="2" Margin="5,0" GotFocus="AddressTB_GotFocus" LostFocus="AddressTB_LostFocus"/>
+            <TextBox x:Name="TownTB" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="Town" VerticalAlignment="Top" Width="120" Grid.Row="4" Margin="5,0,0,0" GotFocus="TownTB_GotFocus" LostFocus="TownTB_LostFocus"/>
+            <TextBox x:Name="ZipTB" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="Zip" VerticalAlignment="Top" Width="75" Grid.Row="4" Margin="130,0,0,0" Grid.ColumnSpan="2" GotFocus="ZipTB_GotFocus" LostFocus="ZipTB_LostFocus"/>
+
+            <Label x:Name="ContactInfo" Content="Contact" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="5" Grid.ColumnSpan="2"/>
+            <TextBox x:Name="PrimaryPhoneTB" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="Primary Phone" VerticalAlignment="Top" Width="245" Grid.Row="6" Grid.ColumnSpan="2" Margin="5,0,0,0" GotFocus="PrimaryPhoneTB_GotFocus" LostFocus="PrimaryPhoneTB_LostFocus"/>
+            <TextBox x:Name="AltPhone1TB" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="Alternate Phone" VerticalAlignment="Top" Width="245" Grid.Row="7" Grid.ColumnSpan="2" Margin="5,0,0,0" LostFocus="AltPhone1TB_LostFocus" GotFocus="AltPhone1TB_GotFocus"/>
+            <TextBox x:Name="AltPhone2TB" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="Alternate Phone" VerticalAlignment="Top" Width="245" Grid.Row="8" Grid.ColumnSpan="2" Margin="5,0,0,0" GotFocus="AltPhone2TB_GotFocus" LostFocus="AltPhone2TB_LostFocus"/>
+
+
+        </Grid>
+
+        <Grid x:Name="PoolInfo" Grid.Column="1" HorizontalAlignment="Right">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- DropDowns, Textboxes, and Labels -->
+
+            <Label Content="Size" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,26,0,0"/>
+            <TextBox x:Name="SizeTB" Height="23" TextWrapping="Wrap" Text="18x36" Grid.Column="1" Margin="5,25,5,0" Width="90" VerticalAlignment="Center" GotFocus="SizeTB_GotFocus" LostFocus="SizeTB_LostFocus"/>
+
+            <Label Content="Style" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="1"/>
+            <ComboBox x:Name="ConstructionDD" Grid.Row="1" Grid.Column="1" Margin="5,0" Width="90" VerticalAlignment="Center">
+                <ComboBoxItem x:Name="ConstructionV" Content="Vinyl"/>
+                <ComboBoxItem x:Name="ConstructionG" Content="Gunite"/>
+                <ComboBoxItem x:Name="ConstructionO" Content="Other"/>
+            </ComboBox>
+
+
+            <Label Content="Cover" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="2"/>
+            <ComboBox x:Name="CoverDD" Grid.Row="2" Grid.Column="1" Margin="5,0" Width="90" VerticalAlignment="Center">
+                <ComboBoxItem x:Name="CoverMesh" Content="Meyco / Mesh"/>
+                <ComboBoxItem x:Name="CoverSolid" Content="Solid / Tarp"/>
+                <ComboBoxItem x:Name="CoverNone" Content="None"/>
+                <ComboBoxItem x:Name="CoverOther" Content="Other"/>
+            </ComboBox>
+
+
+            <Label Content="Spa" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="3"/>
+            <ComboBox x:Name="SpaDD" Grid.Column="1" Grid.Row="3" Margin="5,0" Width="90" VerticalAlignment="Center">
+                <ComboBoxItem x:Name="SpaYes" Content="Yes"/>
+                <ComboBoxItem x:Name="SpaNo" Content="No"/>
+            </ComboBox>
+
+
+            <Label Content="Heater" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="4"/>
+            <ComboBox x:Name="HeaterDD" Grid.Row="4" Grid.Column="1" Margin="5,0" Width="90" VerticalAlignment="Center">
+                <ComboBoxItem x:Name="HeatYes" Content="Yes"/>
+                <ComboBoxItem x:Name="HeatNo" Content="No"/>
+            </ComboBox>
+
+
+            <Label Content="Skimmers" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="2" Margin="0,25,0,0"/>
+            <TextBox x:Name="SkimmerTB" Height="23" TextWrapping="Wrap" Text="0" Grid.Column="4" Margin="5,25,5,0" Width="90" VerticalAlignment="Center" GotFocus="SkimmerTB_GotFocus" LostFocus="SkimmerTB_LostFocus"/>
+
+            <Label Content="Main Drains" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="1" Grid.Column="2"/>
+            <TextBox x:Name="MainDrainTB" Height="23" TextWrapping="Wrap" Text="0" Grid.Row="1" Grid.Column="4" Margin="5,0" Width="90" VerticalAlignment="Center" GotFocus="SkimmerTB_GotFocus" LostFocus="SkimmerTB_LostFocus"/>
+
+            <Label Content="Returns" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="2" Grid.Column="2"/>
+            <TextBox x:Name="ReturnsTB" Height="23" TextWrapping="Wrap" Text="0" Grid.Row="2" Grid.Column="4" Margin="5,0" Width="90" VerticalAlignment="Center" GotFocus="SkimmerTB_GotFocus" LostFocus="SkimmerTB_LostFocus"/>
+
+            <Label Content="Pump" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="3" Grid.Column="2"/>
+            <TextBox x:Name="PumpTB" Height="23" TextWrapping="Wrap" Text="0" Grid.Row="3" Grid.Column="4" Margin="5,0" Width="90" VerticalAlignment="Center" GotFocus="SkimmerTB_GotFocus" LostFocus="SkimmerTB_LostFocus"/>
+
+            <Label Content="Filter Media" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="4" Grid.Column="2"/>
+            <ComboBox x:Name="FilterMediaDD" Grid.Row="4" Grid.Column="4" Margin="5,0" Width="90" VerticalAlignment="Center">
+                <ComboBoxItem x:Name="FilterSand" Content="Sand"/>
+                <ComboBoxItem x:Name="FilterDE" Content="DE"/>
+                <ComboBoxItem x:Name="FilterCart" Content="Cartridge"/>
+                <ComboBoxItem x:Name="FilterOther" Content="Other"/>
+            </ComboBox>
+            
+            <Button x:Name="CancelButton" Grid.ColumnSpan="2" Content="Cancel" HorizontalAlignment="Left" Height="42.47" Margin="32.45,55.455,0,-71.965" Grid.Row="4" VerticalAlignment="Top" Width="130.9" Grid.Column="2" Click="CancelButton_Click"/>
+            <Button x:Name="AcceptButton" Grid.ColumnSpan="3" Content="Add" HorizontalAlignment="Left" Height="42.47" Margin="15.887,55.455,0,-71.965" Grid.Row="4" VerticalAlignment="Top" Width="140.657" Click="AcceptButton_Click"/>
+
+        </Grid>
+
+    </Grid>
+</Window>
