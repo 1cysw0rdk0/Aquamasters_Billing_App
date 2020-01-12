@@ -22,19 +22,21 @@ namespace AquaMasters_Billing_App {
         public ObservableCollection<PurchaseSet> laborList;
         public ObservableCollection<CustomerRecord> customerRecords;
         public ObservableCollection<ServiceRecord> serviceRecords;
-        // TODO //
-        // remove hardcoded password before deplyoment
-        private String Connection_String = @"server=localhost;userid=root;password=password;database=aquamastersservice";
-        // TODO //
         private String poolID;
 
+		private String databaseAddress = "localhost";
+		private String databaseUser = "root";
+		private String databaseName = "aquamastersservice";
+		private String databasePass;
+		private String Connection_String;
 
-        /**
+
+		/**
          * Constructor for the main window
          * Initializes the components that the users sees
          * and all the supporting data 
          */
-        public MainWindow() {
+		public MainWindow() {
             InitializeComponent();
             InitializeBackendData();
             InitializeFrontendData();
@@ -54,32 +56,67 @@ namespace AquaMasters_Billing_App {
          */
         private void InitializeBackendData() {
 
-            // Generate save path for this computer
-            this.savePath = Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
-            this.savePath += "\\Aquamasters\\priceSheet.ini";
+			// Gather Database Server Information
+			//String Connection_String = @"server=localhost;userid=root;password=;database=aquamastersservice";
 
-            // Initialize file to read text
-            try
-            {
-                StreamReader file = File.OpenText(this.savePath);
+
+            // Generate save paths for this computer
+            this.savePath = Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
+            this.savePath += "\\Aquamasters\\";
+
+			string priceList = this.savePath + "priceSheet.ini";
+			string prefs = this.savePath + "conf.ini";
+
+
+			// Initialize price list file to read text
+			// TODO replace with a database call
+			try {
+                StreamReader file = File.OpenText(priceList);
                 // Initialize price sheet with new empty dictionary
                 this.PriceSheet = new Dictionary<string, Part>();
 
                 // Read every line from the file, desearializing into parts and adding to dictonary
-                while (!file.EndOfStream)
-                {
+                while (!file.EndOfStream) {
                     Part part = (Part)JsonConvert.DeserializeObject(file.ReadLine(), typeof(Part));
                     this.PriceSheet.Add(part.name, part);
                 }
-            } catch
-            {
-                Console.Error.WriteLine("Unable to open file.");
+            } catch {
+                Console.Error.WriteLine("Unable to open price list file.");
             }
 
-            
 
-            // Create and Bind data lists
-            this.partsList = new ObservableCollection<PurchaseSet>();
+			// Initialize conf file to read text
+			try {
+				StreamReader file = File.OpenText(prefs);
+				
+				if (!file.EndOfStream) {
+					databaseAddress = file.ReadLine();
+				}
+
+				if (!file.EndOfStream) {
+					databaseUser = file.ReadLine();
+				}
+
+				// Additional Preference Parsing Here
+
+			} catch {
+				Console.Out.WriteLine("Unable to open conf file. Generating blank.");
+				File.Create(prefs);
+			}
+
+
+			// Query user for missing server info
+			serverInfo dialog = new serverInfo(databaseAddress, databaseUser);
+			if ((bool)dialog.ShowDialog()) {
+				this.databaseAddress = dialog.addressTB.Text.Trim();
+				this.databaseUser = dialog.usernameTB.Text;
+				this.databasePass = dialog.passwordPB.Password;
+			}
+
+
+
+			// Create and Bind data lists
+			this.partsList = new ObservableCollection<PurchaseSet>();
             this.PartsDG.ItemsSource = this.partsList;
 
             this.laborList = new ObservableCollection<PurchaseSet>();
@@ -142,8 +179,8 @@ namespace AquaMasters_Billing_App {
                 // Connect to database and pull list of all customers
                 String query = "SELECT CustID, LastName, FirstName, Address, Town, Phone, ZipCode, AltPhone1, AltPhone2 FROM customers;";
 
-                using (MySqlConnection conn = new MySqlConnection(Connection_String)) {
-                    MySqlCommand comm = new MySqlCommand(query, conn);
+				using (MySqlConnection conn = new MySqlConnection("server=" + databaseAddress + ";userid=" + databaseUser + ";password=" + databasePass + ";database=" + databaseName)) {
+					MySqlCommand comm = new MySqlCommand(query, conn);
                     conn.Open();
                     MySqlDataReader read = comm.ExecuteReader();
 
@@ -215,7 +252,7 @@ namespace AquaMasters_Billing_App {
 
             // Pull Pool Info
             String query = "SELECT PoolID, Dimensions, Construction, Cover, Spa, Heater, Returns, Skimmers, MainDrains, Pumps, BigL, Turbo, AutoFills, Controller, WaterFeatrues, LeafCatches, BuddaJet, SaltGenerator, Notes FROM pools WHERE customers_CustID = @CustID";
-            using (MySqlConnection conn = new MySqlConnection(this.Connection_String)) {
+            using (MySqlConnection conn = new MySqlConnection("server=" + databaseAddress + ";userid=" + databaseUser + ";password=" + databasePass + ";database=" + databaseName)) {
 
                 // Set up SQL query
                 MySqlCommand command = new MySqlCommand(query, conn);
@@ -252,7 +289,7 @@ namespace AquaMasters_Billing_App {
 
             // Pull Service History
             query = "SELECT * FROM service_records WHERE pools_PoolID = @PoolID";
-            using (MySqlConnection conn = new MySqlConnection(this.Connection_String)) {
+            using (MySqlConnection conn = new MySqlConnection("server=" + databaseAddress + ";userid=" + databaseUser + ";password=" + databasePass + ";database=" + databaseName)) {
 
                 // Set up SQL Query
                 MySqlCommand command = new MySqlCommand(query, conn);

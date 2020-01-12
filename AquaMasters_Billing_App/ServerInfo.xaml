@@ -1,0 +1,19 @@
+﻿<Window x:Class="AquaMasters_Billing_App.serverInfo"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AquaMasters_Billing_App"
+        mc:Ignorable="d"
+        Title="Input Database Server Information" Height="166" Width="378" ResizeMode="NoResize" KeyDown="Window_KeyDown">
+	<Grid>
+		<TextBox x:Name="addressTB" HorizontalAlignment="Left" Height="23" Margin="140,11,0,0" TextWrapping="Wrap" Text="localhost" VerticalAlignment="Top" Width="215" GotFocus="addressTB_GotFocus" LostFocus="addressTB_LostFocus"/>
+		<TextBox x:Name="usernameTB" HorizontalAlignment="Left" Height="23" Margin="140,39,0,0" TextWrapping="Wrap" Text="root" VerticalAlignment="Top" Width="215" GotFocus="usernameTB_GotFocus" LostFocus="usernameTB_LostFocus"/>
+		<PasswordBox x:Name="passwordPB" HorizontalAlignment="Left" Height="23" Margin="140,67,0,0"  VerticalAlignment="Top" Width="215" />
+		<Label Content="Server Address:" HorizontalAlignment="Left" Margin="49,7,0,0" VerticalAlignment="Top"/>
+		<Label Content="Database Username:" HorizontalAlignment="Left" Margin="22,35,0,0" VerticalAlignment="Top"/>
+		<Label Content="Database Password:" HorizontalAlignment="Left" Margin="26,63,0,0" VerticalAlignment="Top"/>
+		<Button x:Name="AcceptButton" Content="Ok" HorizontalAlignment="Left" Margin="280,100,0,0" VerticalAlignment="Top" Width="75" Click="AcceptButton_Click"/>
+
+	</Grid>
+</Window>
