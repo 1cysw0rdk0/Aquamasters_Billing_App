@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -126,7 +127,7 @@ namespace AquaMasters_Billing_App {
              *   Execute Query
              *     Verify success
              *   Close DB Connection
-             *   this.Close()
+             *   X this.Close()
              */
 
             void errorMessage(string message) {
@@ -312,7 +313,17 @@ namespace AquaMasters_Billing_App {
                 }
             }
 
-            // Customer is not a duplicate, add them to the database
+			// Customer is not a duplicate, add them to the database
+
+			string query = "";
+
+
+			using (MySqlConnection conn = new MySqlConnection()) {
+				
+			}
+
+
+
 
 
 

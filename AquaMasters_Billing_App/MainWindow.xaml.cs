@@ -17,7 +17,6 @@ namespace AquaMasters_Billing_App {
     public partial class MainWindow : Window {
 
         public Dictionary<string, Part> PriceSheet;
-        public string savePath;
         public ObservableCollection<PurchaseSet> partsList;
         public ObservableCollection<PurchaseSet> laborList;
         public ObservableCollection<CustomerRecord> customerRecords;
@@ -28,7 +27,7 @@ namespace AquaMasters_Billing_App {
 		private String databaseUser = "root";
 		private String databaseName = "aquamastersservice";
 		private String databasePass;
-		private String Connection_String;
+		public String priceList, prefs, savePath;
 
 
 		/**
@@ -56,16 +55,12 @@ namespace AquaMasters_Billing_App {
          */
         private void InitializeBackendData() {
 
-			// Gather Database Server Information
-			//String Connection_String = @"server=localhost;userid=root;password=;database=aquamastersservice";
-
-
             // Generate save paths for this computer
             this.savePath = Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
             this.savePath += "\\Aquamasters\\";
 
-			string priceList = this.savePath + "priceSheet.ini";
-			string prefs = this.savePath + "conf.ini";
+			priceList = this.savePath + "priceSheet.ini";
+			prefs = this.savePath + "conf.ini";
 
 
 			// Initialize price list file to read text
@@ -99,9 +94,14 @@ namespace AquaMasters_Billing_App {
 
 				// Additional Preference Parsing Here
 
+				file.Close();
+				file.Dispose();
+				file.DiscardBufferedData();
+
+
 			} catch {
 				Console.Out.WriteLine("Unable to open conf file. Generating blank.");
-				File.Create(prefs);
+				File.Create(prefs).Close();
 			}
 
 
@@ -111,8 +111,8 @@ namespace AquaMasters_Billing_App {
 				this.databaseAddress = dialog.addressTB.Text.Trim();
 				this.databaseUser = dialog.usernameTB.Text;
 				this.databasePass = dialog.passwordPB.Password;
+				writeConfFile(databaseAddress, databaseUser);
 			}
-
 
 
 			// Create and Bind data lists
@@ -454,8 +454,18 @@ namespace AquaMasters_Billing_App {
             foreach (Part part in updates.Values) {
                 jsonData += JsonConvert.SerializeObject(part, Formatting.None) + "\n";
             }
-            System.IO.File.WriteAllText(savePath, jsonData);
+            File.WriteAllText(priceList, jsonData);
         }
+
+		private void writeConfFile(string address, string user) {
+
+			string data = address + "\n" + user;
+
+			Console.Error.WriteLine("Opening " + this.prefs);
+			StreamWriter file = File.CreateText(this.prefs);
+			
+
+		}
 
         /// <summary>
         /// 
@@ -672,6 +682,8 @@ namespace AquaMasters_Billing_App {
             // Reload the customer list from the database
             updateCustomerList();
         }
+
+
     }
 
     /**
