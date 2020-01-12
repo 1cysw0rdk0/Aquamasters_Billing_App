@@ -461,8 +461,11 @@ namespace AquaMasters_Billing_App {
 
 			string data = address + "\n" + user;
 
-			Console.Error.WriteLine("Opening " + this.prefs);
-			StreamWriter file = File.CreateText(this.prefs);
+			string[] lines = File.ReadAllLines(this.prefs);
+
+			if (!(lines[0].Equals(address) && lines[1].Equals(user))) {
+				File.WriteAllText(this.prefs, data);
+			}
 			
 
 		}
